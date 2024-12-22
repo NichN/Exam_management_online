@@ -1,0 +1,52 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    min-height: 100vh;
+}
+.side-menu{
+    background-color: #87CEEB;
+    position: fixed;
+    width: 20vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+li{
+    list-style: none;
+}
+.side-menu .brand-name{
+    height: 20vh;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+.side-menu li{
+    font-size:20px;
+    padding: 10px 40px;
+}
+.side-menu li:hover{
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.logout_btn{
+    color: red;
+    margin-top: 230px;
+}
+.logout_btn a{
+    font-size:20px;
+    padding: 10px 40px;
+}
+.brand-name img{
+    width: 15vw;
+    height: 60px;
+    margin-top: 20px;
+}
+.header{
+    background-color: #87CEEB;
+    width: 100vw;
+    margin-left: 50px;
+}
