@@ -1,274 +1,283 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
 }
 
 .container {
-  display: flex;
-  min-height: 100vh;
+    display: flex;
+    min-height: 100vh;
 }
 
 /* Sidebar Styles */
 .sidebar {
-  width: 250px;
-  background-color: #87ceeb;
-  padding: 20px;
+    width: 250px;
+    background-color: #87ceeb;
+    padding: 20px;
 }
 
 .logo {
-  padding: 20px;
-  text-align: center;
-  margin-bottom: 30px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .logo-image {
-  width: 100px;
-  height: auto;
-  object-fit: contain;
+    width: 100px;
+    height: auto;
+    object-fit: contain;
 }
 
 .logo-text {
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 10px 20px;
-  border: 2px solid white;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px 20px;
+    border: 2px solid white;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Optional: Add hover effect */
 .logo-text:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transition: background 0.3s ease;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.3s ease;
 }
 
 .sidebar nav ul {
-  list-style: none;
+    list-style: none;
 }
 
 .sidebar nav li {
-  padding: 0;
-  margin-bottom: 5px;
+    padding: 0;
+    margin-bottom: 5px;
 }
 
 .sidebar nav a {
-  display: block;
-  padding: 15px;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .sidebar nav a:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .sidebar nav a.active {
-  background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Main Content Styles */
 .main-content {
-  flex: 1;
-  padding: 20px;
+    flex: 1;
+    padding: 20px;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
 .header-icons {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .icon-button {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .icon-button:hover {
-  background-color: #f0f0f0;
-  transform: scale(1.05);
+    background-color: #f0f0f0;
+    transform: scale(1.05);
 }
 
 .icon-button:active {
-  transform: scale(0.95);
+    transform: scale(0.95);
 }
 
 .icon-button img {
-  width: 20px;
-  height: 20px;
+    width: 20px;
+    height: 20px;
 }
 
 /* Optional: Add notification badge */
 .notification-badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: #ff4757;
-  color: white;
-  font-size: 12px;
-  min-width: 18px;
-  height: 18px;
-  border-radius: 9px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 5px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4757;
+    color: white;
+    font-size: 12px;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
 }
 
 /* Card Styles */
 .subjects-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
 }
 
 .subject-card {
-  background: white;
-  border-radius: 15px;
-  padding: 25px;
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.3s ease;
-  border: 1px solid #eee;
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
 }
 
 .subject-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Icon Styles */
 .subject-icon {
-  min-width: 70px;
-  height: 70px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  color: white;
+    min-width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
 }
 
 .subject-icon.purple {
-  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
 }
 
 .subject-icon.green {
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
 }
 
 /* Subject Info Styles */
 .subject-info {
-  flex: 1;
+    flex: 1;
 }
 
 .subject-info h2 {
-  font-size: 20px;
-  margin-bottom: 8px;
-  color: #2d3436;
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #2d3436;
 }
 
 .lecturer {
-  color: #636e72;
-  font-size: 14px;
-  margin-bottom: 15px;
+    color: #636e72;
+    font-size: 14px;
+    margin-bottom: 15px;
 }
 
 /* Meta Information Styles */
 .subject-meta {
-  display: flex;
-  gap: 25px;
+    display: flex;
+    gap: 25px;
 }
 
 .meta-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #636e72;
-  font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #636e72;
+    font-size: 14px;
 }
 
 .meta-item i {
-  font-size: 16px;
-  color: #2d3436;
+    font-size: 16px;
+    color: #2d3436;
 }
 
 /* Status Styles */
 .status {
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .status.red {
-  background-color: #ff7675;
-  color: white;
+    background-color: #ff7675;
+    color: white;
 }
 
 .status.green {
-  background-color: #55efc4;
-  color: #2d3436;
+    background-color: #55efc4;
+    color: #2d3436;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .subject-card {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: center;
-  }
+    .subject-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: center;
+    }
 
-  .subject-icon {
-    margin: 0 auto;
-  }
+    .subject-icon {
+        margin: 0 auto;
+    }
 
-  .subject-meta {
-    justify-content: center;
-  }
+    .subject-meta {
+        justify-content: center;
+    }
 
-  .status {
-    align-self: center;
-    margin-top: 15px;
-  }
+    .status {
+        align-self: center;
+        margin-top: 15px;
+    }
 }
 
 /* Add responsive design */
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
+    .container {
+        flex-direction: column;
+    }
 
-  .sidebar {
-    width: 100%;
-  }
+    .sidebar {
+        width: 100%;
+    }
+}
+
+.stat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
