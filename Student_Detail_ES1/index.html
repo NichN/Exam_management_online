@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Student Management System</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="logo">
+                    <img
+                        src="image/logoNorton.png"
+                        alt="Norton University"
+                    />
+                </div>
+                <nav>
+                    <a href="#" class="nav-item"
+                        ><i class="icon-dashboard"></i> Dashboard</a
+                    >
+                    <a href="#" class="nav-item"
+                        ><i class="icon-department"></i> Department</a
+                    >
+                    <a href="#" class="nav-item"
+                        ><i class="icon-student"></i> Student</a
+                    >
+                    <a href="#" class="nav-item"
+                        ><i class="icon-schedule"></i> My Schedule</a
+                    >
+                    <a href="#" class="nav-item"
+                        ><i class="icon-task"></i> All Task</a
+                    >
+                </nav>
+                <div class="logout">
+                    <a href="#" class="logout-btn"
+                        >Log out <i class=""></i
+                    ></a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="header">
+                    <h1>My Student</h1>
+                    <div class="user-profile">
+                        <img
+                            src="profile-pic.png"
+                            alt="Profile"
+                            class="profile-pic"
+                        />
+                        <span>Sun Navy</span>
+                    </div>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="tabs">
+                    <a href="#" class="tab active">ES1</a>
+                    <a href="#" class="tab">ES2</a>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <input type="search" placeholder="Search....." />
+                    <a href="#" class="view-all">View All</a>
+                </div>
+
+                <!-- Student List -->
+                <div class="student-list">
+                    <!-- Student items will be generated dynamically -->
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script>document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelector('.tabs');
+    const tabLinks = document.querySelectorAll('.tab');
+    
+    // Set initial state based on current page
+    const currentPage = window.location.pathname;
+    if (currentPage.includes('es2')) {
+        tabs.setAttribute('data-active', 'es2');
+    } else {
+        tabs.setAttribute('data-active', 'es1');
+    }
+    
+    tabLinks.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Update the active state
+            if (tab.textContent.toLowerCase().includes('es2')) {
+                tabs.setAttribute('data-active', 'es2');
+            } else {
+                tabs.setAttribute('data-active', 'es1');
+            }
+            
+            // Remove active class from all tabs
+            tabLinks.forEach(t => t.classList.remove('active'));
+            // Add active class to clicked tab
+            tab.classList.add('active');
+        });
+    });
+});</script>>
