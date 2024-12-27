@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Student Dashboard</title>
-        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="{{ asset('/css/student_style.css') }}">
         <!-- Font Awesome for icons -->
         <link
             rel="stylesheet"
@@ -72,10 +72,7 @@
                 <!-- Profile Section -->
                 <div class="profile-section">
                     <div class="profile-info">
-                        <img
-                            src="image/Profile.png"
-                            alt="Student Profile"
-                        />
+                        <img src="<?php echo asset('/Image/pf.png'); ?>" alt="Student Profile" />
                         <div class="info">
                             <h2>Nich</h2>
                             <p>Student ID: B20223119</p>
@@ -131,6 +128,6 @@
                 </div>
             </div>
         </div>
-        <script src="script.js"></script>
+        <script src="../../../public/js/script.js"></script>
     </body>
 </html>
