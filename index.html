@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Management System</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="logo">
+          <img
+            src="image/logoNorton.png"
+            alt="Norton Logo"
+            class="logo-image"
+          />
+        </div>
+        <nav>
+          <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/subjects">Subjects</a></li>
+            <li><a href="/exams">Exams</a></li>
+            <li><a href="/results">Results</a></li>
+            <li><a href="/profile">Profile</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <div class="header">
+          <h1>All Subjects</h1>
+          <div class="header-icons">
+            <a href="/notifications" class="icon-button notification">
+              <img src="image/bell-ringing.png" alt="Notifications" />
+              <span class="notification-badge">3</span>
+            </a>
+            <a href="/profile" class="icon-button profile">
+              <img src="image/ProfileSample.png" alt="Profile" />
+            </a>
+          </div>
+        </div>
+
+        <div class="subjects-list">
+          <!-- Web Development Card -->
+          <a href="/subject/web-development" class="subject-card">
+            <div class="subject-icon purple">
+              <span>&lt;/&gt;</span>
+            </div>
+            <div class="subject-info">
+              <h2>Advance Web Development</h2>
+              <p class="lecturer">Lecturer : Layy Sao</p>
+              <div class="subject-meta">
+                <div class="meta-item">
+                  <i class="fas fa-clock"></i>
+                  <span>48 hours</span>
+                </div>
+                <div class="meta-item">
+                  <i class="fas fa-book"></i>
+                  <span>16 Lessons</span>
+                </div>
+                <div class="meta-item">
+                  <i class="fas fa-award"></i>
+                  <span>2</span>
+                </div>
+              </div>
+            </div>
+            <div class="status red">Incompleted</div>
+          </a>
+
+          <!-- Business Intelligence Card -->
+          <a href="/subject/business-intelligence" class="subject-card">
+            <div class="subject-icon green">
+                <span>&lt;/&gt;</span>
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="subject-info">
+              <h2>Business Intelligence</h2>
+              <p class="lecturer">Lecturer : Sok Dy</p>
+              <div class="subject-meta">
+                <div class="meta-item">
+                  <i class="fas fa-clock"></i>
+                  <span>48 hours</span>
+                </div>
+                <div class="meta-item">
+                  <i class="fas fa-book"></i>
+                  <span>16 Lessons</span>
+                </div>
+                <div class="meta-item">
+                  <i class="fas fa-award"></i>
+                  <span>2</span>
+                </div>
+              </div>
+            </div>
+            <div class="status green">completed</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
