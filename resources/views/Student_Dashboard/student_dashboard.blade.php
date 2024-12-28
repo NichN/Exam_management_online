@@ -72,7 +72,7 @@
                 <!-- Profile Section -->
                 <div class="profile-section">
                     <div class="profile-info">
-                        <img src="<?php echo asset('/Image/pf.png'); ?>" alt="Student Profile" />
+                        <img src="<?php echo asset('/Image/pf.png'); ?>" alt="Student Profile"/>
                         <div class="info">
                             <h2>Nich</h2>
                             <p>Student ID: B20223119</p>
