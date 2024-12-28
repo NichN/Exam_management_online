@@ -15,7 +15,7 @@ return new class extends Migration
             $table->integer('user_id', true);
             $table->string('name', 50)->nullable();
             $table->string('email', 50)->nullable()->unique('email');
-            $table->string('password', 10)->nullable();
+            $table->string('password', 100)->nullable();
             $table->enum('role', ['student', 'teacher'])->nullable()->default('student');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
