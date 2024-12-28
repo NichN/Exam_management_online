@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+        Schema::create('answer', function (Blueprint $table) {
+            $table->integer('answer_id', true);
+            $table->integer('question_id')->nullable()->index('question_id');
+            $table->string('content', 1025)->nullable();
+            $table->boolean('is_correct')->nullable();
         });
     }
 
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('answer');
     }
 };
