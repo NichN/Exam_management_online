@@ -1,0 +1,66 @@
+.dashboard-container {
+    margin-left: 20vw;
+    width: calc(100% - 20vw);
+    padding: 0 0 0 20px;
+    margin-top: 30px;
+}
+
+.dashboard-container h2 {
+    margin-top: 20px; 
+}
+.batch-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
+    background-color: #e0f7fa;
+    padding: 20px;
+    width: 300px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.batch {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+}
+
+.batch h4 {
+    margin: 0;
+    font-size: 18px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.batch-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #000; 
+    margin: 10px 0;
+}
+.batch-major {
+    color: blue;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.labtop-icon {
+    color: black;
+    font-size: 50px;
+    margin-right: 10px;
+}
+
+.arrow-icon {
+    font-size: 16px;
+    color: #424242;
+    position: absolute; 
+    bottom: 10px; 
+    right: 10px; 
+}

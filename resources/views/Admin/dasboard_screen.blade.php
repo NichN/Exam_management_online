@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
+    <script src="{{ asset('/js/menu.js') }}"></script>
 </head>
 <body>
 <div class="side-menu">
@@ -53,8 +54,7 @@
             <span class="user-name">Sun Nasy</span>
         </div>
     </div>
-</div>
-
+    </div>
     </div>
 
     <div class="cards-container">
@@ -186,7 +186,6 @@
         </div>
     </div>
 </div>
-
 
 </body>
 </html>
