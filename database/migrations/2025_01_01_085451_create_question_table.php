@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('answer', function (Blueprint $table) {
-            $table->foreign(['question_id'], 'answer_ibfk_1')->references(['question_id'])->on('question')->onUpdate('restrict')->onDelete('restrict');
+        Schema::create('question', function (Blueprint $table) {
+            $table->bigInteger('question_id', true);
+            $table->bigInteger('exam_id')->nullable()->index('fk_question_id');
+            $table->string('content', 1025)->nullable();
+            $table->decimal('mark', 5)->nullable();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('answer', function (Blueprint $table) {
-            $table->dropForeign('answer_ibfk_1');
-        });
+        Schema::dropIfExists('question');
     }
 };

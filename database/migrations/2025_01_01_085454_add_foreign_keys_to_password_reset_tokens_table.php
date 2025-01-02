@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('schedules', function (Blueprint $table) {
-            $table->integer('schedule_id', true);
-            $table->integer('exam_id')->nullable()->index('exam_id');
-            $table->dateTime('start_at')->nullable();
-            $table->dateTime('end_at')->nullable();
+        Schema::table('password_reset_tokens', function (Blueprint $table) {
+            $table->foreign(['email'], 'fk_reset_tokens_id')->references(['email'])->on('users')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('schedules');
+        Schema::table('password_reset_tokens', function (Blueprint $table) {
+            $table->dropForeign('fk_reset_tokens_id');
+        });
     }
 };

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('model_has_permissions', function (Blueprint $table) {
-            $table->foreign(['permission_id'])->references(['id'])->on('permissions')->onUpdate('restrict')->onDelete('cascade');
+        Schema::table('personal_access_tokens', function (Blueprint $table) {
+            $table->foreign(['tokenable_id'], 'fk_token_id')->references(['id'])->on('users')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('model_has_permissions', function (Blueprint $table) {
-            $table->dropForeign('model_has_permissions_permission_id_foreign');
+        Schema::table('personal_access_tokens', function (Blueprint $table) {
+            $table->dropForeign('fk_token_id');
         });
     }
 };

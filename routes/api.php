@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin_login_controller;
@@ -14,9 +14,19 @@ use App\Http\Controllers\Admin_login_controller;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-    Route::get('/',[Admin_login_controller::class,'ShowLoginPage'])->name('admin.login');
-    Route::post('/admin/login',[Admin_login_controller::class,'login']);
 });
+
+Route::post('login',[Admin_login_controller::class,'login']);
+Route::post('register',[Admin_login_controller::class,'register']);
+Route::group(['middleware'=>['auth:sanctum']],function(){
+    Route::post('profile',[Admin_login_controller::class,'profile']);
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/student/dashboard',[Admin_login_controller::class,'Student'])->name('Student.student_dashboard');
+    Route::get('/admin/dashboard',[Admin_login_controller::class,'Teacher'])->name('Admin.dasboard_screen');
+})
+
+?>

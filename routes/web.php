@@ -20,4 +20,6 @@ Route::get('/admin/department',function(){
     return view('Admin.department_screen');
 });
 
+Route::get('/',[Admin_login_controller::class,'ShowLoginPage'])->name('admin.login');
+
 ?>
