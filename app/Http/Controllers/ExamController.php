@@ -7,30 +7,57 @@ use Illuminate\Http\Request;
 
 class ExamController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Database\Eloquent\Collection
     {
-        return ExamModel::with('category', 'schedule', 'questions')->get();
+        return ExamModel::all();
     }
 
     // Create a new exam
-    public function store(Request $request)
+//    public function store(Request $request)
+//    {
+//        $validated = $request->validate([
+//            'title' => 'required|string|max:255',
+//            'category_id' => 'required|exists:categories,category_id',
+//            'duration' => 'required|int',
+//            'created_by' => 'required|exists:users,user_id',
+//        ]);
+//
+//        $exam = ExamModel::created($validated);
+//
+//        return response()->json($exam, 201);
+//    }
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,category_id',
-            'duration' => 'required|regex:/^\d+\s(min|h)$/', // Validate format like '30 min' or '2 h',
-            'created_by' => 'required|exists:users,user_id',
-        ]);
+        try {
+            $validated = $request->validate([
+                'title' => 'required|string|max:255',
+                'duration' => 'required|integer',
+                'user_id' => 'required|exists:users,id',
+                'category_id' => 'required|exists:categories,category_id',
+            ]);
 
-        $exam = ExamModel::create($validated);
+            // Create a new exam entry
+            $exam = ExamModel::create([
+                'title' => $validated['title'],
+                'duration' => $validated['duration'],
+                'user_id' => $validated['user_id'],
+                'category_id' => $validated['category_id'],
+            ]);
 
-        return response()->json($exam, 201);
+            // Return the newly created exam as JSON with a 201 status code
+            return response()->json($exam, 201);
+        }catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['error' => 'Validation Error', 'messages' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
+
     }
 
     // Get a single exam
     public function show($id)
     {
-        $exam = ExamModel::with('category', 'schedule', 'questions')->findOrFail($id);
+        $exam = ExamModel::with('categories', 'schedules', 'question')->findOrFail($id);
 
         return response()->json($exam);
     }
@@ -38,13 +65,13 @@ class ExamController extends Controller
     // Update an exam
     public function update(Request $request, $id)
     {
-        $exam = Exam::findOrFail($id);
+        $exam = ExamModel::findOrFail($id);
 
         $validated = $request->validate([
-            'title' => 'sometimes|required|string|max:255',
-            'category_id' => 'sometimes|required|exists:categories,category_id',
-            'duration_minutes' => 'sometimes|required|integer|min:1',
-            'created_by' => 'sometimes|required|exists:users,user_id',
+            'title' => 'required|string|max:255',
+            'duration' => 'required|integer',
+            'user_id' => 'required|exists:users,id',
+            'category_id' => 'required|exists:categories,category_id',
         ]);
 
         $exam->update($validated);

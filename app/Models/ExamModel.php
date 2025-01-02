@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class ExamModel extends Model
 {
     use HasFactory;
+    protected $table = "exam";
 
     protected $primaryKey = 'exam_id';
 
     protected $fillable = [
         'title',
-        'category_id',
-        'duration_minutes',
+        'duration',
         'user_id',
+        'category_id'
     ];
 
     public function category()

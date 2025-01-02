@@ -27,7 +27,12 @@ Route::get('/admin', [UserController::class, 'index']);
 Route::post('/users', [UserController::class, 'store']);
 Route::post('/login', [UserController::class, 'login']);
 
-Route::apiResource('/exams', ExamController::class);
+Route::get('/exams', [ExamController::class,'index']);
+Route::post('/exams', [ExamController::class,'store']);
+Route::put('/exams/{id}', [ExamController::class,'update']);
+Route::delete('/exams/{id}', [ExamController::class,'destroy']);
+
+
 //Route::prefix('exam')->group(function () {
 //    Route::get('/', [ExamController::class, 'index'])->name('exam.index');
 //    Route::post('/', [ExamController::class, 'store'])->name('exam.store');
@@ -36,5 +41,6 @@ Route::apiResource('/exams', ExamController::class);
 Route::prefix('/category')->group(function (): void {
     Route::get('/', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/', [CategoryController::class, 'store'])->name('category.index');
+    Route::put('/', [CategoryController::class, 'store'])->name('category.index');
 
 });
