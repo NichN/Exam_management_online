@@ -9,13 +9,28 @@ class ExamModel extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'exam_id';
+
     protected $fillable = [
         'title',
-        'duration',
+        'category_id',
+        'duration_minutes',
         'user_id',
-        'category_id'
     ];
 
-    protected $table = 'exam';
+    public function category()
+    {
+        return $this->belongsTo(CategoryModel::class, 'category_id');
+    }
+
+    public function questions()
+    {
+        return $this->hasMany(CategoryModel::class, 'exam_id');
+    }
+
+    public function schedule()
+    {
+        return $this->hasOne(CategoryModel::class, 'exam_id');
+    }
 
 }

@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExamController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin_login_controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,22 @@ use App\Http\Controllers\Admin_login_controller;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-    Route::get('/',[Admin_login_controller::class,'ShowLoginPage'])->name('admin.login');
-    Route::post('/admin/login',[Admin_login_controller::class,'login']);
+});
+
+Route::post('/admin/login', [UserController::class, 'store']);
+Route::get('/admin', [UserController::class, 'index']);
+
+Route::post('/users', [UserController::class, 'store']);
+Route::post('/login', [UserController::class, 'login']);
+
+Route::apiResource('/exams', ExamController::class);
+//Route::prefix('exam')->group(function () {
+//    Route::get('/', [ExamController::class, 'index'])->name('exam.index');
+//    Route::post('/', [ExamController::class, 'store'])->name('exam.store');
+//});
+
+Route::prefix('/category')->group(function (): void {
+    Route::get('/', [CategoryController::class, 'index'])->name('category.index');
+    Route::post('/', [CategoryController::class, 'store'])->name('category.index');
+
 });
