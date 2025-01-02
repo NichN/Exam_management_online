@@ -6,30 +6,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Admin_login_controller;
 use App\Http\Controllers\ExamController;
-use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 
 });
-
-Route::post('/admin/login', [UserController::class, 'store']);
-Route::get('/admin', [UserController::class, 'index']);
-
-Route::post('/users', [UserController::class, 'store']);
-Route::post('/login', [UserController::class, 'login']);
 
 Route::apiResource('/exams', ExamController::class);
 //Route::prefix('exam')->group(function () {
