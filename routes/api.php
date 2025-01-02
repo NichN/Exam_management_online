@@ -26,15 +26,11 @@ Route::prefix('/category')->group(function (): void {
 
 });
 
-Route::post('login',[Admin_login_controller::class,'login']);
+Route::post('login',[Admin_login_controller::class,'login'])->name('admin.login');
 Route::post('register',[Admin_login_controller::class,'register']);
 Route::group(['middleware'=>['auth:sanctum']],function(){
     Route::post('profile',[Admin_login_controller::class,'profile']);
 });
 
-Route::middleware(['auth'])->group(function(){
-    Route::get('/student/dashboard',[Admin_login_controller::class,'Student'])->name('Student.student_dashboard');
-    Route::get('/admin/dashboard',[Admin_login_controller::class,'Teacher'])->name('Admin.dasboard_screen');
-})
 
 ?>

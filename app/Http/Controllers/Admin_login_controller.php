@@ -41,9 +41,7 @@ class Admin_login_controller extends Controller
             'password' => 'required|min:6',
         ]);
 
-
         $user=User::where('email', $request->email)->first();
-
         if(!empty($user)){
             if(Hash::check($request->password,$user->password)){
                 return response()->json([
@@ -72,15 +70,6 @@ class Admin_login_controller extends Controller
         }
         
     }
-        
-    public function Teacher()
-    {
-        return view('Admin.dasboard_screen');
-    }
-    public function Student()
-    {
-        return view('Student.student_dashboard');
-    }
-       
+
 }
 ?>
