@@ -14,7 +14,7 @@
         {{$errors->first('email')}}
       </div>
     @endif
-    <form action="{{route('admin.login')}}" method="POST">
+    <form action="{{route('admin.login')}}" method="GET">
         @csrf
       <div class="form-group">
         <label for="email">Email</label>

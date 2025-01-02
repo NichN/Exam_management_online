@@ -14,23 +14,25 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 });
 
-Route::apiResource('/exams', ExamController::class);
-//Route::prefix('exam')->group(function () {
-//    Route::get('/', [ExamController::class, 'index'])->name('exam.index');
-//    Route::post('/', [ExamController::class, 'store'])->name('exam.store');
-//});
+Route::get('/exams', [ExamController::class, 'index']);
+Route::post('/exams', [ExamController::class, 'store']);
+Route::put('/exams/{id}', [ExamController::class, 'update']);
+Route::delete('/exams/{id}', [ExamController::class, 'destroy']);
 
-Route::prefix('/category')->group(function (): void {
-    Route::get('/', [CategoryController::class, 'index'])->name('category.index');
-    Route::post('/', [CategoryController::class, 'store'])->name('category.index');
+Route::get('/category', [CategoryController::class, 'index']);
+Route::post('/category', [CategoryController::class, 'store']);
+Route::put('/category/{id}', [CategoryController::class, 'update']);
+Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
 
+Route::post('login', [Admin_login_controller::class, 'login']);
+Route::post('register', [Admin_login_controller::class, 'register']);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('profile', [Admin_login_controller::class, 'profile']);
 });
 
-Route::post('login',[Admin_login_controller::class,'login'])->name('admin.login');
-Route::post('register',[Admin_login_controller::class,'register']);
-Route::group(['middleware'=>['auth:sanctum']],function(){
-    Route::post('profile',[Admin_login_controller::class,'profile']);
-});
+Route::middleware(['auth'])->group(function () {
+    Route::get('/student/dashboard', [Admin_login_controller::class, 'Student'])->name('Student.student_dashboard');
+    Route::get('/admin/dashboard', [Admin_login_controller::class, 'Teacher'])->name('Admin.dasboard_screen');
+})
 
-
-?>
+    ?>

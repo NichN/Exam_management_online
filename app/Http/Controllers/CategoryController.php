@@ -52,7 +52,8 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $category = CategoryModel::findOrFail($id);
+        return response()->json($category, 200);
     }
 
     /**
@@ -68,14 +69,21 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = CategoryModel::findOrFail($id);
+        $validatedData = $request->validate([
+            'Name' => 'required|string|max:1025'
+        ]);
+        $category->update($validatedData);
+        return response()->json($category);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id): \Illuminate\Http\Response
     {
-        //
+        CategoryModel::destroy($id);
+
+        return response()->noContent(200, ['message' => 'Exam deleted successfully']);
     }
 }
