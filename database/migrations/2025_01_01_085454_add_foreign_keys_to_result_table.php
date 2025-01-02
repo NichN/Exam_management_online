@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('result', function (Blueprint $table) {
             $table->foreign(['exam_id'], 'fk_exam_id')->references(['exam_id'])->on('exam')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['user_id'], 'fk_user_id')->references(['user_id'])->on('users')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign(['user_id'], 'fk_id')->references(['id'])->on('users')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('result', function (Blueprint $table) {
             $table->dropForeign('fk_exam_id');
-            $table->dropForeign('fk_user_id');
+            $table->dropForeign('fk_id');
         });
     }
 };

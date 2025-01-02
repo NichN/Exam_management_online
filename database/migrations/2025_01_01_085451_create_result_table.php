@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('result', function (Blueprint $table) {
-            $table->integer('result_id', true);
-            $table->integer('user_id')->nullable()->index('fk_user_id');
-            $table->integer('exam_id')->nullable()->index('fk_exam_id');
+            $table->bigInteger('result_id', true);
+            $table->bigInteger('user_id')->nullable()->index('fk_id');
+            $table->bigInteger('exam_id')->nullable()->index('fk_exam_id');
             $table->decimal('total_score', 5)->nullable();
             $table->string('result_status', 1025)->nullable();
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

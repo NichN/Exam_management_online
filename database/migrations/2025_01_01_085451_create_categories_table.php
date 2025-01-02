@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('model_has_roles', function (Blueprint $table) {
-            $table->foreign(['role_id'])->references(['id'])->on('roles')->onUpdate('restrict')->onDelete('cascade');
+        Schema::create('categories', function (Blueprint $table) {
+            $table->bigInteger('category_id', true);
+            $table->string('Name', 1025)->nullable();
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('model_has_roles', function (Blueprint $table) {
-            $table->dropForeign('model_has_roles_role_id_foreign');
-        });
+        Schema::dropIfExists('categories');
     }
 };

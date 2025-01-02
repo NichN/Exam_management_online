@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -44,5 +45,17 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+    }
+
+    public function redirectTo(){
+        if(Auth::check()){
+            $user=Auth::user();
+            if($user->role == "teacher"){
+                return route('Admin.dasboard_screen');
+            }else{
+                return route('Student.student_dashboard');
+            }
+        }
+        return null;
     }
 }

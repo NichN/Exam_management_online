@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('schedules', function (Blueprint $table) {
-            $table->foreign(['exam_id'], 'schedules_ibfk_1')->references(['exam_id'])->on('exam')->onUpdate('restrict')->onDelete('restrict');
+        Schema::create('schedules', function (Blueprint $table) {
+            $table->bigInteger('schedule_id', true);
+            $table->bigInteger('exam_id')->nullable()->index('fk_schedules_id');
+            $table->dateTime('start_at')->nullable();
+            $table->dateTime('end_at')->nullable();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('schedules', function (Blueprint $table) {
-            $table->dropForeign('schedules_ibfk_1');
-        });
+        Schema::dropIfExists('schedules');
     }
 };
