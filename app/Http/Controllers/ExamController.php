@@ -2,30 +2,82 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryModel;
+use App\Models\Question;
+use App\Models\Schedule;
+use App\Models\User;
 use App\Models\ExamModel;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
 {
-    public function index(): \Illuminate\Database\Eloquent\Collection
+    public function index(): \Illuminate\Http\JsonResponse
     {
-        return ExamModel::all();
+        // return ExamModel::all();
+        try {
+            $exams = ExamModel::all()->map(function (ExamModel $exam) {
+                $category = CategoryModel::find($exam->category_id);
+                $user = User::find($exam->user_id);
+
+                \Log::info('Exam ID: ' . $exam->exam_id);
+                \Log::info('Category: ' . ($category ? $category->Name : 'null'));
+                \Log::info('User: ' . ($user ? $user->name : 'null'));
+
+                return [
+                    'exam_id' => $exam->exam_id,
+                    'title' => $exam->title,
+                    'category' => $category ? $category->Name : null,
+                    'duration' => $exam->duration,
+                    'created_by' => $user ? $user->name : null,
+                    'created_at' => $exam->created_at ? $exam->created_at->toIso8601String() : null,
+                ];
+            });
+
+            return response()->json($exams, 200);
+        } catch (\Exception $e) {
+            \Log::error('Error fetching exams', ['exception' => $e]);
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
+
+    }
+
+    public function examDetailsById($id)
+    {
+        try {
+            $exam = ExamModel::findOrFail($id);
+            $category = CategoryModel::findOrFail($exam->category_id);
+            $user = User::findOrFail($exam->user_id);
+            $schedules = Schedule::where('exam_id', $exam->exam_id)->first();
+            $question = Question::where('exam_id', $exam->exam_id)->get();
+
+            $response = [
+                'id' => $exam->exam_id,
+                'title' => $exam->title,
+                'category' => $category->Name,
+                'duration' => $exam->duration,
+                'created_by' => $user->name,
+                'created_at' => $exam->created_at->toIso8601String(),
+                'schedule' => $schedules ? [
+                    'start_at' => $schedules->start_at ? $schedules->start_at->toIso8601String() : null,
+                    'end_at' => $schedules->end_at ? $schedules->end_at->toIso8601String() : null,
+                ] : null,
+                'question' => $question->map(function ($question) {
+                    return [
+                        'id' => $question->question_id,
+                        'content' => $question->content,
+                        'marks' => $question->mark,
+                    ];
+                }),
+            ];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            \Log::error('Error fetching exam: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
     }
 
     // Create a new exam
-//    public function store(Request $request)
-//    {
-//        $validated = $request->validate([
-//            'title' => 'required|string|max:255',
-//            'category_id' => 'required|exists:categories,category_id',
-//            'duration' => 'required|int',
-//            'created_by' => 'required|exists:users,user_id',
-//        ]);
-//
-//        $exam = ExamModel::created($validated);
-//
-//        return response()->json($exam, 201);
-//    }
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         try {
@@ -57,9 +109,25 @@ class ExamController extends Controller
     // Get a single exam
     public function show($id)
     {
-        $exam = ExamModel::with('categories', 'schedules', 'question')->findOrFail($id);
+        try {
+            $exam = ExamModel::findOrFail($id);
+            $category = CategoryModel::findOrFail($exam->category_id);
+            $user = User::findOrFail($exam->user_id);
+            $response = [
+                'exam_id' => $exam->exam_id,
+                'title' => $exam->title,
+                'category' => $category->Name,
+                'duration' => $exam->duration,
+                'user_id' => $user->name,
+                'created_at' => $exam->created_at->toIso8601String(),
+            ];
+            return response()->json(data: $response, status: 200);
 
-        return response()->json($exam);
+
+        } catch (\Exception $e) {
+            \Log::error('Error fetching exam: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
     }
 
     // Update an exam

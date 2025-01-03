@@ -12,7 +12,7 @@ class ResponseController extends Controller
      */
     public function index()
     {
-        //
+        return Response::all();
     }
 
     /**
@@ -28,15 +28,37 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'user_id' => 'required|integer|exists:users,id',
+                'question_id' => 'required|integer|exists:question,question_id',
+                'answer_id' => 'required|integer|exists:answer,answer_id'
+            ]);
+
+            $response = Response::create($validated);
+
+            return response()->json($response, 201);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['error' => 'Validation Error', 'messages' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            \Log::error('Error creating response: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Response $response)
+    public function show($id)
     {
-        //
+        try {
+            $response = Response::findOrFail($id);
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            \Log::error('Error fetching response: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -50,16 +72,37 @@ class ResponseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Response $response)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $response = Response::findOrFail($id);
+            $validated = $request->validate([
+                'user_id' => 'required|integer|exists:users,id',
+                'question_id' => 'required|integer|exists:question,question_id',
+                'answer_id' => 'required|integer|exists:answer,answer_id'
+            ]);
+            $response->update($validated);
+            return response()->json($response, 200);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['error' => 'Validation Error', 'messages' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            \Log::error('Error updating response: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Response $response)
+    public function destroy($id)
     {
-        //
+        try {
+            $response = Response::findOrFail($id);
+            $response->delete();
+            return response()->json(['message' => 'Response deleted successfully'], 200);
+        } catch (\Exception $e) {
+            \Log::error('Error deleting response: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
     }
 }

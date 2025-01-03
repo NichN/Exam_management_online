@@ -12,7 +12,7 @@ class ResultController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Result::all(), 200);
     }
 
     /**
@@ -28,15 +28,37 @@ class ResultController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'user_id' => 'required|integer|exists:users,id',
+                'exam_id' => 'required|integer|exists:exam,exam_id',
+                'total_score' => 'required|integer',
+                'result_status' => 'required|in:pass,fail'
+            ]);
+
+            $result = Result::create($validated);
+
+            return response()->json($result, 201);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['error' => 'Validation Error', 'messages' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            \Log::error('Error creating result: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Result $result)
+    public function show($id)
     {
-        //
+        try {
+            $result = Result::findOrFail($id);
+            return response()->json($result, 200);
+        } catch (\Exception $e) {
+            \Log::error('Error fetching result: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -50,16 +72,38 @@ class ResultController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Result $result)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $result = Result::findOrFail($id);
+            $validated = $request->validate([
+                'user_id' => 'required|integer|exists:users,id',
+                'exam_id' => 'required|integer|exists:exam,exam_id',
+                'total_score' => 'required|integer',
+                'result_status' => 'required|in:pass,fail'
+            ]);
+            $result->update($validated);
+            return response()->json($result, 200);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['error' => 'Validation Error', 'messages' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            \Log::error('Error updating result: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Result $result)
+    public function destroy($id)
     {
-        //
+        try {
+            $result = Result::findOrFail($id);
+            $result->delete();
+            return response()->json(['message' => 'Result deleted successfully'], 200);
+        } catch (\Exception $e) {
+            \Log::error('Error deleting result: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
     }
 }
