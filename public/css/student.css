@@ -1,0 +1,156 @@
+.student-container {
+    margin-left: 20vw;
+    width: calc(100% - 20vw);
+    padding: 0 0 0 20px;
+    margin-top: 30px;
+}
+
+.tabs-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc; 
+}
+
+.tabs {
+    display: flex;
+    gap: 20px; 
+    margin-left: 0; 
+    flex-grow: 0; 
+}
+
+.tab {
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    padding-bottom: 5px;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+}
+
+.tab.active {
+    color: blue;
+    border-bottom-color: blue;
+}
+
+.search-bar {
+    margin-left: auto;
+    flex-grow: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.search-bar input {
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.search-bar i {
+    color: gray;
+}
+.student-container {
+    margin-left: 20vw;
+    width: calc(100% - 20vw);
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.student-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.student-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.student-header .view-all {
+    margin-left: auto;
+    color: blue;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.student-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.student-item {
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr 2fr 1fr 1fr 80px;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.student-item img.avatar {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.student-item .name {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.student-item .class {
+    font-size: 14px;
+    color: gray;
+}
+
+.student-item .assignment {
+    font-size: 14px;
+    color: #555;
+}
+
+.student-item .status {
+    font-size: 14px;
+    color: green;
+    font-weight: bold;
+}
+
+.student-item .date {
+    font-size: 14px;
+    color: gray;
+}
+
+.student-item .view-btn {
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.student-item .view-btn:hover {
+    background-color: darkblue;
+}
+@media (max-width: 768px) {
+    .student-item {
+        grid-template-columns: 1fr;
+    }
+    .tabs-container {
+        flex-direction: column;
+    }
+}

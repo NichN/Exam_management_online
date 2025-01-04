@@ -64,25 +64,5 @@
     </div>
  </div>
 
- <div class="dashboard-container">
-    <h2>My Batch</h2>
-    <hr class="divider">
-    <div class="batch-container">
-        <div class="batch">
-            <h4>COM-24</h4>
-            <div class="batch-content">
-                <div class="labtop-icon">
-                    <i class="fas fa-laptop batch-icon"></i>
-                </div>
-                <a class="batch-major">Computer Studies</a>
-            </div>
-            <div class="arrow-icon">
-                <i class="fas fa-arrow-right"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 </body>
 </html>
