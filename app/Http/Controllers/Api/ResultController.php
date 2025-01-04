@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExamModel;
 use App\Models\Result;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,27 @@ class ResultController extends Controller
      */
     public function index()
     {
-        return response()->json(Result::all(), 200);
+        // return response()->json(Result::all(), 200);
+        try {
+            $results = Result::all()->map(function (Result $result) {
+                $exam = ExamModel::find($result->exam_id);
+                return [
+                    'result_id' => $result->result_id,
+                    'user_id' => $result->user_id,
+                    'exam_id' => $result->exam_id,
+                    'total_score' => $result->total_score,
+                    'result_status' => $result->result_status,
+                    'exam' => $exam ? $exam->title : null,
+                    'created_at' => $result->created_at ? $result->created_at->toIso8601String() : null,
+                ];
+            });
+
+            return response()->json($results, 200);
+        } catch (\Exception $e) {
+            \Log::error('Error fetching results', ['exception' => $e]);
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
+
     }
 
     /**
