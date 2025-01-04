@@ -34,7 +34,7 @@ class User extends Model
     const CREATED_AT = 'created_at';
     public function exam()
     {
-        return $this->hasMany(ExamModel::class, 'user_id');
+        return $this->hasMany(ExamModel::class, 'user_id', 'id');
     }
 
 }

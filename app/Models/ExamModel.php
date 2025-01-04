@@ -9,7 +9,7 @@ class ExamModel extends Model
 {
     use HasFactory;
     protected $table = "exam";
-
+    public $timestamps = false;
     protected $primaryKey = 'exam_id';
 
     protected $fillable = [
@@ -31,12 +31,12 @@ class ExamModel extends Model
 
     public function questions()
     {
-        return $this->hasMany(CategoryModel::class, 'exam_id');
+        return $this->hasMany(Question::class, 'exam_id');
     }
 
     public function schedule()
     {
-        return $this->hasOne(CategoryModel::class, 'exam_id');
+        return $this->hasOne(Schedule::class, 'exam_id');
     }
 
 }
