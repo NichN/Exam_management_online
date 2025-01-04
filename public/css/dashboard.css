@@ -8,10 +8,12 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;    
+    min-height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
 }
+
+
 .side-menu {
     width: 20vw;
     height: 100vh;
@@ -23,6 +25,43 @@ body {
     position: fixed;
     left: 0;
     top: 0;
+    transition: background-color 0.3s ease;
+}
+
+.side-menu a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 0px 15px;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.side-menu a:hover {
+    background-color: #e0f7ff;
+    color: #000;
+}
+
+.side-menu a.active {
+    background-color: white;
+    color: #000;
+    border-radius: 20px 0 0 20px;
+}
+
+.side-menu a,
+.side-menu a:hover {
+    text-decoration: none;
+}
+
+.side-menu a i {
+    margin-right: 10px;
+}
+
+
+.side-menu .logo img {
+    width: 80%;
 }
 
 .logo img {
@@ -211,7 +250,8 @@ body {
     font-size: 14px;
     margin-top: 5px;
 }
-.cards-container {    
+
+.cards-container {
     margin-left: 20vw;
     width: calc(100% - 20vw);
     padding: 0 20px;
@@ -331,7 +371,9 @@ body {
     font-weight: bold;
 }
 
-.class, .assignment, .date {
+.class,
+.assignment,
+.date {
     font-size: 14px;
     color: #555;
 }
@@ -407,4 +449,6 @@ body {
     .header-icons i {
         font-size: 18px;
     }
+
+
 }
