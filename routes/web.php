@@ -27,6 +27,12 @@ Route::get('/admin/department', function () {
 Route::get('/admin/student', function () {
     return view('Admin.student_screen');
 });
+
+    Route::get('/admin/student/detail', function () {
+        return view('Admin.student_detail_screen');
+    });
+
+
 Route::get('/admin/alltask', function () {
     return view('Admin.all_task_screen');
 });

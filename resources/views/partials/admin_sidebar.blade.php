@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>All Task</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/department.css') }}">
-    <script src="{{ asset('/js/menu.js') }}"></script>
-</head>
-<body>
-<div class="container">
-        @include('partials.admin_sidebar')
-</div>
-<!-- <div class="side-menu">
+<div class="side-menu">
     <div class="logo">
     <img src="/Image/norton.png" alt="Logo">
     </div>
@@ -50,9 +33,8 @@
 <div class="logout">
         <i class="fas fa-sign-out-alt"></i> Log out
     </div>
-</div> -->
-
-<!-- <div class="container">
+</div>
+<div class="container">
     <div class="header">
     <div class="header-icons">
         <div class="notification">
@@ -65,8 +47,4 @@
         </div>
     </div>
     </div>
- </div> -->
-
-
-</body>
-</html>
+</div>

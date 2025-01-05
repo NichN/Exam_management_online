@@ -9,11 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/student.css') }}">
+    
     <script src="{{ asset('/js/menu.js') }}"></script>
     <script src="{{ asset('/js/student.js') }}"></script>
 </head>
 <body>
-<div class="side-menu">
+<div class="container">
+        @include('partials.admin_sidebar')
+</div>
+<!-- <div class="side-menu">
     <div class="logo">
     <img src="/Image/norton.png" alt="Logo">
     </div>
@@ -48,9 +52,9 @@
 <div class="logout">
         <i class="fas fa-sign-out-alt"></i> Log out
     </div>
-</div>
+</div> -->
 
-<div class="container">
+<!-- <div class="container">
     <div class="header">
     <div class="header-icons">
         <div class="notification">
@@ -63,7 +67,7 @@
         </div>
     </div>
     </div>
-</div>
+</div> -->
 
  <div class="container">
         <h2>My Student</h2>
@@ -93,7 +97,9 @@
                     <span class="class">ES1</span>
                     <span class="id">B20223119</span>
                     <span class="year">COM_24</span>
-                    <button class="view-btn">View</button>
+                    <button class="view-btn">
+                        <a href="/admin/student/detail">View</a>
+                    </button>
                 </div>
                 <div class="student-item">
                     <img src="/Image/avatar.png" alt="Avatar" class="avatar">
@@ -101,7 +107,9 @@
                     <span class="class">ES1</span>
                     <span class="id">B20223119</span>
                     <span class="year">COM_24</span>
-                    <button class="view-btn">View</button>
+                    <button class="view-btn">                        
+                        <a href="/admin/student/detail">View</a>
+                    </button>
                 </div>
                 <div class="student-item">
                     <img src="/Image/avatar.png" alt="Avatar" class="avatar">
@@ -109,24 +117,27 @@
                     <span class="class">ES1</span>
                     <span class="id">B20223119</span>
                     <span class="year">COM_24</span>
-                    <button class="view-btn">View</button>
-                </div>
+                    <button class="view-btn">                        
+                        <a href="/admin/student/detail">View</a>
+                    </button>                </div>
                 <div class="student-item">
                     <img src="/Image/avatar.png" alt="Avatar" class="avatar">
                     <span class="name">Keo Sovanlogdy</span>
                     <span class="class">ES1</span>
                     <span class="id">B20223119</span>
                     <span class="year">COM_24</span>
-                    <button class="view-btn">View</button>
-                </div>
+                    <button class="view-btn">                        
+                        <a href="/admin/student/detail">View</a>
+                    </button>                </div>
                 <div class="student-item">
                     <img src="/Image/avatar.png" alt="Avatar" class="avatar">
                     <span class="name">Keo Sovanlogdy</span>
                     <span class="class">ES1</span>
                     <span class="id">B20223119</span>
                     <span class="year">COM_24</span>
-                    <button class="view-btn">View</button>
-                </div>
+                    <button class="view-btn">                        
+                        <a href="/admin/student/detail">View</a>
+                    </button>                </div>
              </div>
         </div>
 
@@ -142,7 +153,27 @@
                     <span class="class">ES2</span>
                     <span class="id">B20223120</span>
                     <span class="year">COM_24</span>
-                    <button class="view-btn">View</button>
+                    <button class="view-btn">                        
+                        <a href="/admin/student/detail">View</a>
+                    </button>                </div>
+                <div class="student-item">
+                    <img src="/Image/avatar.png" alt="Avatar" class="avatar">
+                    <span class="name">Keo Sovanlogdy</span>
+                    <span class="class">ES2</span>
+                    <span class="id">B20223120</span>
+                    <span class="year">COM_24</span>
+                    <button class="view-btn">                        
+                        <a href="/admin/student/detail">View</a>
+                    </button>                </div>
+                <div class="student-item">
+                    <img src="/Image/avatar.png" alt="Avatar" class="avatar">
+                    <span class="name">Keo Sovanlogdy</span>
+                    <span class="class">ES2</span>
+                    <span class="id">B20223120</span>
+                    <span class="year">COM_24</span>
+                    <button class="view-btn">                        
+                        <a href="/admin/student/detail">View</a>
+                    </button>
                 </div>
                 <div class="student-item">
                     <img src="/Image/avatar.png" alt="Avatar" class="avatar">
@@ -150,32 +181,18 @@
                     <span class="class">ES2</span>
                     <span class="id">B20223120</span>
                     <span class="year">COM_24</span>
-                    <button class="view-btn">View</button>
-                </div>
+                    <button class="view-btn">                        
+                        <a href="/admin/student/detail">View</a>
+                    </button>                </div>
                 <div class="student-item">
                     <img src="/Image/avatar.png" alt="Avatar" class="avatar">
                     <span class="name">Keo Sovanlogdy</span>
                     <span class="class">ES2</span>
                     <span class="id">B20223120</span>
                     <span class="year">COM_24</span>
-                    <button class="view-btn">View</button>
-                </div>
-                <div class="student-item">
-                    <img src="/Image/avatar.png" alt="Avatar" class="avatar">
-                    <span class="name">Keo Sovanlogdy</span>
-                    <span class="class">ES2</span>
-                    <span class="id">B20223120</span>
-                    <span class="year">COM_24</span>
-                    <button class="view-btn">View</button>
-                </div>
-                <div class="student-item">
-                    <img src="/Image/avatar.png" alt="Avatar" class="avatar">
-                    <span class="name">Keo Sovanlogdy</span>
-                    <span class="class">ES2</span>
-                    <span class="id">B20223120</span>
-                    <span class="year">COM_24</span>
-                    <button class="view-btn">View</button>
-                </div>
+                    <button class="view-btn">                        
+                        <a href="/admin/student/detail">View</a>
+                    </button>                </div>
             </div>
         </div>
     </div>

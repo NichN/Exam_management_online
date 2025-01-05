@@ -12,7 +12,10 @@
     <script src="{{ asset('/js/menu.js') }}"></script>
 </head>
 <body>
-<div class="side-menu">
+<div class="container">
+        @include('partials.admin_sidebar')
+</div>
+<!-- <div class="side-menu">
     <div class="logo">
     <img src="/Image/norton.png" alt="Logo">
     </div>
@@ -47,9 +50,9 @@
 <div class="logout">
         <i class="fas fa-sign-out-alt"></i> Log out
     </div>
-</div>
+</div> -->
 
-<div class="container">
+<!-- <div class="container">
     <div class="header">
     <div class="header-icons">
         <div class="notification">
@@ -62,7 +65,7 @@
         </div>
     </div>
     </div>
- </div>
+ </div> -->
 
  <div class="dashboard-container">
     <h2>My Batch</h2>
