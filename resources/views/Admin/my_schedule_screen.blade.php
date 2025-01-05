@@ -8,8 +8,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/department.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/myschedule.css') }}">
     <script src="{{ asset('/js/menu.js') }}"></script>
+    <script src="{{ asset('/js/myschedule.js') }}"></script>
 </head>
 <body>
 <div class="container">
@@ -65,7 +66,103 @@
         </div>
     </div>
     </div>
-</div> -->
+ </div> -->
+ <div class="container">
+    <div class="header-with-button">
+        <h2>Schedule Task</h2>
+        <button class="add-task-btn" onclick="addNewTask()">+ Add New Task</button>
+    </div>
+    <hr class="divider">
+    <div class="task-tabs-container">
+        <div class="task-tabs">
+            <a class="task-tab active" onclick="setActiveTab(this)" data-class="All Tasks">All Tasks</a>
+            <a class="task-tab" onclick="setActiveTab(this)" data-class="DueToday">Due Today</a>
+            <a class="task-tab" onclick="setActiveTab(this)" data-class="Overdue">Overdue</a>
+        </div>
+    </div>
 
+    <div id="All Tasks" class="task-container active">
+        <div class="tasks-container">
+            <!-- Tasks dynamically included here -->
+        </div>
+    </div>
+    <div id="DueToday" class="task-container">
+        <div class="tasks-container">
+            <!-- Example Due Today Task -->
+            <div class="card">
+                <h3>Testing Chapter1 in Semester 1</h3>
+                <p><strong>Major:</strong>Web Development </p>
+                <div class="details">
+                    <p>
+                        <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                        <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                    </p>
+                </div>
+                <button class="view-details">View Details</button>
+            </div>
+            <div class="card">
+                <h3>Testing Chapter1 in Semester 1</h3>
+                <p><strong>Major:</strong>Web Development </p>
+                <div class="details">
+                    <p>
+                        <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                        <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                    </p>
+                </div>
+                <button class="view-details">View Details</button>
+            </div>
+            <div class="card">
+                <h3>Testing Chapter1 in Semester 1</h3>
+                <p><strong>Major:</strong>Web Development </p>
+                <div class="details">
+                    <p>
+                        <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                        <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                    </p>
+                </div>
+                <button class="view-details">View Details</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="Overdue" class="task-container">
+        <div class="tasks-container">
+            <!-- Example Overdue task -->
+            <div class="card">
+                <h3>Testing Chapter1 in Semester 1</h3>
+                <p><strong>Major:</strong>Web Development </p>
+                    <div class="details">
+                        <p>
+                            <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                            <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                        </p>
+                </div>
+                <button class="view-details">View Details</button>
+            </div>
+            <div class="card">
+                <h3>Testing Chapter1 in Semester 1</h3>
+                    <p><strong>Major:</strong>Web Development </p>
+                    <div class="details">
+                        <p>
+                            <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                            <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                        </p>
+                    </div>
+                    <button class="view-details">View Details</button>
+            </div>
+                <div class="card">
+                    <h3>Testing Chapter1 in Semester 1</h3>
+                    <p><strong>Major:</strong>Web Development </p>
+                    <div class="details">
+                        <p>
+                            <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                            <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                        </p>
+                    </div>
+                    <button class="view-details">View Details</button>
+                </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

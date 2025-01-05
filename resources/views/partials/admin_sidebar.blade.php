@@ -19,15 +19,16 @@
         </a>    
     </li>
     <li class="menu-item" onclick="setActive(this)">
-        <a href="/admin/alltask">
-            <i class="fas fa-tasks"></i> All Task
-        </a>    
-    </li>
-    <li class="menu-item" onclick="setActive(this)">
         <a href="/admin/myschedule">
             <i class="fas fa-clock"></i> My Schedule
         </a>
     </li>
+    <li class="menu-item" onclick="setActive(this)">
+        <a href="/admin/alltask">
+            <i class="fas fa-tasks"></i> All Task
+        </a>    
+    </li>
+
 </ul>
 
 <div class="logout">

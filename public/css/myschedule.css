@@ -1,0 +1,168 @@
+.header-with-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.header-with-button h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.add-task-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-task-btn:hover {
+    background-color: #0056b3;
+}
+
+h2 {
+    margin-bottom: 0;
+}
+
+.divider {
+    margin-top: 20px;
+}
+
+.task-tabs-container {
+    display: flex;
+    justify-content: left;
+    border-bottom: 2px solid #e0e0e0;
+    padding: 10px 0;
+    margin-left: 20px;
+}
+
+.task-tabs {
+    display: flex;
+    gap: 30px;
+}
+
+.task-tab {
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    padding: 5px 15px;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.task-tab:hover {
+    color: #007bff;
+    border-bottom-color: #007bff;
+}
+
+.task-tab.active {
+    color: #007bff;
+    border-bottom-color: #007bff;
+}
+
+.task-container {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.task-container.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.tasks-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 5px 0;
+}
+
+.details {
+    margin: 15px 0;
+}
+
+.batch-icon {
+    margin-right: 8px;
+    color: #007BFF;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.view-details {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.view-details:hover {
+    background-color: #0056b3;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 900px) {
+    .tasks-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .tasks-container {
+        grid-template-columns: 1fr;
+    }
+}
