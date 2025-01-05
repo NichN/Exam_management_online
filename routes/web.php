@@ -24,6 +24,10 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/department', function () {
     return view('Admin.department_screen');
 });
+    Route::get('/admin/department/detail', function () {
+        return view('Admin.batch_detail_screen');
+    });
+
 Route::get('/admin/student', function () {
     return view('Admin.student_screen');
 });
