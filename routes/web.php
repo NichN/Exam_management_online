@@ -1,10 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin_login_controller;
-use App\Http\Controllers\page\AllTaskController;
-use App\Http\Controllers\page\DepartmentController;
+
 use App\Http\Controllers\page\ExamController;
-use App\Http\Controllers\page\MyScheduleController;
 use App\Http\Controllers\page\ResultController;
 use App\Http\Controllers\page\StudentController;
 use App\Http\Controllers\page\StudentDashboardController;
@@ -27,18 +25,17 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/department', function () {
     return view('Admin.department_screen');
 });
-    Route::get('/admin/department/detail', function () {
-        return view('Admin.batch_detail_screen');
-    });
+Route::get('/admin/department/detail', function () {
+    return view('Admin.batch_detail_screen');
+});
 
-<<<<<<< HEAD
 Route::get('/admin/student', function () {
     return view('Admin.student_screen');
 });
 
-    Route::get('/admin/student/detail', function () {
-        return view('Admin.student_detail_screen');
-    });
+Route::get('/admin/student/detail', function () {
+    return view('Admin.student_detail_screen');
+});
 
 
 Route::get('/admin/alltask', function () {
@@ -47,16 +44,10 @@ Route::get('/admin/alltask', function () {
 Route::get('/admin/myschedule', function () {
     return view('Admin.my_schedule_screen');
 });
-Route::get('/',[Admin_login_controller::class,'ShowLoginPage'])->name('admin.login');
-Route::get('/login',[Admin_login_controller::class,'login'])->name('admin.login');
-Route::group(['middleware'=>'teacher'],function(){
-    Route::get('/admin',function(){
-=======
 Route::get('/', [Admin_login_controller::class, 'ShowLoginPage'])->name('admin.login');
 Route::get('/login', [Admin_login_controller::class, 'login'])->name('admin.login');
 Route::group(['middleware' => 'teacher'], function () {
     Route::get('/admin', function () {
->>>>>>> 4e60d03 (student dashboard correct the sidebar)
         return view('Admin.dasboard_screen');
     });
 });
