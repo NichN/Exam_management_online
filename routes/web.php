@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin_login_controller;
 
 use App\Http\Controllers\page\ExamController;
+use App\Http\Controllers\page\HistoryExamController;
 use App\Http\Controllers\page\ResultController;
 use App\Http\Controllers\page\StudentController;
 use App\Http\Controllers\page\StudentDashboardController;
@@ -60,7 +61,8 @@ Route::group(['middleware' => 'student'], function () {
 
 Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name(name: 'Student.dashboard');
 Route::get('/student/subject', [SubjectController::class, 'index'])->name(name: 'Student.subject');
-Route::get('/student/exam', [ExamController::class, 'index'])->name(name: 'Student.exam');
+Route::get('/student/exam', [ExamController::class, 'index'])->name(name: 'Student.exams');
+Route::get('/student/history-exam', [HistoryExamController::class, 'index'])->name(name: 'Student.history_exam');
 Route::get('/student/result', [ResultController::class, 'index'])->name(name: 'Student.result');
 Route::get('/student/student', [StudentController::class, 'index'])->name(name: 'Student.student');
 

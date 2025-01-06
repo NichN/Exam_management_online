@@ -5,10 +5,10 @@ namespace App\Http\Controllers\page;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ExamController extends Controller
+class HistoryExamController extends Controller
 {
     public function index()
     {
-        return view('Student.exams');
+        return view('Student.history_exam');
     }
 }

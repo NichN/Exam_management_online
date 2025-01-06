@@ -122,8 +122,12 @@ h1 {
 
 .status.incompleted {
     background-color: #e74c3c;
+    color: white;
+
 }
+
 
 .status.completed {
     background-color: #2ecc71;
+    color: white;
 }

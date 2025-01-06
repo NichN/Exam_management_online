@@ -22,7 +22,7 @@
     <!-- Card 1 -->
     <div class="card-row">
         <!-- Card 1 -->
-        <div class="card">
+        <div class="card highlight">
             <div class="card-left">
                 <div class="icon" style="background-color: #b39ddb;">
                     <img src="https://img.icons8.com/ios-filled/50/000000/source-code.png" alt="Icon">
@@ -66,7 +66,7 @@
         </div>
 
         <!-- Card 3 -->
-        <div class="card">
+        <div class="card highlight">
             <div class="card-left">
                 <div class="icon" style="background-color: #e57373;">
                     <img src="https://img.icons8.com/ios-filled/50/000000/security-shield.png" alt="Icon">

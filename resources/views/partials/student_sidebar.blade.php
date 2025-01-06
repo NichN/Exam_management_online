@@ -13,9 +13,14 @@
                 <i class="fas fa-building"></i> Suject
             </a>
         </li>
-        <li class="menu-item {{ request()->is('student/exam') ? 'active' : '' }}">
-            <a href="{{ route('Student.exam') }}">
+        <li class="menu-item {{ request()->is('student/exams') ? 'active' : '' }}">
+            <a href="{{ route('Student.exams') }}">
                 <i class="fas fa-user-graduate"></i> Exam
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('student/history-exam') ? 'active' : '' }}">
+            <a href="{{ route('Student.history_exam') }}">
+                <i class="fas fa-user-graduate"></i> History Exam
             </a>
         </li>
         <li class="menu-item {{ request()->is('student/result') ? 'active' : '' }}">
