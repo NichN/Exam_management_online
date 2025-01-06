@@ -70,7 +70,9 @@
  <div class="container">
     <div class="header-with-button">
         <h2>Schedule Task</h2>
-        <button class="add-task-btn" onclick="addNewTask()">+ Add New Task</button>
+        <button class="add-task-btn" onclick="addNewTask()">
+            <a href="/admin/alltask">+ Add New Task</a>
+        </button>
     </div>
     <hr class="divider">
     <div class="task-tabs-container">
@@ -83,12 +85,11 @@
 
     <div id="All Tasks" class="task-container active">
         <div class="tasks-container">
-            <!-- Tasks dynamically included here -->
-        </div>
+
+    </div>
     </div>
     <div id="DueToday" class="task-container">
         <div class="tasks-container">
-            <!-- Example Due Today Task -->
             <div class="card">
                 <h3>Testing Chapter1 in Semester 1</h3>
                 <p><strong>Major:</strong>Web Development </p>
@@ -98,7 +99,9 @@
                         <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
                     </p>
                 </div>
-                <button class="view-details">View Details</button>
+                <button class="view-details">                   
+                    <a href="/admin/alltask/detail">View Details</a>
+                </button>
             </div>
             <div class="card">
                 <h3>Testing Chapter1 in Semester 1</h3>
@@ -109,7 +112,9 @@
                         <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
                     </p>
                 </div>
-                <button class="view-details">View Details</button>
+                <button class="view-details">                   
+                    <a href="/admin/alltask/detail">View Details</a>
+                </button>
             </div>
             <div class="card">
                 <h3>Testing Chapter1 in Semester 1</h3>
@@ -120,14 +125,15 @@
                         <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
                     </p>
                 </div>
-                <button class="view-details">View Details</button>
+                <button class="view-details">                   
+                    <a href="/admin/alltask/detail">View Details</a>
+                </button>
             </div>
         </div>
     </div>
 
     <div id="Overdue" class="task-container">
         <div class="tasks-container">
-            <!-- Example Overdue task -->
             <div class="card">
                 <h3>Testing Chapter1 in Semester 1</h3>
                 <p><strong>Major:</strong>Web Development </p>
@@ -137,7 +143,9 @@
                             <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
                         </p>
                 </div>
-                <button class="view-details">View Details</button>
+                <button class="view-details">                   
+                    <a href="/admin/alltask/detail">View Details</a>
+                </button>
             </div>
             <div class="card">
                 <h3>Testing Chapter1 in Semester 1</h3>
@@ -148,7 +156,9 @@
                             <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
                         </p>
                     </div>
-                    <button class="view-details">View Details</button>
+                    <button class="view-details">                   
+                    <a href="/admin/alltask/detail">View Details</a>
+                </button>
             </div>
                 <div class="card">
                     <h3>Testing Chapter1 in Semester 1</h3>
@@ -159,7 +169,9 @@
                             <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
                         </p>
                     </div>
-                    <button class="view-details">View Details</button>
+                    <button class="view-details">                   
+                    <a href="/admin/alltask/detail">View Details</a>
+                </button>
                 </div>
         </div>
     </div>

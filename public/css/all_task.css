@@ -1,0 +1,138 @@
+.header-with-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.header-with-button h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+.submit-task-btn {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-task-btn:hover {
+    background-color: #0056b3;
+}
+
+.task-container {
+    margin: 15px 15px 15px 15px;
+    background-color: #a9dcf0;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border: 2px solid #007bff;
+}
+
+.task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    margin: auto;
+    margin-left: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+label {
+    width: 120px;
+    font-size: 16px;
+    color: #333;
+}
+
+input[type="text"],
+textarea,
+select,
+input[type="date"] {
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+    resize: none;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus,
+input[type="date"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.file-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-upload input[type="file"] {
+    padding: 5px;
+}
+
+.file-upload i {
+    font-size: 18px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.title-exam {
+    width: 700px;
+    height: 40px; 
+}
+
+.major {
+    width: 300px; 
+    height: 40px; 
+}
+
+.course {
+    width: 350px; 
+    height: 40px; 
+}
+
+.type {
+    width: 250px; 
+    height: 40px; 
+}
+
+.description {
+    width: 600px; 
+    height: 150px; 
+}
+
+.dateline {
+    width: 300px; 
+    height: 40px; 
+}
+
+.mark {
+    width: 150px; 
+    height: 40px; 
+}
+
+.attachment {
+    width: 400px; 
+    height: 50px; 
+}
