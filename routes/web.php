@@ -3,9 +3,12 @@
 use App\Http\Controllers\Admin_login_controller;
 use App\Http\Controllers\page\AllTaskController;
 use App\Http\Controllers\page\DepartmentController;
+use App\Http\Controllers\page\ExamController;
 use App\Http\Controllers\page\MyScheduleController;
+use App\Http\Controllers\page\ResultController;
 use App\Http\Controllers\page\StudentController;
 use App\Http\Controllers\page\StudentDashboardController;
+use App\Http\Controllers\page\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,6 +31,7 @@ Route::get('/admin/department', function () {
         return view('Admin.batch_detail_screen');
     });
 
+<<<<<<< HEAD
 Route::get('/admin/student', function () {
     return view('Admin.student_screen');
 });
@@ -47,6 +51,12 @@ Route::get('/',[Admin_login_controller::class,'ShowLoginPage'])->name('admin.log
 Route::get('/login',[Admin_login_controller::class,'login'])->name('admin.login');
 Route::group(['middleware'=>'teacher'],function(){
     Route::get('/admin',function(){
+=======
+Route::get('/', [Admin_login_controller::class, 'ShowLoginPage'])->name('admin.login');
+Route::get('/login', [Admin_login_controller::class, 'login'])->name('admin.login');
+Route::group(['middleware' => 'teacher'], function () {
+    Route::get('/admin', function () {
+>>>>>>> 4e60d03 (student dashboard correct the sidebar)
         return view('Admin.dasboard_screen');
     });
 });
@@ -58,10 +68,10 @@ Route::group(['middleware' => 'student'], function () {
 });
 
 Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name(name: 'Student.dashboard');
-Route::get('/student/department', [DepartmentController::class, 'index'])->name(name: 'Student.department');
+Route::get('/student/subject', [SubjectController::class, 'index'])->name(name: 'Student.subject');
+Route::get('/student/exam', [ExamController::class, 'index'])->name(name: 'Student.exam');
+Route::get('/student/result', [ResultController::class, 'index'])->name(name: 'Student.result');
 Route::get('/student/student', [StudentController::class, 'index'])->name(name: 'Student.student');
-Route::get('/student/all-task', [AllTaskController::class, 'index'])->name(name: 'Student.all_task');
-Route::get('/student/my-schedule', [MyScheduleController::class, 'index'])->name(name: 'Student.my_schedule');
 
 
 ?>

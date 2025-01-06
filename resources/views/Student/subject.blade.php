@@ -10,12 +10,11 @@
 <body>
     @extends('layouts.app')
 
-    @section('title', 'Department')
+    @section('title', 'My Subject')
 
     @section('content')
-    <h1>Welcome to the AllTasks page</h1>
+    <h1>Welcome to the Subject page</h1>
     @endsection
-
 </body>
 
 </html>

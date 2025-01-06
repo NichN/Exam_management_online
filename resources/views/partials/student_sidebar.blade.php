@@ -8,24 +8,24 @@
                 <i class="fas fa-home"></i> Dashboard
             </a>
         </li>
-        <li class="menu-item {{ request()->is('student/department') ? 'active' : '' }}">
-            <a href="{{ route('Student.department') }}">
-                <i class="fas fa-building"></i> Department
+        <li class="menu-item {{ request()->is('student/subject') ? 'active' : '' }}">
+            <a href="{{ route('Student.subject') }}">
+                <i class="fas fa-building"></i> Suject
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('student/exam') ? 'active' : '' }}">
+            <a href="{{ route('Student.exam') }}">
+                <i class="fas fa-user-graduate"></i> Exam
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('student/result') ? 'active' : '' }}">
+            <a href="{{ route('Student.result') }}">
+                <i class="fas fa-tasks"></i> Result
             </a>
         </li>
         <li class="menu-item {{ request()->is('student/student') ? 'active' : '' }}">
             <a href="{{ route('Student.student') }}">
-                <i class="fas fa-user-graduate"></i> Student
-            </a>
-        </li>
-        <li class="menu-item {{ request()->is('student/all-task') ? 'active' : '' }}">
-            <a href="{{ route('Student.all_task') }}">
-                <i class="fas fa-tasks"></i> All Task
-            </a>
-        </li>
-        <li class="menu-item {{ request()->is('student/my-schedule') ? 'active' : '' }}">
-            <a href="{{ route('Student.my_schedule') }}">
-                <i class="fas fa-clock"></i> My Schedule
+                <i class="fas fa-clock"></i> Profile
             </a>
         </li>
     </ul>
