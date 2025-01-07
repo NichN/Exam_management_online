@@ -11,4 +11,9 @@ class ExamController extends Controller
     {
         return view('Student.exams');
     }
+
+    public function exampage()
+    {
+        return view('Student.exam_page');
+    }
 }
