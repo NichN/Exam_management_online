@@ -36,7 +36,9 @@ Route::get('/admin/student', function () {
     Route::get('/admin/student/detail', function () {
         return view('Admin.student_detail_screen');
     });
-
+    Route::get('/admin/student/task/detail', function () {
+        return view('Admin.student_task_detail_screen');
+    });
 Route::get('/admin/alltask', function () {
     return view('Admin.all_task_screen');
 });

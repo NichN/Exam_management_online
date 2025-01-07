@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/student_detail.css') }}">
-    <!-- <script src="{{ asset('/js/menu.js') }}"></script>
-    <script src="{{ asset('/js/student.js') }}"></script> -->
+    <script src="{{ asset('/js/menu.js') }}"></script>
+    <script src="{{ asset('/js/student_detail.js') }}"></script>
+
+
 </head>
 <body>
 <div class="container">
@@ -67,6 +69,34 @@
     </div>
     </div>
 </div> -->
+        <!-- Statistics Section
+        <div class="statistics">
+            <h3>Quiz</h3>
+            <div class="stat-card">
+                <p>Total Quizzes: <strong>15</strong></p>
+                <p>Attempted: <strong>10</strong></p>
+                <p class="success">Passed: 25</p>
+                <p class="failure">Failed: 25</p>
+                <button class="view-btn">View Details</button>
+            </div>
+            <h3>Exams</h3>
+            <div class="stat-card">                
+                <p>Total Exams: <strong>15</strong></p>
+                <p>Attempted: <strong>10</strong></p>
+                <p class="success">Passed: 25</p>
+                <p class="failure">Failed: 25</p>
+                <button class="view-btn">View Details</button>
+            </div>
+            <h3>Assignment</h3>
+            <div class="stat-card">               
+                <p>Total Assignments: <strong>15</strong></p>
+                <p>Attempted: <strong>12</strong></p>
+                <p class="success">Passed: 25</p>
+                <p class="failure">Failed: 25</p>
+                <button class="view-btn">View Details</button>
+            </div>
+        </div>
+    </div> -->
 <dive class="container">
     <div class="student-profile">
         <!-- Profile Header -->
@@ -99,31 +129,115 @@
             </div>
         </div>
 
-        <!-- Statistics Section -->
-        <div class="statistics">
-            <h3>Quiz</h3>
-            <div class="stat-card">
-                <p>Total Quizzes: <strong>15</strong></p>
-                <p>Attempted: <strong>10</strong></p>
-                <p class="success">Passed: 25</p>
-                <p class="failure">Failed: 25</p>
-                <button class="view-btn">View Details</button>
+    <div class="task-tabs-container">
+        <div class="task-tabs">
+            <a class="task-tab active" onclick="setActiveTab(this)" data-class="Quiz">Quiz</a>
+            <a class="task-tab" onclick="setActiveTab(this)" data-class="Exams">Exams</a>
+            <a class="task-tab" onclick="setActiveTab(this)" data-class="Assignment">Assignment</a>
+        </div>
+    </div>
+
+    <div id="Quiz" class="task-container active">
+        <div class="tasks-container">
+            <div class="card">
+                <h3>Quiz Chapter1 in Semester 1</h3>
+                <p><strong>Major:</strong>Web Development </p>
+                <div class="details">
+                    <p>
+                        <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                        <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                    </p>
+                </div>
+                <button class="view-details">                   
+                    <a href="/admin/student/task/detail">View Details</a>                
+                </button>
             </div>
-            <h3>Exams</h3>
-            <div class="stat-card">                
-                <p>Total Exams: <strong>15</strong></p>
-                <p>Attempted: <strong>10</strong></p>
-                <p class="success">Passed: 25</p>
-                <p class="failure">Failed: 25</p>
-                <button class="view-btn">View Details</button>
+            <div class="card">
+                <h3>Quiz Chapter1 in Semester 1</h3>
+                <p><strong>Major:</strong>Web Development </p>
+                <div class="details">
+                    <p>
+                        <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                        <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                    </p>
+                </div>
+                <button class="view-details">                   
+                    <a href="/admin/student/task/detail">View Details</a>                
+                </button>
             </div>
-            <h3>Assignment</h3>
-            <div class="stat-card">               
-                <p>Total Assignments: <strong>15</strong></p>
-                <p>Attempted: <strong>12</strong></p>
-                <p class="success">Passed: 25</p>
-                <p class="failure">Failed: 25</p>
-                <button class="view-btn">View Details</button>
+            <div class="card">
+                <h3>Quiz Chapter1 in Semester 1</h3>
+                <p><strong>Major:</strong>Web Development </p>
+                <div class="details">
+                    <p>
+                        <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                        <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                    </p>
+                </div>
+                <button class="view-details">                   
+                    <a href="/admin/student/task/detail">View Details</a>                
+                </button>
+            </div>
+    </div>
+    </div>
+    <div id="Exams" class="task-container">
+        <div class="tasks-container">
+            <div class="card">
+                <h3>Exam Chapter1 in Semester 1</h3>
+                <p><strong>Major:</strong>Web Development </p>
+                <div class="details">
+                    <p>
+                        <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                        <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                    </p>
+                </div>
+                <button class="view-details">                   
+                    <a href="/admin/student/task/detail">View Details</a>                
+                </button>
+            </div>
+            <div class="card">
+                <h3>Exam Chapter1 in Semester 1</h3>
+                <p><strong>Major:</strong>Web Development </p>
+                <div class="details">
+                    <p>
+                        <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                        <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                    </p>
+                </div>
+                <button class="view-details">                   
+                    <a href="/admin/student/task/detail">View Details</a>                
+                </button>
+            </div>
+            <div class="card">
+                <h3>Exam Chapter1 in Semester 1</h3>
+                <p><strong>Major:</strong>Web Development </p>
+                <div class="details">
+                    <p>
+                        <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                        <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                    </p>
+                </div>
+                <button class="view-details">                   
+                    <a href="/admin/student/task/detail">View Details</a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="Assignment" class="task-container">
+        <div class="tasks-container">
+            <div class="card">
+                <h3>Assignment Chapter1 in Semester 1</h3>
+                <p><strong>Major:</strong>Web Development </p>
+                    <div class="details">
+                        <p>
+                            <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
+                            <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
+                        </p>
+                </div>
+                <button class="view-details">                   
+                    <a href="/admin/student/task/detail">View Details</a>
+                </button>
             </div>
         </div>
     </div>
