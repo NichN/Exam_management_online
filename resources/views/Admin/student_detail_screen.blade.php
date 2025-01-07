@@ -97,7 +97,7 @@
             </div>
         </div>
     </div> -->
-<dive class="container">
+<dive class="student-detail-container">
     <div class="student-profile">
         <!-- Profile Header -->
         <div class="profile-header">

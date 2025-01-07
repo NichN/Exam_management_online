@@ -67,7 +67,7 @@
     </div>
  </div> -->
 
-<div class="container">
+<div class="taskdetail-container">
     <div class="header-with-button">
         <div class="header-details">
             <h1>Task Details</h1>

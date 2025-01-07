@@ -67,7 +67,7 @@
     </div>
  </div> -->
 
-<div class="container">
+<div class="alltask-container">
     <div class="header-with-button">
         <h4>Create New Task</h4>
         <button class="submit-task-btn" onclick="submitTask()">Submit</button>

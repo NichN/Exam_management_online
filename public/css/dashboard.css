@@ -137,8 +137,8 @@ body {
 }
 
 .container {
-    margin-left: 20vw;
-    width: calc(100% - 20vw);
+    margin-left: 10vw;
+    width: calc(100% - 10vw);
     padding: 0 0 0 20px;
 }
 .container h4 {

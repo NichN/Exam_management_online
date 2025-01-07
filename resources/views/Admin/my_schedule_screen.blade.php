@@ -67,7 +67,7 @@
     </div>
     </div>
  </div> -->
- <div class="container">
+ <div class="myschedule-container">
     <div class="header-with-button">
         <h2>Schedule Task</h2>
         <button class="add-task-btn" onclick="addNewTask()">

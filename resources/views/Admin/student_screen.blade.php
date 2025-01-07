@@ -69,7 +69,7 @@
     </div>
 </div> -->
 
- <div class="container">
+ <div class="student-container">
         <h2>My Student</h2>
         <div class="tabs-container">
             <div class="tabs">

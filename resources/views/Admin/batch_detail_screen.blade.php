@@ -68,7 +68,7 @@
     </div>
  </div> -->
 
-<div class="container">
+<div class="batch-detail-container">
     <div class="batch-header">
         <div class="header-with-back">
             <a href="/admin/department" class="back-btn">

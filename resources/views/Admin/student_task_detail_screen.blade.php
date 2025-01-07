@@ -67,7 +67,7 @@
     </div>
  </div> -->
 
-<div class="container">
+<div class="student-taskdetail-container">
     <div class="detail-header">
         <div class="header-with-back">
             <a href="/admin/student/detail" class="back-btn">
