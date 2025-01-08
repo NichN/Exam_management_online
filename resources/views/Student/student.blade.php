@@ -10,6 +10,9 @@
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+            rel="stylesheet"
         />
     </head>
     <body>
@@ -61,7 +64,7 @@
                 <header>
                     <button class="back-button" id="back-button">
                         <i class="fas fa-arrow-left"></i>
-                        <span>Back</span>
+                        <span>Student Profile</span>
                     </button>
                     <div class="user-profile">
                         <i class="fas fa-bell" id="notification-icon"></i>
@@ -74,30 +77,62 @@
                 <div class="profile-section">
                     <div class="profile-info">
                         <img src="image/Profile.png" alt="Student Profile" />
-                        <div style="margin-top: 40px;text-align: left;">
-                            <h2>Ny Srey Nich</h2>
-                            <p>Student ID: B202223119</p>
-                            <p>Gender: Female</p>
-                        </div>
                     </div>
-                    
+                    <div>
+                        <h2>Srey Nich</h2>
+                        <p>ID: B20220061</p>
+                    </div>
                     <div class="course-info">
-                        <div>Course: COM-24</div>
-                        <div>Class: ES1</div>
-                        <div>Testing Chapter 1 in Semester 1</div>
-                        <div>Batch: COM-24</div>
-                        <div>12:40 PM | 03 Jan 2023</div>
-                        <div>Status: <span class="status-pass">Pass</span></div>
-                        <div>Total Marks: 50</div>
-                        <div>
-                            Question Paper:
-                            <a href="Testing1_Question_Paper.pdf"
-                                >Testing1 Question Paper.pdf</a
-                            >
-                        </div>
-                        <div>Result: 32/50</div>
+                        <span class="icon"
+                            ><i class="fas fa-university"></i>Norton
+                            University</span
+                        >
+                        <div>Computer Study</div>
+                        <div>Year 4, Semester 1</div>
+                        <div>Software Development</div>
+                        <div>2024 - 2025</div>
                     </div>
+                    <div class="form-group">
+                        <label for="name-khmer">Name Khmer</label>
+                        <input
+                            type="text"
+                            id="name-khmer"
+                            placeholder="Name in Khmer"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="name-english">Name English</label>
+                        <input
+                            type="text"
+                            id="name-english"
+                            value="Srey Nich"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="identity">Identity</label>
+                        <input
+                            type="text"
+                            id="identity"
+                            value="ID: B20220061"
+                            readonly
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value="nichh@gmail.com"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" value="0837344643747" />
+                    </div>
+                    <button href="#" class="save-button">Save</button>
                 </div>
+
+                <!-- Course Information Section -->
             </div>
         </div>
         <script src="script.js"></script>
@@ -317,18 +352,16 @@ header {
 .view-details:hover {
     background-color: #3157d1;
 }
-
-/* Add custom styles here to match the new design */
 .profile-section {
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     background-color: #f0f8ff; /* Light blue background */
     padding: 20px;
     border-radius: 10px;
 }
 .profile-info {
-    text-align: left;
+    text-align: center;
 }
 .profile-info img {
     border-radius: 50%; /* Circular profile picture */
@@ -377,9 +410,6 @@ header {
     font-size: 16px;
     line-height: 1.6;
 }
-
-
-
     </style>
     <script>
         // Get all menu items
