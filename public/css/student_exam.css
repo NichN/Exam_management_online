@@ -1,23 +1,9 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
 h1 {
     text-align: start;
     font-size: 24px;
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: 5vw;
 }
 
 .exam-card {
@@ -26,6 +12,7 @@ h1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     margin-right: 20px;
+    margin-left: 5vw;
     overflow: hidden;
     border: 1px solid #e0e0e0;
 }

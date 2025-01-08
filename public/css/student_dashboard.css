@@ -1,7 +1,14 @@
+.container {
+    padding-left: 5vw;
+
+}
+
 .card-row {
     display: flex;
     margin: 10px 0;
     padding-left: 10px;
+    margin-right: 150px;
+    margin-left: 0vw;
     gap: 20px;
 
 }
