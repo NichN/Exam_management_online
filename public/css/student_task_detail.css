@@ -1,0 +1,156 @@
+.student-taskdetail-container {
+    margin-left: 20vw;
+    width: calc(100% - 20vw);
+    padding: 0 0 0 20px;
+}
+.detail-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-with-back {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+    color: #0056b3;
+}
+
+.divider {
+    border: none;
+    border-top: 2px solid #eee;
+    margin: 20px 0;
+}
+.profile-details {
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.header-with-back {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #333; 
+    font-size: 20px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 5px;
+    border: none;
+    background: none;
+}
+
+.back-btn:hover {
+    color: #555; 
+}
+
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+    padding: 20px;
+    background-color: #fff;
+    max-width: 500px; 
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; 
+    object-fit: cover;
+    border: 2px solid #87CEEB; 
+}
+
+.profile-info p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.additional-info p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+.info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.info p {
+    margin: 0;
+    padding: 5px 10px;
+    background: #f4f4f4;
+    border-radius: 4px;
+}
+
+.status {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.status.pass {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.details {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.question-paper a {
+    display: inline-block;
+    margin-top: 5px;
+    text-decoration: none;
+    color: #007bff;
+    background: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.question-paper a:hover {
+    text-decoration: underline;
+}
+
+.result h4 {
+    margin: 20px 0 10px;
+    font-size: 1.2em;
+    color: #444;
+}
+
+.result .score {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+    background: #f4f4f4;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+}

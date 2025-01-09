@@ -1,0 +1,124 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+.batch-detail-container {
+    margin-left: 20vw;
+    width: calc(100% - 20vw);
+    /* padding: 0 0 0 20px; */
+}
+.batch-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-with-back {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+    color: #0056b3;
+}
+
+.divider {
+    border: none;
+    border-top: 2px solid #eee;
+    margin: 20px 0;
+}
+
+.course-container, .major-container {
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+}
+
+.course-container h3, .major-container h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.course-container span, .major-container span {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.semester-container {
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    border-left: 4px solid #28a745;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.semester-container h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.semester-container ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+    color: #555;
+}
+
+.semester-container ul li {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.batch-container {
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 4px solid #ffc107;
+}
+
+.batch-container h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.batch-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.batch-container ul li {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #555;
+}
+
+.batch-container ul span {
+    font-weight: bold;
+    color: #007bff;
+}
+
+button:hover {
+    background-color: #0056b3;
+    color: #fff;
+}

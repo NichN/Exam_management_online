@@ -1,0 +1,340 @@
+.container {
+    padding-left: 5vw;
+
+}
+
+.card-row {
+    display: flex;
+    margin: 10px 0;
+    padding-left: 10px;
+    margin-right: 150px;
+    margin-left: 0vw;
+    gap: 20px;
+
+}
+
+.total-students {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    text-align: center;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.details .title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.details .subtitle {
+    font-size: 16px;
+    color: #666;
+}
+
+.details .semester {
+    font-size: 14px;
+    color: #999;
+}
+
+.upcomming-exam-container {
+    margin-left: 0vw;
+    width: 100%;
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.upcomming-header {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.upcomming-header h2 {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #333;
+}
+
+.upcomming-header .view-all {
+    padding-right: 20px;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.upcomming-header .view-all:hover {
+    text-decoration: underline;
+}
+
+.upcomming-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.upcomming-item {
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr 2fr 1fr 1fr 80px;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.class,
+.assignment,
+.date {
+    font-size: 14px;
+    color: #555;
+}
+
+.status {
+    font-size: 14px;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}
+
+.view-btn {
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.view-btn:hover {
+    background-color: darkgreen;
+}
+
+.id-card {
+    display: flex;
+    align-items: center;
+    background-color: #add8e6;
+    width: 98%;
+    border-radius: 12px;
+    padding: 32px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-left img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+}
+
+.card-center {
+    flex: 1;
+    margin-left: 16px;
+}
+
+.card-center h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.card-center p {
+    margin: 4px 0;
+    color: #333;
+    font-size: 1rem;
+}
+
+.card-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 98%;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.card-header {
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    width: 100%;
+}
+
+.card-header img {
+    margin-top: 5px;
+    width: 80px;
+}
+
+.card-body {
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.card-body img.profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.card-body p {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.card-body p span {
+    margin-left: 5px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: transparent;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status.passed {
+    color: #28a745;
+}
+
+.status.failed {
+    color: #dc3545;
+}
+
+.points {
+    background-color: #66a3ff;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+
+@media (max-width: 768px) {
+    .side-menu {
+        width: 25vw;
+    }
+
+    .container {
+        margin-left: 25vw;
+        width: calc(100% - 25vw);
+    }
+
+    .brand-name img {
+        width: 20vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .side-menu {
+        position: static;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        height: auto;
+    }
+
+    .container {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .side-menu li {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+
+    .brand-name img {
+        width: 50px;
+    }
+
+    .total-students {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .header {
+        height: 50px;
+    }
+
+    .header-icons i {
+        font-size: 18px;
+    }
+}

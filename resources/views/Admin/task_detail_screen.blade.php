@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Department</title>
+    <title>Task Detail</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/department.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/task_detail.css') }}">
     <script src="{{ asset('/js/menu.js') }}"></script>
 </head>
 <body>
@@ -67,27 +67,44 @@
     </div>
  </div> -->
 
- <div class="dashboard-container">
-    <h2>My Batch</h2>
-    <hr class="divider">
-    <div class="batch-container">
-        <div class="batch">
-            <h4>COM-24</h4>
-            <div class="batch-content">
-                <div class="labtop-icon">
-                    <i class="fas fa-laptop batch-icon"></i>
-                </div>
-                <a class="batch-major">
-                    <a href="/admin/department/detail">Computer Studies</a>
-                </a>
+<div class="taskdetail-container">
+    <div class="header-with-button">
+        <div class="header-details">
+            <h1>Task Details</h1>
+            <div class="task-status">
+                <select name="status" class="status-select">
+                    <option value="" disabled selected>Not Started</option>
+                    <option value="1">Done</option>
+                    <option value="0">Not Done</option>
+                </select>
+                <span class="due-date">Due Date: 12:00 PM | 12 Sep 2023</span>
             </div>
-            <div class="arrow-icon">
-                <i class="fas fa-arrow-right"></i>
-            </div>
+        </div>
+        <div class="button-group">
+            <button class="edit-task-btn" onclick="editTask()">Edit</button>
+            <button class="delete-task-btn" onclick="deleteTask()">Delete</button>
+        </div>
+    </div>
+
+    <div class="task-details">
+        <div class="detail-item">
+            <p><strong>Title:</strong></p>
+            <p class="detail-content">Testing Chapter1 in Semester 1</p>
+        </div>
+        <div class="detail-item">
+            <p><strong>Assigned by:</strong></p>
+            <p class="detail-content">Keo Lakena</p>
+        </div>
+        <div class="detail-item">
+            <p><strong>Description:</strong></p>
+            <p class="detail-content">Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci ut diam condimentum, vel euismod erat placerat. In iaculis arcu eros, eget tempus orci facilisis id. Praesent lorem orci, mattis non efficitur id, ultricies vel nibh. Sed volutpat lacus </p>
+        </div>
+        <div class="detail-item">
+            <p><strong>Attachments:</strong></p>
+            <a href="Assignment.pdf" class="attachment-link">Assignment.pdf</a>
         </div>
     </div>
 </div>
-
 
 </body>
 </html>

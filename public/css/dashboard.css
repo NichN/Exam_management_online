@@ -8,12 +8,14 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;    
+    min-height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
 }
+
+
 .side-menu {
-    width: 20vw;
+    width: 15vw;
     height: 100vh;
     background-color: #87CEEB;
     display: flex;
@@ -23,6 +25,43 @@ body {
     position: fixed;
     left: 0;
     top: 0;
+    transition: background-color 0.3s ease;
+}
+
+.side-menu a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 0px 15px;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.side-menu a:hover {
+    background-color: #e0f7ff;
+    color: #000;
+}
+
+.side-menu a.active {
+    background-color: white;
+    color: #000;
+    border-radius: 20px 0 0 20px;
+}
+
+.side-menu a,
+.side-menu a:hover {
+    text-decoration: none;
+}
+
+.side-menu a i {
+    margin-right: 10px;
+}
+
+
+.side-menu .logo img {
+    width: 80%;
 }
 
 .logo img {
@@ -98,9 +137,16 @@ body {
 }
 
 .container {
-    margin-left: 20vw;
-    width: calc(100% - 20vw);
+    margin-left: 10vw;
+    width: calc(100% - 10vw);
     padding: 0 0 0 20px;
+}
+
+.container h4 {
+    margin-top: 25px;
+    margin-left: 25px;
+    color: #333;
+    font-size: 20px;
 }
 
 .header {
@@ -211,7 +257,8 @@ body {
     font-size: 14px;
     margin-top: 5px;
 }
-.cards-container {    
+
+.cards-container {
     margin-left: 20vw;
     width: calc(100% - 20vw);
     padding: 0 20px;
@@ -331,7 +378,9 @@ body {
     font-weight: bold;
 }
 
-.class, .assignment, .date {
+.class,
+.assignment,
+.date {
     font-size: 14px;
     color: #555;
 }
@@ -354,6 +403,63 @@ body {
 
 .view-btn:hover {
     background-color: darkgreen;
+}
+
+.id-card {
+    display: flex;
+    align-items: center;
+    background-color: #add8e6;
+    width: 98%;
+    border-radius: 12px;
+    padding: 32px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-left img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+}
+
+.card-center {
+    flex: 1;
+    margin-left: 16px;
+}
+
+.card-center h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.card-center p {
+    margin: 4px 0;
+    color: #333;
+    font-size: 1rem;
+}
+
+.card-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 
@@ -407,4 +513,7 @@ body {
     .header-icons i {
         font-size: 18px;
     }
+
+
+
 }
