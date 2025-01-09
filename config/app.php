@@ -196,6 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
     ],
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -212,5 +213,5 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
     
-
+        
 ];

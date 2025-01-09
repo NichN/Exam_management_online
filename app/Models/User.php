@@ -1,17 +1,15 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-
-class User extends Model
+class User extends Authenticatable 
 {
-    use HasFactory,HasApiTokens,Notifiable;
+    use HasFactory, HasApiTokens, Notifiable;
 
     // Specify which attributes are mass assignable
     protected $fillable = [
@@ -21,16 +19,31 @@ class User extends Model
         'role',
     ];
 
-    /*@var array<int, string>
-    */
-   protected $hidden = [
-       'password',
-       'remember_token',
-   ];
-    
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    public function isTeacher()
+    {
+        return $this->role === 'teacher';
+    }
+
+    public function isStudent()
+    {
+        return $this->role === 'student';
+    }
+
     protected $table = 'users';
 
-    // Define the columns for timestamps if you're not using default ones
     const CREATED_AT = 'created_at';
 
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }

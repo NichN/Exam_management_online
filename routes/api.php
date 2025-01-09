@@ -24,15 +24,23 @@ Route::post('/category', [CategoryController::class, 'store']);
 Route::put('/category/{id}', [CategoryController::class, 'update']);
 Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
 
-Route::post('login', [Admin_login_controller::class, 'login']);
-Route::post('register', [Admin_login_controller::class, 'register']);
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('profile', [Admin_login_controller::class, 'profile']);
+
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/student/dashboard', [Admin_login_controller::class, 'Student'])->name('Student.student_dashboard');
-    Route::get('/admin/dashboard', [Admin_login_controller::class, 'Teacher'])->name('Admin.dasboard_screen');
-})
 
-    ?>
+
+//កុំប៉ះកន្លែងនឹង
+Route::post('login', [Admin_login_controller::class, 'login']);
+Route::post('register', [Admin_login_controller::class, 'register']);
+Route::post('logout',[Admin_login_controller::class, 'logout']);
+Route::get('sentverifyemail/{email}', [Admin_login_controller::class, 'sentverifyemail']);
+Route::get('verify-mail/{token}',[Admin_login_controller::class,'verificationMail']);
+Route::post('passwordreset',[Admin_login_controller::class, 'passwordreset']);
+//profile
+Route::middleware(['auth:sanctum', 'role:teacher'])->get('/teacher/dashboard', [Admin_login_controller::class, 'teacher']);
+Route::middleware(['auth:sanctum', 'role:student'])->get('/student/dashboard', [Admin_login_controller::class, 'student']);
+Route::middleware(['auth:sanctum'])->put('profile-update',[Admin_login_controller::class,'profile_update']);
+?>
