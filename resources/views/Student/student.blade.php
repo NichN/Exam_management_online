@@ -16,8 +16,7 @@
         @extends('layouts.app')
         @section('title', 'Result')
 
-        @section('content')
-
+        @section('content') 
         <!-- Main Content -->
         <div class="main-content">
             <!-- Header -->

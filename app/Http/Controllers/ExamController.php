@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\ExamModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+
 
 class ExamController extends Controller
 {
@@ -30,7 +32,7 @@ class ExamController extends Controller
                     'category' => $category ? $category->Name : null,
                     'duration' => $exam->duration,
                     'created_by' => $user ? $user->name : null,
-                    'created_at' => $exam->created_at ? $exam->created_at->toIso8601String() : null,
+                    'created_at' => $exam->created_at ? Carbon::parse($exam->created_at)->toIso8601String() : null,
                 ];
             });
 
