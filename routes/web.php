@@ -52,7 +52,7 @@ Route::group(['middleware' => 'teacher'], function () {
 });
 
 // Student Routes
-Route::group(['middleware' => 'student'], function () {
+
     Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('Student.dashboard');
     Route::get('/student/subject', [SubjectController::class, 'index'])->name('Student.subject');
     Route::get('/student/exam', [ExamController::class, 'index'])->name('Student.exams');
@@ -60,6 +60,5 @@ Route::group(['middleware' => 'student'], function () {
     Route::get('/student/result', [ResultController::class, 'index'])->name('Student.result');
     Route::get('/student/student', [StudentController::class, 'index'])->name('Student.student');
     Route::get('/student/exam-page', [ExamController::class, 'exampage'])->name('Student.exam_page');
-});
 
 ?>
