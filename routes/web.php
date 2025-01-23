@@ -50,15 +50,15 @@ Route::group(['middleware' => 'teacher'], function () {
         return view('Admin.my_schedule_screen');
     });
 });
+Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('Student.dashboard');
 
 // Student Routes
 
-    Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('Student.dashboard');
-    Route::get('/student/subject', [SubjectController::class, 'index'])->name('Student.subject');
-    Route::get('/student/exam', [ExamController::class, 'index'])->name('Student.exams');
-    Route::get('/student/history-exam', [HistoryExamController::class, 'index'])->name('Student.history_exam');
-    Route::get('/student/result', [ResultController::class, 'index'])->name('Student.result');
-    Route::get('/student/student', [StudentController::class, 'index'])->name('Student.student');
-    Route::get('/student/exam-page', [ExamController::class, 'exampage'])->name('Student.exam_page');
+Route::get('/student/subject', [SubjectController::class, 'index'])->name('Student.subject');
+Route::get('/student/exam', [ExamController::class, 'index'])->name('Student.exams');
+Route::get('/student/history-exam', [HistoryExamController::class, 'index'])->name('Student.history_exam');
+Route::get('/student/result', [ResultController::class, 'index'])->name('Student.result');
+Route::get('/student/student', [StudentController::class, 'index'])->name('Student.student');
+Route::get('/student/exam-page', [ExamController::class, 'exampage'])->name('Student.exam_page');
 
 ?>
