@@ -1,8 +1,14 @@
 <?php
-    use App\Http\Controllers\Admin_login_controller;
+    namespace App\Http\Controllers\Api;
+    use App\Http\Controllers\Api\Admin_login_controller;
     use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\page\ExamController;
+    use App\Http\Controllers\page\HistoryExamController;
+    use App\Http\Controllers\page\ResultController;
+    use App\Http\Controllers\page\StudentController;
+    use App\Http\Controllers\page\StudentDashboardController;
+    use App\Http\Controllers\page\SubjectController;
 
-<<<<<<< HEAD
     Route::get('/', [Admin_login_controller::class, 'ShowLoginPage'])->name('login');
     
     Route::get('/student/dashboard', function() {
@@ -24,19 +30,6 @@
     Route::get('/student/dashboard', function () {
         return view('Student.student_dashboard');
     })->middleware('auth', 'role:student');
-    
-    
-=======
-use App\Http\Controllers\Admin_login_controller;
-
-use App\Http\Controllers\page\ExamController;
-use App\Http\Controllers\page\HistoryExamController;
-use App\Http\Controllers\page\ResultController;
-use App\Http\Controllers\page\StudentController;
-use App\Http\Controllers\page\StudentDashboardController;
-use App\Http\Controllers\page\SubjectController;
-use Illuminate\Support\Facades\Route;
-
 
 /*Route::get('/admin',function(){
     return view('Admin.dasboard_screen');
@@ -100,5 +93,4 @@ Route::get('/student/student', [StudentController::class, 'index'])->name(name: 
 Route::get('/student/exam-page', [ExamController::class, 'exampage'])->name('Student.exam_page');
 
 
->>>>>>> 3f826563b65c05afc6f0415591823c2dc2dff003
 ?>

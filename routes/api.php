@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Admin_login_controller;
+use App\Http\Controllers\Api\Admin_login_controller;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ResponseController;
@@ -31,12 +31,9 @@ Route::post('/category', [CategoryController::class, 'store']);
 Route::put('/category/{id}', [CategoryController::class, 'update']);
 Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
 
-<<<<<<< HEAD
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-=======
+
 Route::get('/question', [QuestionController::class, 'index']);
 Route::post('/question', [QuestionController::class, 'store']);
 Route::get('/question/{id}', [QuestionController::class, 'show']);
@@ -65,7 +62,6 @@ Route::post('login', [Admin_login_controller::class, 'login']);
 Route::post('register', [Admin_login_controller::class, 'register']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('profile', [Admin_login_controller::class, 'profile']);
->>>>>>> 3f826563b65c05afc6f0415591823c2dc2dff003
 });
 
 
@@ -81,4 +77,5 @@ Route::post('passwordreset',[Admin_login_controller::class, 'passwordreset']);
 Route::middleware(['auth:sanctum', 'role:teacher'])->get('/teacher/dashboard', [Admin_login_controller::class, 'teacher']);
 Route::middleware(['auth:sanctum', 'role:student'])->get('/student/dashboard', [Admin_login_controller::class, 'student']);
 Route::middleware(['auth:sanctum'])->put('profile-update',[Admin_login_controller::class,'profile_update']);
+
 ?>
