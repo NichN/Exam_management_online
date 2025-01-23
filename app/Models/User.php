@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable 
+class User extends Authenticatable
 {
     use HasFactory, HasApiTokens, Notifiable;
 
@@ -19,21 +19,16 @@ class User extends Authenticatable
         'role',
     ];
 
-<<<<<<< HEAD
     /**
      * The attributes that should be hidden for arrays.
      *
-     * @var array<int, string>
-=======
     /*@var array<int, string>
->>>>>>> 3f826563b65c05afc6f0415591823c2dc2dff003
      */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-<<<<<<< HEAD
     public function isTeacher()
     {
         return $this->role === 'teacher';
@@ -44,8 +39,6 @@ class User extends Authenticatable
         return $this->role === 'student';
     }
 
-=======
->>>>>>> 3f826563b65c05afc6f0415591823c2dc2dff003
     protected $table = 'users';
 
     const CREATED_AT = 'created_at';
