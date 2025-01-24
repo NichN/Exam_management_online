@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Models\User;
-use Dotenv\Validator as DotenvValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
+
 
 class Admin_login_controller extends Controller
 {
