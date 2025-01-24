@@ -42,7 +42,6 @@ Route::group(['middleware' => 'role:teacher'], function () {
     });
 });
 // Student Routes
-<<<<<<< HEAD
 
     Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('Student.dashboard');
     Route::get('/student/subject', [SubjectController::class, 'index'])->name('Student.subject');
@@ -51,15 +50,6 @@ Route::group(['middleware' => 'role:teacher'], function () {
     Route::get('/student/result', [ResultController::class, 'index'])->name('Student.result');
     Route::get('/student/student', [StudentController::class, 'index'])->name('Student.student');
     Route::get('/student/exam-page', [ExamController::class, 'exampage'])->name('Student.exam_page');
+    ?>
 
-?>
-=======
-Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('Student.dashboard')->middleware('auth', 'role:student');
-Route::get('/student/subject', [SubjectController::class, 'index'])->name('Student.subject');
-Route::get('/student/exam', [ExamController::class, 'index'])->name('Student.exams');
-Route::get('/student/history-exam', [HistoryExamController::class, 'index'])->name('Student.history_exam');
-Route::get('/student/result', [ResultController::class, 'index'])->name('Student.result');
-Route::get('/student/student', [StudentController::class, 'index'])->name('Student.student');
-Route::get('/student/exam-page', [ExamController::class, 'exampage'])->name('Student.exam_page');
-?>
->>>>>>> 0645b1efcec35ffa7df2f2d94f511007db68b0a6
+
