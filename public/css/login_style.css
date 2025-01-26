@@ -57,6 +57,7 @@
       border-radius: 5px;
       font-size: 16px;
       cursor: pointer;
+      margin-top: 10px;
       transition: background 0.3s;
     }
 
@@ -89,3 +90,21 @@
         margin-bottom: 15px;
         font-size: 14px;
       }
+      .forgot-password {
+        margin-top: 10px;
+        right: 0;
+    }
+    
+    .forgot-password-link {
+        color: red;
+        font-size: 12px; 
+        text-decoration: none;
+        display: inline-block;
+        transition: color 0.3s ease;
+    }
+    
+    .forgot-password-link:hover {
+        color: #0056b3;
+        text-decoration: none;
+    }
+    

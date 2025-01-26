@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Password;
 
 
 class Admin_login_controller extends Controller
@@ -74,7 +75,6 @@ class Admin_login_controller extends Controller
         ]);
     }
 
-    //need to pul fronten sin
     public function student(Request $request)
     {   
         return response()->json([
@@ -117,6 +117,7 @@ class Admin_login_controller extends Controller
             'message'=> 'User logout Success'
         ],200);
     }
+    
     public function sentverifyemail($email){
         
         $user = User::where('email', $email)->first();
@@ -195,6 +196,19 @@ public function verificationMail($token)
     ]);
 }
 
+    public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ]);
 
+        $response = Password::sendResetLink($request->only('email'));
 
+        if ($response === Password::RESET_LINK_SENT) {
+            return response()->json(['message' => 'We have emailed your password reset link!']);
+        }
+
+        return response()->json(['error' => 'We can\'t find a user with that email address.'], 404);
+    }
 }
+

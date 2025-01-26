@@ -71,4 +71,5 @@ Route::post('passwordreset',[Admin_login_controller::class, 'passwordreset']);
 Route::middleware(['auth:sanctum', 'role:teacher'])->get('/teacher/dashboard', [Admin_login_controller::class, 'teacher']);
 Route::middleware(['auth:sanctum', 'role:student'])->get('/student/dashboard', [Admin_login_controller::class, 'student']);
 Route::middleware(['auth:sanctum'])->put('profile-update',[Admin_login_controller::class,'profile_update']);
+Route::post('password/email', [Admin_login_controller::class, 'sendResetLinkEmail']);
 ?>

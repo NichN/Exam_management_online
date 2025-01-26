@@ -10,7 +10,7 @@
         </li>
         <li class="menu-item {{ request()->is('student/subject') ? 'active' : '' }}">
             <a href="{{ route('Student.subject') }}">
-                <i class="fas fa-building"></i> Suject
+                <i class="fas fa-building"></i> Subject
             </a>
         </li>
         <li class="menu-item {{ request()->is('student/exam') ? 'active' : '' }}">
@@ -35,7 +35,7 @@
         </li>
     </ul>
     <div class="logout">
-        <a href="#">
+        <a href="#" id="logout-btn">
             <i class="fas fa-sign-out-alt"></i> Log out
         </a>
     </div>
@@ -55,3 +55,38 @@
         </div>
     </div>
 </div>
+<script>
+    if(localStorage.getItem('authToken')){
+        console.log('User is logged in');
+    }
+    else {
+        console.log('User is not logged in');
+    }
+
+    document.getElementById('logout-btn').addEventListener('click', function (e) {
+        e.preventDefault(); 
+        localStorage.removeItem('authToken');
+        
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            fetch('http://127.0.0.1:8000/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Logged out:', data);
+                alert('You have successfully logged out!');
+            })
+            .catch(error => {
+                console.error('Error logging out:', error);
+            });
+        } else {
+            console.error('No token found for logout!');
+        }
+        window.location.href = '/login';
+    });
+</script>

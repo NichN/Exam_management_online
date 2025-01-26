@@ -10,7 +10,11 @@ use App\Http\Controllers\page\StudentDashboardController;
 use App\Http\Controllers\page\SubjectController;
 
 // Admin Routes
-Route::get('/login', [Admin_login_controller::class, 'ShowLoginPage'])->name('admin.login');
+Route::get('/', [Admin_login_controller::class, 'ShowLoginPage'])->name('admin.login');
+Route::get('/password/email',function(){
+    return view('Loginform.Password_Reset');
+})->name('emailreset');
+
 Route::get('/admin/dashboard', function () {
     return view('Admin.dasboard_screen');
 })->middleware('auth', 'role:teacher');
@@ -42,6 +46,7 @@ Route::group(['middleware' => 'role:teacher'], function () {
     });
 });
 // Student Routes
+
 Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('Student.dashboard')->middleware('auth', 'role:student');
 Route::get('/student/subject', [SubjectController::class, 'index'])->name('Student.subject');
 Route::get('/student/exam', [ExamController::class, 'index'])->name('Student.exams');
@@ -49,4 +54,5 @@ Route::get('/student/history-exam', [HistoryExamController::class, 'index'])->na
 Route::get('/student/result', [ResultController::class, 'index'])->name('Student.result');
 Route::get('/student/student', [StudentController::class, 'index'])->name('Student.student');
 Route::get('/student/exam-page', [ExamController::class, 'exampage'])->name('Student.exam_page');
+
 ?>

@@ -331,7 +331,7 @@
             <!-- Profile Section -->
             <div class="profile-section">
                 <div class="profile-info">
-                    <img src="image/Profile.png" alt="Student Profile" />
+                    <img src="/image/avatar.png" alt="Student Profile" />
                     <div style="margin-top: 40px; text-align: left">
                         <h2>Ny Srey Nich</h2>
                         <p>Student ID: B202223119</p>

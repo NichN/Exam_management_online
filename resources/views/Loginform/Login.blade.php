@@ -19,7 +19,11 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
+            <div class="forgot-password">
+                <a href="/password/email" class="forgot-password-link">Forgot your password?</a>
+            </div>
             <button type="submit" class="btn">Login</button>
+            
         </div>
     </form>
 
