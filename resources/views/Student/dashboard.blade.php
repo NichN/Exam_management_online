@@ -62,7 +62,7 @@
             </div>
         </div>
         <div class="upcomming-header">
-            <h2>Submitted Homework</h2>
+            <h2>Upcomming Exams</h2>
             <a href="#" class="view-all">View All</a>
         </div>
         <div class="upcomming-exam-container">
