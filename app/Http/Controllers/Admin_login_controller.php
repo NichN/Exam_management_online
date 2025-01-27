@@ -24,25 +24,28 @@ class Admin_login_controller extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6', 
+            'password' => 'required|min:6',
             'role' => 'required|in:student,teacher'
         ]);
-
+        
+        // Create the user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role, // You should store the role too, as it's validated
         ]);
-
-        $token = $user->createToken('Token')->plainTextToken;
         
+        // Generate the token
+        $token = $user->createToken('Token')->plainTextToken;
         
         return response()->json([
             'success' => true,
             'message' => 'User registered successfully',
             'user' => $user,
-            'token' => $token,  
+            'token' => $token,
         ]);
+        
     }
 
     public function login(Request $request)
@@ -54,12 +57,12 @@ class Admin_login_controller extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $user = Auth::user(); 
+            $user = Auth::user();
             $token = $user->createToken('Token')->plainTextToken;
             return response()->json([
                 'success' => true,
                 'user' => $user,
-                'role' => $user->role, 
+                'role' => $user->role,
                 'token' => $token
             ]);
         }
@@ -75,7 +78,7 @@ class Admin_login_controller extends Controller
     }
 
     public function student(Request $request)
-    {   
+    {
         return response()->json([
             'message' => 'Welcome to the Teacher Dashboard',
             'user' => $request->user(),
@@ -118,53 +121,54 @@ class Admin_login_controller extends Controller
             'data' => $user
         ]);
     }
-
-   public function logout(Request $request){
+    public function logout(Request $request)
+    {
         auth()->logout();
-        return response() ->json([
-            'success'=>true,
-            'message'=> 'User logout Success'
-        ],200);
+        return response()->json([
+            'success' => true,
+            'message' => 'User logout Success'
+        ], 200);
     }
-    
-    public function sentverifyemail($email){
         
+    public function sentverifyemail($email)
+    {
+
         $user = User::where('email', $email)->first();
-    
+
         if (!$user) {
             return response()->json([
                 'success' => false,
                 'message' => 'User not found',
             ], 404);
         }
-    
+
         $verificationToken = Str::random(40);
-    
+
         $user->remember_token = $verificationToken;
         $user->save();
-    
+
         $domain = URL::to('/');
-        $verificationUrl = $domain .'/verify-mail/'. $verificationToken;
-    
+        $verificationUrl = $domain . '/verify-mail/' . $verificationToken;
+
         $data = [
             'url' => $verificationUrl,
             'email' => $email,
             'title' => 'Email Verification',
             'body' => 'Click the link below to verify your email',
         ];
-    
+
         try {
 
             Mail::send('Loginform.VerifyEmail', ['data' => $data], function ($message) use ($data) {
                 $message->to($data['email'])->subject($data['title']);
             });
-           
-    
+
+
             return response()->json([
                 'success' => true,
                 'message' => 'Verification email sent successfully',
             ]);
-            
+
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -220,4 +224,3 @@ class Admin_login_controller extends Controller
         return response()->json(['error' => 'We can\'t find a user with that email address.'], 404);
     }
 }
-

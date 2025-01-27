@@ -2,214 +2,169 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CategoryModel;
-use App\Models\Question;
-use App\Models\Schedule;
-use App\Models\User;
-use App\Models\ExamModel;
+use App\Models\Exam;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Carbon\Carbon;
-
+use App\Models\StudentAnswer;
+use App\Models\Question;
 
 class ExamController extends Controller
 {
-    public function index(): \Illuminate\Http\JsonResponse
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        // return ExamModel::all();
-        try {
-            $exams = ExamModel::all()->map(function (ExamModel $exam) {
-                $category = CategoryModel::find($exam->category_id);
-                $user = User::find($exam->user_id);
-
-                Log::info('Exam ID: ' . $exam->exam_id);
-                Log::info('Category: ' . ($category ? $category->Name : 'null'));
-                Log::info('User: ' . ($user ? $user->name : 'null'));
-
-                return [
-                    'exam_id' => $exam->exam_id,
-                    'title' => $exam->title,
-                    'category' => $category ? $category->Name : null,
-                    'duration' => $exam->duration,
-                    'created_by' => $user ? $user->name : null,
-                    'created_at' => $exam->created_at ? Carbon::parse($exam->created_at)->toIso8601String() : null,
-                ];
-            });
-
-            return response()->json($exams, 200);
-        } catch (\Exception $e) {
-            \Log::error('Error fetching exams', ['exception' => $e]);
-            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
-        }
-
+        return Exam::with(['subject', 'teacher'])->get();
     }
 
-    public function examDetailsById($id)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        try {
-            $exam = ExamModel::findOrFail($id);
-            $category = CategoryModel::findOrFail($exam->category_id);
-            $user = User::findOrFail($exam->user_id);
-            $schedules = Schedule::where('exam_id', $exam->exam_id)->first();
-            $question = Question::where('exam_id', $exam->exam_id)->get();
-
-            $response = [
-                'id' => $exam->exam_id,
-                'title' => $exam->title,
-                'category' => $category->Name,
-                'duration' => $exam->duration,
-                'created_by' => $user->name,
-                'created_at' => $exam->created_at->toIso8601String(),
-                'schedule' => $schedules ? [
-                    'start_at' => $schedules->start_at ? $schedules->start_at->toIso8601String() : null,
-                    'end_at' => $schedules->end_at ? $schedules->end_at->toIso8601String() : null,
-                ] : null,
-                'question' => $question->map(function ($question) {
-                    return [
-                        'id' => $question->question_id,
-                        'content' => $question->content,
-                        'marks' => $question->mark,
-                    ];
-                }),
-            ];
-
-            return response()->json($response, 200);
-        } catch (\Exception $e) {
-            \Log::error('Error fetching exam: ' . $e->getMessage());
-            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
-        }
+        //
     }
 
-    // Create a new exam
-    public function store(Request $request): \Illuminate\Http\JsonResponse
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
-        $input = $request->all();
-        if (isset($input['question']) && is_array($input['question'])) {
-            foreach ($input['question'] as $index => $question) {
-                // Ensure each question has a default 'mark' field if missing
-                $input['question'][$index]['mark'] = $question['mark'] ?? 1;
-            }
-        }
-        try {
-            $validated = $request->validate([
-                'title' => 'required|string|max:255',
-                'category' => 'required|string|max:255',
-                'duration' => 'required|integer',
-                'name' => 'required|string|max:255',
-                'question' => 'required|array',
-                'question.*.content' => 'required|string|max:255',
-                'question.*.mark' => 'required|integer|min:1',
-            ]);
-
-            // Find or create the category
-            $category = CategoryModel::firstOrCreate(['Name' => $validated['Name']]);
-
-            // Find or create the user
-            $user = User::firstOrCreate(['name' => $validated['name']]);
-
-            // Create the exam
-            $exam = ExamModel::create([
-                'title' => $validated['title'],
-                'category_id' => $category->category_id,
-                'duration' => $validated['duration'],
-                'user_id' => $user->id,
-            ]);
-
-            // Create the questions
-            foreach ($validated['question'] as $questionData) {
-                Question::create([
-                    'exam_id' => $exam->exam_id,
-                    'content' => $questionData['content'],
-                    'mark' => $questionData['mark'],
-                ]);
-            }
-
-            return response()->json($exam->load('question', 'categories', 'users'), 201);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json([
-                'error' => 'Validation Error',
-                'messages' => $e->errors(),
-            ], 422);
-        } catch (\Exception $e) {
-            Log::error('Error creating exam: ' . $e->getMessage());
-            return response()->json([
-                'error' => 'Internal Server Error',
-                'message' => 'An unexpected error occurred. Please try again later.',
-            ], 500);
-        }
-        // try {
-        //     $validated = $request->validate([
-        //         'title' => 'required|string|max:255',
-        //         'duration' => 'required|integer',
-        //         'user_id' => 'required|string|max:255',
-        //         'category' => 'required|string|max:255',
-        //     ]);
-
-        //     // Create a new exam entry
-        //     $exam = ExamModel::create([
-        //         'title' => $validated['title'],
-        //         'duration' => $validated['duration'],
-        //         'user_id' => $validated['user_id'],
-        //         'category_id' => $validated['category_id'],
-        //         'created_at' => now(),
-        //     ]);
-
-        //     // Return the newly created exam as JSON with a 201 status code
-        //     return response()->json($exam, 201);
-        // } catch (\Illuminate\Validation\ValidationException $e) {
-        //     return response()->json(['error' => 'Validation Error', 'messages' => $e->errors()], 422);
-        // } catch (\Exception $e) {
-        //     return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
-        // }
-
-    }
-
-    // Get a single exam
-    public function show($id)
-    {
-        try {
-            $exam = ExamModel::findOrFail($id);
-            $category = CategoryModel::findOrFail($exam->category_id);
-            $user = User::findOrFail($exam->user_id);
-            $response = [
-                'exam_id' => $exam->exam_id,
-                'title' => $exam->title,
-                'category' => $category->Name,
-                'duration' => $exam->duration,
-                'user_id' => $user->name,
-                'created_at' => $exam->created_at->toIso8601String(),
-            ];
-            return response()->json(data: $response, status: 200);
-
-
-        } catch (\Exception $e) {
-            \Log::error('Error fetching exam: ' . $e->getMessage());
-            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
-        }
-    }
-
-    // Update an exam
-    public function update(Request $request, $id)
-    {
-        $exam = ExamModel::findOrFail($id);
-
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'duration' => 'required|integer',
-            'user_id' => 'required|exists:users,id',
-            'category_id' => 'required|exists:categories,category_id',
+            'description' => 'nullable|string',
+            'subject_id' => 'required|exists:subjects,id',
+            'teacher_id' => 'required|exists:users,id',
+            'start_time' => 'required|date',
+            'end_time' => 'required|date|after:start_time',
+            'status' => 'in:scheduled,active,completed',
+            'exam_type' => 'required|in:quiz,midterm,final,practice',
         ]);
 
-        $exam->update($validated);
-
+        $exam = Exam::create($validated);
+        return response()->json($exam, 201);
+    }
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $exam = Exam::with(['subject', 'teacher'])->findOrFail($id);
         return response()->json($exam);
     }
 
-    // Delete an exam
-    public function destroy($id): \Illuminate\Http\Response
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Exam $exam)
     {
-        ExamModel::destroy($id);
-
-        return response()->noContent(200, ['message' => 'Exam deleted successfully']);
+        //
     }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        $exam = Exam::findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => 'sometimes|required|string|max:255',
+            'description' => 'nullable|string',
+            'subject_id' => 'sometimes|required|exists:subjects,id',
+            'teacher_id' => 'sometimes|required|exists:users,id',
+            'start_time' => 'sometimes|required|date',
+            'end_time' => 'sometimes|required|date|after:start_time',
+            'status' => 'sometimes|in:scheduled,active,completed',
+            'exam_type' => 'required|in:quiz,midterm,final,practice',
+        ]);
+
+        $exam->update($validated);
+        return response()->json($exam);
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        $exam = Exam::findOrFail($id);
+        $exam->delete();
+        return response()->json(['message' => 'Exam deleted successfully']);
+    }
+    public function getTotalScoreForQuestions($examId)
+    {
+        $questions = Question::where('exam_id', $examId)->get();
+
+        $totalScores = [];
+
+        foreach ($questions as $question) {
+            // Calculate the total score for this question based on correct answers
+            $correctAnswersCount = StudentAnswer::where('question_id', $question->id)
+                ->where('is_correct', 1)
+                ->count();
+
+            // Calculate the total score for this question
+            $totalScore = $correctAnswersCount * $question->points;
+
+            $totalScores[] = [
+                'question_id' => $question->id,
+                'question_points' => $question->points,
+                'correct_answers_count' => $correctAnswersCount,
+                'total_score_for_question' => $totalScore,
+            ];
+        }
+
+        return response()->json([
+            'exam_id' => $examId,
+            'total_scores' => $totalScores,
+        ]);
+    }
+
+    public function getAllAnswersForExam($examId)
+    {
+        $answers = StudentAnswer::whereHas('question', function ($query) use ($examId) {
+            $query->where('exam_id', $examId);
+        })
+            ->with(['question', 'user'])  // Include question and student details
+            ->get();
+
+        return response()->json($answers);
+    }
+
+    public function getTotalScoreSummary($examId)
+    {
+        // Find the exam
+        $exam = Exam::with('questions')->findOrFail($examId);
+
+        // Calculate total scores for each student
+        $summary = $exam->students()
+            ->with([
+                'answers' => function ($query) use ($exam) {
+                    $query->whereHas('question', function ($subQuery) use ($exam) {
+                        $subQuery->where('exam_id', $exam->id);
+                    });
+                }
+            ])
+            ->get()
+            ->map(function ($student) use ($exam) {
+                $totalScore = $student->answers->sum(function ($answer) {
+                    return $answer->points_awarded ?? 0;
+                });
+
+                return [
+                    'student_id' => $student->id,
+                    'student_name' => $student->name,
+                    'total_score' => $totalScore,
+                ];
+            });
+
+        return response()->json([
+            'exam_id' => $exam->id,
+            'exam_title' => $exam->title,
+            'summary' => $summary,
+        ]);
+    }
+
 }

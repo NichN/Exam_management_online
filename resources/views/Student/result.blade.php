@@ -12,15 +12,11 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
-
-
-    
-    
+    <link rel="stylesheet" href="{{ asset('/css/student_result.css') }}">
 </head>
 
 <body>
     <div class="container">
-        <!-- Sidebar -->
         @extends('layouts.app')
 
         @section('title', 'Result')
@@ -40,13 +36,8 @@
             margin-top: 20px; /* Space above the section */
         }
 
-        .profile-picture {
-            width: 80px; /* Adjust size as needed */
-            height: 80px; /* Adjust size as needed */
-            border-radius: 50%; /* Make it circular */
-            margin-right: 20px; /* Space between image and text */
-        }
-
+        <!-- Main Content -->
+        <div class="main-content">
             <!-- Profile Section -->
             <div class="profile-section">
                 <div class="profile-info">

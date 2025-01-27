@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 class User extends Authenticatable
 {
     use HasFactory, HasApiTokens, Notifiable;
+    protected $table = 'users';
 
     // Specify which attributes are mass assignable
     protected $fillable = [
@@ -39,15 +40,26 @@ class User extends Authenticatable
         return $this->role === 'student';
     }
 
-    protected $table = 'users';
+
 
     const CREATED_AT = 'created_at';
-    public function exam()
-    {
-        return $this->hasMany(ExamModel::class, 'user_id', 'id');
-    }
 
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function exams()
+    {
+        return $this->hasMany(Exam::class, 'teacher_id');
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'assigned_to');
+    }
 }

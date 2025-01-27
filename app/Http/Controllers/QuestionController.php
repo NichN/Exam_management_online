@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
-use App\Models\Answer;
 
 class QuestionController extends Controller
 {
@@ -13,8 +12,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::all();
-        return response()->json($questions);
+        return Question::all();
     }
 
     /**
@@ -25,89 +23,32 @@ class QuestionController extends Controller
         //
     }
 
-    public function questionandAnswer(Request $request)
-    {
-        try {
-            $validate = $request->validate([
-                'exam_id' => 'required|exists:exam,exam_id',
-                'content' => 'required|string|max:255',
-                'mark' => 'required|integer',
-                'answers' => 'required|array',
-                'answers.*.content' => 'required|string|max:255',
-                'answers.*.is_correct' => 'required|boolean',
-            ]);
-
-            $question = Question::create([
-                'exam_id' => $validate['exam_id'],
-                'content' => $validate['content'],
-                'mark' => $validate['mark'],
-            ]);
-
-            foreach ($validate['answers'] as $answer) {
-                Answer::create(attributes: [
-                    'question_id' => $question->question_id,
-                    'content' => $answer['content'],
-                    'is_correct' => $answer['is_correct'],
-                ]);
-            }
-
-            return response()->json($question->load('answers'), 201);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json(['error' => 'Validation Error', 'messages' => $e->errors()], 422);
-        } catch (\Exception $e) {
-            \Log::error('Error creating question: ' . $e->getMessage());
-            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
-        }
-    }
-
-
-
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        try {
-            $validate = $request->validate([
-                'exam_id' => 'required|exists:exam,exam_id',
-                'content' => 'required|string|max:255',
-                'mark' => 'required',
-            ]);
+        $validated = $request->validate([
+            'exam_id' => 'required|exists:exams,id',
+            'question_text' => 'required|string',
+            'question_type' => 'required|in:MCQ,subjective',
+            'options' => 'nullable|json',
+            'correct_answer' => 'nullable|string',
+            'points' => 'required|numeric',
+        ]);
 
-            $question = Question::create([
-                'exam_id' => $validate['exam_id'],
-                'content' => $validate['content'],
-                'mark' => $validate['mark'],
-            ]);
-
-            return response()->json($question, 201);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json(['error' => 'Validation Error', 'messages' => $e->errors()], 422);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
-        }
-
+        $question = Question::create($validated);
+        return response()->json($question, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($question_id)
+    public function show($id)
     {
-        try {
-            $question = Question::find($question_id);
-
-            if (!$question) {
-                return response()->json(['error' => 'Question not found'], 404);
-            }
-
-            return response()->json($question, 200);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
-        }
+        $question = Question::findOrFail($id);
+        return response()->json($question);
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -120,31 +61,26 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $question_id)
+    public function update(Request $request, $id)
     {
-        try {
-            $question = Question::findOrFail($question_id);
-            $validate = $request->validate([
-                'exam_id' => 'required|exists:exam,exam_id',
-                'content' => 'required|string|max:255',
-                'mark' => 'required',
-            ]);
+        $question = Question::findOrFail($id);
 
-            $question->update($validate);
-            return response()->json($question, 200);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json(['error' => 'Validation Error', 'messages' => $e->errors()], 422);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
-        }
+        $validated = $request->validate([
+            'question_text' => 'sometimes|required|string',
+            'question_type' => 'sometimes|required|in:MCQ,subjective',
+            'options' => 'nullable|json',
+            'correct_answer' => 'nullable|string',
+        ]);
+
+        $question->update($validated);
+        return response()->json($question);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Question $question)
+    // Delete a specific question
+    public function destroy($id)
     {
-        Question::destroy($question->question_id);
-        return response()->json(['message' => 'Question deleted successfully'], 200);
+        $question = Question::findOrFail($id);
+        $question->delete();
+        return response()->json(['message' => 'Question deleted successfully']);
     }
 }
