@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Password;
-
-
 class Admin_login_controller extends Controller
 {
 
@@ -37,6 +35,7 @@ class Admin_login_controller extends Controller
         ]);
 
         $token = $user->createToken('Token')->plainTextToken;
+        
         
         return response()->json([
             'success' => true,
@@ -82,34 +81,44 @@ class Admin_login_controller extends Controller
             'user' => $request->user(),
         ]);
     }
-    public function profile_update(Request $request){
-       if(auth()->user()){
-        $validator = Validator::make($request->all(),[
-            'id'=> 'required',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-        ]);
-        if($validator->fails()){
-            return response()->json(
-                $validator->errors()
-            );
+    public function profile_update(Request $request)
+    {
+        $user = auth()->user();
+        
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized'
+            ], 401);
         }
-        $user=User::find($request->id);
-        $user->name= $request->name;
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $user->name = $request->name;
         $user->email = $request->email;
-        $user->save();
+
+        if ($user instanceof \App\Models\User) {
+            $user->save();
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update user data. Invalid user model.'
+            ], 500);
+        }
 
         return response()->json([
-            'success'=>true,
+            'success' => true,
             'data' => $user
         ]);
-       }
-       else{
-        return response()->json([
-            'success'=>false
-        ]);
-       }
     }
+
    public function logout(Request $request){
         auth()->logout();
         return response() ->json([
@@ -165,36 +174,36 @@ class Admin_login_controller extends Controller
         }
 } 
 
-public function verificationMail($token)
-{
-    $user = User::where('remember_token', $token)->first();
+    public function verificationMail($token)
+    {
+        $user = User::where('remember_token', $token)->first();
 
-    if (!$user) {
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid or expired token.',
+            ], 400); 
+        }
+
+        if ($user->is_verified) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Email already verified.',
+            ], 400);
+        }
+
+        $datetime = Carbon::now()->format('Y-m-d H:i:s');
+
+        $user->remember_token = '';  
+        $user->is_verified = 1;     
+        $user->email_verified_at = $datetime; 
+        $user->save(); 
+
         return response()->json([
-            'success' => false,
-            'message' => 'Invalid or expired token.',
-        ], 400); 
+            'success' => true,
+            'message' => 'Email verified successfully.',
+        ]);
     }
-
-    if ($user->is_verified) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Email already verified.',
-        ], 400);
-    }
-
-    $datetime = Carbon::now()->format('Y-m-d H:i:s');
-
-    $user->remember_token = '';  
-    $user->is_verified = 1;     
-    $user->email_verified_at = $datetime; 
-    $user->save(); 
-
-    return response()->json([
-        'success' => true,
-        'message' => 'Email verified successfully.',
-    ]);
-}
 
     public function sendResetLinkEmail(Request $request)
     {

@@ -10,7 +10,7 @@ use App\Http\Controllers\page\StudentDashboardController;
 use App\Http\Controllers\page\SubjectController;
 
 // Admin Routes
-Route::get('/', [Admin_login_controller::class, 'ShowLoginPage'])->name('admin.login');
+Route::get('/', [Admin_login_controller::class, 'ShowLoginPage'])->name('login');
 Route::get('/password/email',function(){
     return view('Loginform.Password_Reset');
 })->name('emailreset');

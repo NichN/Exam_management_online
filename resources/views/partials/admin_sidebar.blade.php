@@ -45,7 +45,7 @@
         </div>
         <div class="user-profile">
             <i class="fa fa-user-circle"></i>
-            <span class="user-name">Sun Nasy</span>
+            <span class="user-name">{{ auth()->user()->name }}</span>
         </div>
     </div>
     </div>
@@ -82,6 +82,6 @@
         } else {
             console.error('No token found for logout!');
         }
-        window.location.href = '/login';
+        window.location.href = '/';
     });
 </script>
