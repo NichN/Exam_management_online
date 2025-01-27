@@ -49,7 +49,6 @@
         </div>
         @endsection
     </div>
-    @endsection
     <script src="script.js"></script>
 </body>
 </html>
