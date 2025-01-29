@@ -187,7 +187,6 @@ header {
 .course-info div {
     text-align: center;
 }
-
 .software-icon i {
     color: #4caf50;
     /* Change icon color */
@@ -201,4 +200,36 @@ header {
     font-family: Arial, sans-serif;
     font-size: 16px;
     line-height: 1.6;
+}
+.logout {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#logout-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #4753ff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#logout-btn i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+#logout-btn:hover {
+    background-color: #e03939;
+    transform: scale(1.05);
+}
+
+#logout-btn:active {
+    background-color: #d12f2f;
+    transform: scale(0.98);
 }

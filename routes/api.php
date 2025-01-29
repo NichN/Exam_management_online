@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin_login_controller;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\page\StudentController;
 use App\Http\Controllers\ResultController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,4 +35,7 @@ Route::middleware(['auth:sanctum', 'role:teacher'])->get('/teacher/dashboard', [
 Route::middleware(['auth:sanctum', 'role:student'])->get('/student/dashboard', [Admin_login_controller::class, 'student']);
 Route::middleware(['auth:sanctum'])->patch('profile-update',[Admin_login_controller::class,'profile_update']);
 Route::post('password/email', [Admin_login_controller::class, 'sendResetLinkEmail']);
+
+//student total
+Route::middleware('auth:sanctum')->get('/students/total', [StudentController::class, 'getTotalStudents']);
 ?>

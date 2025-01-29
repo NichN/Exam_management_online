@@ -42,8 +42,9 @@
         const data = await response.json();
 
         if (response.ok && data.success) {
+            const token = data.token;
             const role = data.role;
-
+            localStorage.setItem('authToken', token);
             if (role === 'teacher') {
                 window.location.href = '/admin/dashboard';
             } else if (role === 'student') {
@@ -59,18 +60,15 @@
         alert('An error occurred. Please try again.');
     }
 };
-        const loginForm = document.getElementById('loginForm');
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-        loginForm.addEventListener('submit', function (event) {
-            event.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
-          
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-          
-            login(email, password);
-        });
-    </script>
+        login(email, password);
+    });
+</script>
 </body>
 </html>

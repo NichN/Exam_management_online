@@ -8,7 +8,6 @@ use App\Http\Controllers\page\ResultController;
 use App\Http\Controllers\page\StudentController;
 use App\Http\Controllers\page\StudentDashboardController;
 use App\Http\Controllers\page\SubjectController;
-
 // Admin Routes
 Route::get('/', [Admin_login_controller::class, 'ShowLoginPage'])->name('login');
 Route::get('/password/email',function(){
@@ -31,7 +30,7 @@ Route::group(['middleware' => 'role:teacher'], function () {
     });
     Route::get('/admin/student/detail', function () {
         return view('Admin.student_detail_screen');
-    });
+    })->name('student.detail');
     Route::get('/admin/student/task/detail', function () {
         return view('Admin.student_task_detail_screen');
     });
@@ -46,7 +45,6 @@ Route::group(['middleware' => 'role:teacher'], function () {
     });
 });
 // Student Routes
-
 Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('Student.dashboard')->middleware('auth', 'role:student');
 Route::get('/student/subject', [SubjectController::class, 'index'])->name('Student.subject');
 Route::get('/student/exam', [ExamController::class, 'index'])->name('Student.exams');
@@ -54,5 +52,4 @@ Route::get('/student/history-exam', [HistoryExamController::class, 'index'])->na
 Route::get('/student/result', [ResultController::class, 'index'])->name('Student.result');
 Route::get('/student/student', [StudentController::class, 'index'])->name('Student.student');
 Route::get('/student/exam-page', [ExamController::class, 'exampage'])->name('Student.exam_page');
-
 ?>
