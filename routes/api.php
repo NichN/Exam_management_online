@@ -32,6 +32,44 @@ Route::post('passwordreset', [Admin_login_controller::class, 'passwordreset']);
 //profile
 Route::middleware(['auth:sanctum', 'role:teacher'])->get('/teacher/dashboard', [Admin_login_controller::class, 'teacher']);
 Route::middleware(['auth:sanctum', 'role:student'])->get('/student/dashboard', [Admin_login_controller::class, 'student']);
-Route::middleware(['auth:sanctum'])->patch('profile-update',[Admin_login_controller::class,'profile_update']);
+Route::middleware(['auth:sanctum'])->patch('profile-update', [Admin_login_controller::class, 'profile_update']);
 Route::post('password/email', [Admin_login_controller::class, 'sendResetLinkEmail']);
+
+Route::get('/exams', [ExamController::class, 'index']);
+Route::post('/exams', [ExamController::class, 'store']);
+//exam details
+Route::get('/exams/{id}', [ExamController::class, 'show']);
+Route::put('/exams/{id}', [ExamController::class, 'update']);
+Route::delete('/exams/{id}', [ExamController::class, 'destroy']);
+
+Route::get('/departments', [DepartmentController::class, 'index']);
+Route::post('/departments', [DepartmentController::class, 'store']);
+Route::put('/departments/{id}', [DepartmentController::class, 'update']);
+Route::delete('/departments/{id}', [DepartmentController::class, 'destroy']);
+
+Route::get('/courses', [DepartmentController::class, 'index']);
+Route::post('/courses', [DepartmentController::class, 'store']);
+Route::put('/courses/{id}', [DepartmentController::class, 'update']);
+Route::delete('/courses/{id}', [DepartmentController::class, 'destroy']);
+
+Route::get('/subjects', [DepartmentController::class, 'index']);
+Route::post('/subjects', [DepartmentController::class, 'store']);
+Route::put('/subjects/{id}', [DepartmentController::class, 'update']);
+Route::delete('/subjects/{id}', [DepartmentController::class, 'destroy']);
+
+Route::get('/questions', [DepartmentController::class, 'index']);
+Route::post('/questions', [DepartmentController::class, 'store']);
+Route::put('/questions/{id}', [DepartmentController::class, 'update']);
+Route::delete('/questions/{id}', [DepartmentController::class, 'destroy']);
+
+Route::get('/student-answers', [DepartmentController::class, 'index']);
+Route::post('/student-answers', [DepartmentController::class, 'store']);
+Route::put('/student-answers/{id}', [DepartmentController::class, 'update']);
+Route::delete('/student-answers/{id}', [DepartmentController::class, 'destroy']);
+
+Route::get('/exam-students', [DepartmentController::class, 'index']);
+Route::post('/exam-students', [DepartmentController::class, 'store']);
+Route::put('/exam-students/{id}', [DepartmentController::class, 'update']);
+Route::delete('/exam-students/{id}', [DepartmentController::class, 'destroy']);
+
 ?>
