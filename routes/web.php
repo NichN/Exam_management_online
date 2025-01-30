@@ -37,6 +37,9 @@ Route::group(['middleware' => 'role:teacher'], function () {
     Route::get('/admin/alltask', function () {
         return view('Admin.all_task_screen');
     });
+    Route::get('/admin/alltask/quizexam', function () {
+        return view('Admin.exam_quiz_screen');
+    });
     Route::get('/admin/alltask/detail', function () {
         return view('Admin.task_detail_screen');
     });

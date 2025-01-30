@@ -71,6 +71,9 @@
     <div class="header-with-button">
         <h4>Create New Task</h4>
         <button class="submit-task-btn" onclick="submitTask()">Submit</button>
+        <a href="/admin/alltask/quizexam">
+            <button class="next-task-btn">Next</button>
+        </a>
     </div>
     <div class="task-container">
         <form class="task-form">
@@ -102,8 +105,9 @@
                 <label for="type">Type:</label>
                 <select name="type" class="type">
                     <option value="" disabled selected>Choose Type</option>
-                    <option value="type1">Type 1</option>
-                    <option value="type2">Type 2</option>
+                    <option value="type1">Assignment</option>
+                    <option value="type2">Quiz</option>
+                    <option value="type2">Exam</option>
                 </select>
             </div>
             <div class="form-group">
@@ -118,7 +122,7 @@
                 <label for="mark">Mark:</label>
                 <input type="text" name="mark" class="mark">
             </div>
-            <div class="form-group">
+            <div class="form-group attachment-group">
                 <label for="attachment">Attachment:</label>
                 <div class="file-upload">
                     <input type="file" name="attachment" class="attachment">
@@ -129,3 +133,41 @@
 </div>
 </body>
 </html>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const typeSelect = document.querySelector(".type");
+        const nextButton = document.querySelector(".next-task-btn");
+        const submitButton = document.querySelector(".submit-task-btn");
+        const attachmentGroup = document.querySelector(".attachment-group");
+
+        // Function to handle changes in the task type
+        typeSelect.addEventListener("change", function () {
+            const selectedValue = typeSelect.value;
+
+            if (selectedValue === "type1") { 
+                // If "Assignment" is selected, show "Submit" and Attachment field, hide "Next"
+                submitButton.style.display = "inline-block";
+                nextButton.style.display = "none";
+                attachmentGroup.style.display = "block";
+            } else if (selectedValue === "type2") { 
+                // If "Quiz" or "Exam" is selected, show "Next", hide "Submit" and Attachment field
+                submitButton.style.display = "none";
+                nextButton.style.display = "inline-block";
+                attachmentGroup.style.display = "none";
+            } else {
+                // If no type is selected, hide both buttons and attachment field
+                submitButton.style.display = "none";
+                nextButton.style.display = "none";
+                attachmentGroup.style.display = "none";
+            }
+        });
+
+        // Initially hide both buttons and the attachment field
+        submitButton.style.display = "none";
+        nextButton.style.display = "none";
+        attachmentGroup.style.display = "none";
+    });
+</script>
+
+
+

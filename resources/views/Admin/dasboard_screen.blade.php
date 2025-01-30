@@ -45,7 +45,7 @@
         </div>
 
             <!-- Card 3 -->
-        <div class="total-students">
+        <!-- <div class="total-students">
             <div class="icon-container" style="background-color: #e57373;">
                 <i class="fas fa-home"></i>
             </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="semester">Semester1, Year4</div>
             </div>
-        </div>
+        </div> -->
 
             <!-- Card 4 -->
         <div class="total-students">
