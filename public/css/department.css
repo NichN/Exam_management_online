@@ -1,66 +1,34 @@
-.dashboard-container {
-    margin-left: 20vw;
-    width: calc(100% - 20vw);
-    padding: 0 0 0 20px;
-    margin-top: 30px;
-}
-
-.dashboard-container h2 {
-    margin-top: 20px; 
-}
 .batch-container {
     display: flex;
-    flex-direction: column; 
-    align-items: flex-start;
-    background-color: #e0f7fa;
-    padding: 20px;
-    width: 300px;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-left: 10%;
     margin-top: 20px;
-    position: relative;
+}
+.batch-container .card {
+    background: #ffffff;
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.batch {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
+.batch-container .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.batch h4 {
-    margin: 0;
-    font-size: 18px;
-    text-align: left;
+.batch-container .card-title {
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
-.batch-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 10px;
+.batch-container .card-text {
+    font-size: 0.9rem;
+    color: #666;
 }
-
-.divider {
-    border: none;
-    border-top: 1px solid #000; 
-    margin: 10px 0;
-}
-.batch-major {
-    color: blue;
-    font-size: 15px;
-    font-weight: bold;
-}
-
-.labtop-icon {
-    color: black;
-    font-size: 50px;
-    margin-right: 10px;
-}
-
-.arrow-icon {
-    font-size: 16px;
-    color: #424242;
-    position: absolute; 
-    bottom: 10px; 
-    right: 10px; 
+.laptop {
+    font-size: 3rem;
+    color: #007bff;
+    margin-bottom: 15px;
 }
