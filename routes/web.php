@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Controllers\Admin_login_controller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin_login_controller;
 use App\Http\Controllers\page\ExamController;
 use App\Http\Controllers\page\HistoryExamController;
 use App\Http\Controllers\page\ResultController;
@@ -46,6 +46,9 @@ Route::group(['middleware' => 'role:teacher'], function () {
     Route::get('/admin/myschedule', function () {
         return view('Admin.my_schedule_screen');
     });
+    Route::get('/major', function () {
+        return view('Admin.major');
+    })->name('major');
 });
 // Student Routes
 Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('Student.dashboard')->middleware('auth', 'role:student');

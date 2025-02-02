@@ -46,6 +46,7 @@ Route::put('/exams/{id}', [ExamController::class, 'update']);
 Route::delete('/exams/{id}', [ExamController::class, 'destroy']);
 
 Route::get('/departments', [DepartmentController::class, 'index']);
+Route::get('/show/departments/{id}', [DepartmentController::class, 'show']);
 Route::post('/departments', [DepartmentController::class, 'store']);
 Route::put('/departments/{id}', [DepartmentController::class, 'update']);
 Route::delete('/departments/{id}', [DepartmentController::class, 'destroy']);
@@ -56,6 +57,7 @@ Route::put('/courses/{id}', [DepartmentController::class, 'update']);
 Route::delete('/courses/{id}', [DepartmentController::class, 'destroy']);
 
 Route::get('/subjects', [DepartmentController::class, 'index']);
+Route::get('/show/subjects/{id}', [SubjectController::class, 'show']);
 Route::post('/subjects', [DepartmentController::class, 'store']);
 Route::put('/subjects/{id}', [DepartmentController::class, 'update']);
 Route::delete('/subjects/{id}', [DepartmentController::class, 'destroy']);
