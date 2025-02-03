@@ -27,7 +27,7 @@ class Admin_login_controller extends Controller
             'password' => 'required|min:6',
             'role' => 'required|in:student,teacher'
         ]);
-        
+
         // Create the user
         $user = User::create([
             'name' => $request->name,
@@ -35,17 +35,17 @@ class Admin_login_controller extends Controller
             'password' => Hash::make($request->password),
             'role' => $request->role, // You should store the role too, as it's validated
         ]);
-        
+
         // Generate the token
         $token = $user->createToken('Token')->plainTextToken;
-        
+
         return response()->json([
             'success' => true,
             'message' => 'User registered successfully',
             'user' => $user,
             'token' => $token,
         ]);
-        
+
     }
 
     public function login(Request $request)
@@ -87,7 +87,7 @@ class Admin_login_controller extends Controller
     public function profile_update(Request $request)
     {
         $user = auth()->user();
-        
+
         if (!$user) {
             return response()->json([
                 'success' => false,
@@ -123,13 +123,12 @@ class Admin_login_controller extends Controller
     }
     public function logout(Request $request)
     {
-        auth()->logout();
-        return response()->json([
-            'success' => true,
-            'message' => 'User logout Success'
-        ], 200);
+        Auth::logout(); // Logs the user out
+        $request->session()->invalidate(); // Invalidates the session
+        $request->session()->regenerateToken(); // Regenerates the CSRF token
+        return redirect('/login'); // Redirect to login page
     }
-        
+
     public function sentverifyemail($email)
     {
 
@@ -176,7 +175,7 @@ class Admin_login_controller extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
-} 
+    }
 
     public function verificationMail($token)
     {
@@ -186,7 +185,7 @@ class Admin_login_controller extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid or expired token.',
-            ], 400); 
+            ], 400);
         }
 
         if ($user->is_verified) {
@@ -198,10 +197,10 @@ class Admin_login_controller extends Controller
 
         $datetime = Carbon::now()->format('Y-m-d H:i:s');
 
-        $user->remember_token = '';  
-        $user->is_verified = 1;     
-        $user->email_verified_at = $datetime; 
-        $user->save(); 
+        $user->remember_token = '';
+        $user->is_verified = 1;
+        $user->email_verified_at = $datetime;
+        $user->save();
 
         return response()->json([
             'success' => true,

@@ -19,73 +19,94 @@
     @section('title', 'Exam')
 
     @section('content')
-    <div class="main-content">
-        <h1>Exam Overview</h1>
+        <div class="main-content">
+            <h1>Exam Overview</h1>
 
-        <div class="tabs">
-            <div class="tab active" data-tab="completed-exam">Completed Exams</div>
-            <div class="tab" data-tab="upcoming-exam">Upcoming Exams</div>
+            <div class="tabs">
+                <div class="tab active" data-tab="completed-exam">Completed Exams</div>
+                <div class="tab" data-tab="upcoming-exam">Upcoming Exams</div>
+            </div>
+
+            <div class="content active" id="completed-exam">
+                @if($completedExams->count() > 0)
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Subject</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($completedExams as $key => $exam)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $exam->title }}</td>
+                                <td>{{ $exam->subject->name }}</td>
+                                <td>{{ \Carbon\Carbon::parse($exam->start_time)->format('d/M/Y H:i') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($exam->end_time)->format('d/M/Y H:i') }}</td>
+                                <td class="status">{{ ucfirst($exam->status) }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <p>No completed exams available.</p>
+                @endif
+            </div>
+
+            <div class="content" id="upcoming-exam">
+                @if($upcomingExams->count() > 0)
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Subject</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($upcomingExams as $key => $exam)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $exam->title }}</td>
+                                <td>{{ $exam->subject->name }}</td>
+                                <td>{{ \Carbon\Carbon::parse($exam->start_time)->format('d/M/Y H:i') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($exam->end_time)->format('d/M/Y H:i') }}</td>
+                                <td class="status">{{ ucfirst($exam->status) }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <p>No upcoming exams available.</p>
+                @endif
+            </div>
         </div>
 
-        <div class="content active" id="completed-exam">
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Subject</th>
-                        <th>Date</th>
-                        <th>Duration</th>
-                        <th>Points</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Software Security</td>
-                        <td>21/January/2024</td>
-                        <td>1h</td>
-                        <td>51 pt</td>
-                        <td class="status">Completed</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Software Security</td>
-                        <td>21/January/2024</td>
-                        <td>1h</td>
-                        <td>51 pt</td>
-                        <td class="status">Completed</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const tabs = document.querySelectorAll('.tab');
+                const contents = document.querySelectorAll('.content');
 
-        <div class="content" id="upcoming-exam">
-            <p>No upcoming exams available.</p>
-        </div>
-    </div>
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', function () {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        this.classList.add('active');
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const tabs = document.querySelectorAll('.tab');
-            const contents = document.querySelectorAll('.content');
-
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function () {
-                    // Remove active class from all tabs
-                    tabs.forEach(t => t.classList.remove('active'));
-                    // Add active class to the clicked tab
-                    this.classList.add('active');
-
-                    // Hide all content
-                    contents.forEach(content => content.classList.remove('active'));
-                    // Show the content corresponding to the clicked tab
-                    const activeContent = document.getElementById(this.getAttribute('data-tab'));
-                    activeContent.classList.add('active');
+                        contents.forEach(content => content.classList.remove('active'));
+                        const activeContent = document.getElementById(this.getAttribute('data-tab'));
+                        activeContent.classList.add('active');
+                    });
                 });
             });
-        });
-    </script>
+        </script>
 
     @endsection
 

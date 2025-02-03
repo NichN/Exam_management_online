@@ -38,4 +38,15 @@ class Exam extends Model
     {
         return $this->belongsToMany(User::class, 'exam_student');
     }
+
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function subjectTeacher()
+    {
+        return $this->hasOne(SubjectTeacher::class, 'subject_id', 'subject_id');
+    }
 }

@@ -14,8 +14,22 @@ class ExamController extends Controller
      */
     public function index()
     {
-        return Exam::with(['subject', 'teacher'])->get();
+        $exams = Exam::with(['createdBy', 'subjectTeacher.subject'])
+            ->get()
+            ->map(function ($exam) {
+                return [
+                    'title' => $exam->title,
+                    'duration' => $exam->duration_minutes,
+                    'full_score' => '100/100',
+                    'lecturer' => optional($exam->createdBy)->name ?? 'Unknown',
+                    'subject_info' => optional($exam->subjectTeacher->subject)->name ?? 'N/A',
+                ];
+            });
+
+        return response()->json($exams);
     }
+//        return Exam::with(['subject', 'teacher'])->get();
+
 
     /**
      * Show the form for creating a new resource.

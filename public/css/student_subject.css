@@ -88,7 +88,7 @@
 
 .status {
     padding: 8px 20px;
-    border-radius: 20px;
+    border-radius: 10px;
     font-size: 14px;
     font-weight: bold;
     color: white;
@@ -97,13 +97,13 @@
 }
 
 .status.incompleted {
-    background-color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.77);
     color: white;
 
 }
 
 
 .status.completed {
-    background-color: #2ecc71;
+    background-color: rgba(46, 204, 113, 0.69);
     color: white;
 }

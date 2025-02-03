@@ -38,6 +38,8 @@ class QuestionController extends Controller
         ]);
 
         $question = Question::create($validated);
+
+        // Return the created question with a 201 status code
         return response()->json($question, 201);
     }
 
