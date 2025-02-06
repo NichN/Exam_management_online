@@ -12,10 +12,10 @@ class ExamController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return Exam::with(['subject', 'teacher'])->get();
+    public function index(Request $request) {
+        return response()->json(Exam::all()); // Return all exams
     }
+    
 
     /**
      * Show the form for creating a new resource.

@@ -77,4 +77,10 @@ Route::post('/exam-students', [DepartmentController::class, 'store']);
 Route::put('/exam-students/{id}', [DepartmentController::class, 'update']);
 Route::delete('/exam-students/{id}', [DepartmentController::class, 'destroy']);
 
+
+Route::middleware('auth:sanctum')->post('/exam', [ExamController::class, 'store']);
+Route::middleware('auth:sanctum')->get('/exam', [ExamController::class, 'index']);
+Route::middleware('auth:sanctum')->put('/exam/{id}', [ExamController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('/exam/{id}', [ExamController::class, 'destroy']);
+
 ?>

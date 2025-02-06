@@ -16,57 +16,6 @@
 <div class="container">
         @include('partials.admin_sidebar')
 </div>
-<!-- <div class="side-menu">
-    <div class="logo">
-    <img src="/Image/norton.png" alt="Logo">
-    </div>
-    <ul class="menu-list">
-    <li class="menu-item" onclick="setActive(this)">
-        <a href="/admin/dashboard">
-            <i class="fas fa-home"></i> Dashboard
-        </a>        
-    </li>
-    <li class="menu-item" onclick="setActive(this)">
-        <a href="/admin/department">
-            <i class="fas fa-building"></i> Department
-        </a> 
-    </li>
-    <li class="menu-item" onclick="setActive(this)">
-        <a href="/admin/student">
-            <i class="fas fa-user-graduate"></i> Student
-        </a>    
-    </li>
-    <li class="menu-item" onclick="setActive(this)">
-        <a href="/admin/alltask">
-            <i class="fas fa-tasks"></i> All Task
-        </a>    
-    </li>
-    <li class="menu-item" onclick="setActive(this)">
-        <a href="/admin/myschedule">
-            <i class="fas fa-clock"></i> My Schedule
-        </a>
-    </li>
-</ul>
-
-<div class="logout">
-        <i class="fas fa-sign-out-alt"></i> Log out
-    </div>
-</div> -->
-
-<!-- <div class="container">
-    <div class="header">
-    <div class="header-icons">
-        <div class="notification">
-            <i class="fa fa-bell"></i>
-            <span class="notification-badge"></span>
-        </div>
-        <div class="user-profile">
-            <i class="fa fa-user-circle"></i>
-            <span class="user-name">Sun Nasy</span>
-        </div>
-    </div>
-    </div>
- </div> -->
  <div class="myschedule-container">
     <div class="header-with-button">
         <h2>Schedule Task</h2>
@@ -77,102 +26,28 @@
     <hr class="divider">
     <div class="task-tabs-container">
         <div class="task-tabs">
-            <a class="task-tab active" onclick="setActiveTab(this)" data-class="All Tasks">All Tasks</a>
+            <a class="task-tab active" onclick="setActiveTab(this)" data-class="AllTasks">All Tasks</a>
             <a class="task-tab" onclick="setActiveTab(this)" data-class="DueToday">Due Today</a>
             <a class="task-tab" onclick="setActiveTab(this)" data-class="Overdue">Overdue</a>
         </div>
     </div>
 
-    <div id="All Tasks" class="task-container active">
-        <div class="tasks-container">
+    <div id="AllTasks" class="task-container active">
+    <div class="tasks-container" id="tasks-list">
 
     </div>
-    </div>
+</div>
+
+
     <div id="DueToday" class="task-container">
         <div class="tasks-container">
-            <div class="card">
-                <h3>Testing Chapter1 in Semester 1</h3>
-                <p><strong>Major:</strong>Web Development </p>
-                <div class="details">
-                    <p>
-                        <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
-                        <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
-                    </p>
-                </div>
-                <button class="view-details">                   
-                    <a href="/admin/alltask/detail">View Details</a>
-                </button>
-            </div>
-            <div class="card">
-                <h3>Testing Chapter1 in Semester 1</h3>
-                <p><strong>Major:</strong>Web Development </p>
-                <div class="details">
-                    <p>
-                        <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
-                        <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
-                    </p>
-                </div>
-                <button class="view-details">                   
-                    <a href="/admin/alltask/detail">View Details</a>
-                </button>
-            </div>
-            <div class="card">
-                <h3>Testing Chapter1 in Semester 1</h3>
-                <p><strong>Major:</strong>Web Development </p>
-                <div class="details">
-                    <p>
-                        <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
-                        <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
-                    </p>
-                </div>
-                <button class="view-details">                   
-                    <a href="/admin/alltask/detail">View Details</a>
-                </button>
-            </div>
+
         </div>
     </div>
 
     <div id="Overdue" class="task-container">
         <div class="tasks-container">
-            <div class="card">
-                <h3>Testing Chapter1 in Semester 1</h3>
-                <p><strong>Major:</strong>Web Development </p>
-                    <div class="details">
-                        <p>
-                            <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
-                            <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
-                        </p>
-                </div>
-                <button class="view-details">                   
-                    <a href="/admin/alltask/detail">View Details</a>
-                </button>
-            </div>
-            <div class="card">
-                <h3>Testing Chapter1 in Semester 1</h3>
-                    <p><strong>Major:</strong>Web Development </p>
-                    <div class="details">
-                        <p>
-                            <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
-                            <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
-                        </p>
-                    </div>
-                    <button class="view-details">                   
-                    <a href="/admin/alltask/detail">View Details</a>
-                </button>
-            </div>
-                <div class="card">
-                    <h3>Testing Chapter1 in Semester 1</h3>
-                    <p><strong>Major:</strong>Web Development </p>
-                    <div class="details">
-                        <p>
-                            <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
-                            <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
-                        </p>
-                    </div>
-                    <button class="view-details">                   
-                    <a href="/admin/alltask/detail">View Details</a>
-                </button>
-                </div>
+
         </div>
     </div>
 </div>
