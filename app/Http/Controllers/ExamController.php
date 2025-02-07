@@ -12,10 +12,24 @@ class ExamController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request) {
-        return response()->json(Exam::all()); // Return all exams
+    public function index()
+    {
+        $exams = Exam::with(['createdBy', 'subjectTeacher.subject'])
+            ->get()
+            ->map(function ($exam) {
+                return [
+                    'title' => $exam->title,
+                    'duration' => $exam->duration_minutes,
+                    'full_score' => '100/100',
+                    'lecturer' => optional($exam->createdBy)->name ?? 'Unknown',
+                    'subject_info' => optional($exam->subjectTeacher->subject)->name ?? 'N/A',
+                ];
+            });
+
+        return response()->json($exams);
     }
-    
+//        return Exam::with(['subject', 'teacher'])->get();
+
 
     /**
      * Show the form for creating a new resource.

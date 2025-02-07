@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin_login_controller;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ResponseController;
-use App\Http\Controllers\page\StudentController;
 use App\Http\Controllers\ResultController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,8 +35,6 @@ Route::middleware(['auth:sanctum', 'role:student'])->get('/student/dashboard', [
 Route::middleware(['auth:sanctum'])->patch('profile-update', [Admin_login_controller::class, 'profile_update']);
 Route::post('password/email', [Admin_login_controller::class, 'sendResetLinkEmail']);
 
-//student total
-Route::middleware('auth:sanctum')->get('/students/total', [StudentController::class, 'getTotalStudents']);
 Route::get('/exams', [ExamController::class, 'index']);
 Route::post('/exams', [ExamController::class, 'store']);
 //exam details
@@ -46,7 +43,6 @@ Route::put('/exams/{id}', [ExamController::class, 'update']);
 Route::delete('/exams/{id}', [ExamController::class, 'destroy']);
 
 Route::get('/departments', [DepartmentController::class, 'index']);
-Route::get('/show/departments/{id}', [DepartmentController::class, 'show']);
 Route::post('/departments', [DepartmentController::class, 'store']);
 Route::put('/departments/{id}', [DepartmentController::class, 'update']);
 Route::delete('/departments/{id}', [DepartmentController::class, 'destroy']);
@@ -57,7 +53,6 @@ Route::put('/courses/{id}', [DepartmentController::class, 'update']);
 Route::delete('/courses/{id}', [DepartmentController::class, 'destroy']);
 
 Route::get('/subjects', [DepartmentController::class, 'index']);
-Route::get('/show/subjects/{id}', [SubjectController::class, 'show']);
 Route::post('/subjects', [DepartmentController::class, 'store']);
 Route::put('/subjects/{id}', [DepartmentController::class, 'update']);
 Route::delete('/subjects/{id}', [DepartmentController::class, 'destroy']);
@@ -76,6 +71,16 @@ Route::get('/exam-students', [DepartmentController::class, 'index']);
 Route::post('/exam-students', [DepartmentController::class, 'store']);
 Route::put('/exam-students/{id}', [DepartmentController::class, 'update']);
 Route::delete('/exam-students/{id}', [DepartmentController::class, 'destroy']);
+
+Route::get('/users', [UserController::class, 'index']); // Get all users with departments
+Route::get('/users/{id}', [UserController::class, 'show']);
+
+Route::get('/subject-teacher', [SubjectTeacherController::class, 'index']); // Get all assignments
+Route::post('/subject-teacher', [SubjectTeacherController::class, 'store']); // Assign teacher to subject
+Route::get('/subject/{id}/teachers', [SubjectTeacherController::class, 'getTeachersBySubject']); // Get teachers by subject
+Route::delete('/subject-teacher/{id}', [SubjectTeacherController::class, 'destroy']); // Delete assignment
+Route::post('/exam/{id}/submit', [ExamController::class, 'submitExam']);
+Route::post('/submit-answers', [StudentAnswerController::class, 'store']);
 
 
 Route::middleware('auth:sanctum')->post('/exam', [ExamController::class, 'store']);

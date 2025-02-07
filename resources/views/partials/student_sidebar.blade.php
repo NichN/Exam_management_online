@@ -36,11 +36,7 @@
                     <i class="fas fa-user-graduate"></i> History Exam
                 </a>
             </li>
-            <li class="menu-item {{ request()->is('student/result') ? 'active' : '' }}">
-                <a href="{{ route('Student.result') }}">
-                    <i class="fas fa-tasks"></i> Result
-                </a>
-            </li>
+
             <li class="menu-item {{ request()->is('student/student') ? 'active' : '' }}">
                 <a href="{{ route('Student.student') }}">
                     <i class="fas fa-clock"></i> Profile
