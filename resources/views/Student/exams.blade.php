@@ -44,7 +44,10 @@
                     </div>
                 </div>
                 <div class="exam-footer">
-                    <button class="start-exam-btn" onclick="navigateToExam({{ $exam->id }})">Start Exam</button>
+                    <button class="start-exam-btn"
+                        onclick="navigateToExam({{ $exam->id }}, '{{ $exam->subject->name ?? 'N/A' }}')">
+                        Start Exam
+                    </button>
                     <div class="lecturer">Lec. {{ $exam->teacher->name ?? 'Unknown' }}</div>
                 </div>
             </div>
@@ -52,11 +55,12 @@
 
     </div>
     <script>
-        function navigateToExam(examId) {
-            const examUrl = '/student/exam/' + examId;
+        function navigateToExam(examId, subjectName) {
+            const examUrl = `/student/exam/${examId}?subject=${encodeURIComponent(subjectName)}`;
             console.log("Redirecting to: " + examUrl); // Log the URL to the console
             window.location.href = examUrl;
         }
+
     </script>
     @endsection
 </body>

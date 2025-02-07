@@ -17,6 +17,33 @@ class ExamStudentController extends Controller
         return response()->json($examStudents);
     }
 
+    public function getScore($examId, $studentId)
+    {
+        $examResult = ExamStudent::where('exam_id', $examId)
+            ->where('student_id', $studentId)
+            ->first();
+
+        if (!$examResult) {
+            return response()->json(['message' => 'No score found'], 404);
+        }
+
+        return response()->json([
+            'exam_id' => $examId,
+            'student_id' => $studentId,
+            'score' => $examResult->result,
+        ]);
+    }
+
+
+    public function showExamResult($examId, $studentId)
+    {
+        $examResult = ExamStudent::where('exam_id', $examId)
+            ->where('student_id', $studentId)
+            ->first();
+
+        return view('exam.result', ['examResult' => $examResult]);
+    }
+
 
 
 

@@ -79,5 +79,7 @@ Route::get('/subject-teacher', [SubjectTeacherController::class, 'index']); // G
 Route::post('/subject-teacher', [SubjectTeacherController::class, 'store']); // Assign teacher to subject
 Route::get('/subject/{id}/teachers', [SubjectTeacherController::class, 'getTeachersBySubject']); // Get teachers by subject
 Route::delete('/subject-teacher/{id}', [SubjectTeacherController::class, 'destroy']); // Delete assignment
+Route::post('/exam/{id}/submit', [ExamController::class, 'submitExam']);
+Route::post('/submit-answers', [StudentAnswerController::class, 'store']);
 
 ?>

@@ -4,12 +4,18 @@ namespace App\Http\Controllers\page;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
+use App\Models\ExamStudent;
+use App\Models\Question;
+use App\Models\StudentAnswer;
+use App\Models\ExamResult;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
     public function index()
     {
-        $exams = Exam::with(['subject', 'createdBy', 'subjectTeacher.subject', 'teacher', 'questions'])->get();
+        $exams = Exam::with(['subject', 'teacher', 'questions'])->get();
 
         return view('Student.exams', compact('exams'));
     }
@@ -28,46 +34,65 @@ class ExamController extends Controller
         return view('Student.exam_page', compact('exam'));
     }
 
+
     public function submitExam(Request $request, $examId)
     {
-        // Fetch the exam
-        $exam = Exam::findOrFail($examId);
+        try {
+            \Log::info('Submit Exam Request:', ['examId' => $examId, 'answers' => $request->all()]);
 
-        // Fetch all questions for the exam
-        $questions = Question::where('exam_id', $examId)->get();
-
-        $totalScore = 0;
-
-        // Loop through each question and check the user's answer
-        foreach ($questions as $question) {
-            $userAnswer = $request->input('q' . $question->id); // Get the user's answer for this question
-
-            // Fetch the correct answer for the question
-            $correctAnswer = Answer::where('question_id', $question->id)
-                ->where('is_correct', true)
-                ->first();
-
-            // Compare the user's answer with the correct answer
-            if ($correctAnswer && $userAnswer == $correctAnswer->id) {
-                $totalScore += $question->marks; // Add marks if the answer is correct
+            // Ensure student is logged in
+            $studentId = auth()->id();
+            if (!$studentId) {
+                return response()->json(['error' => 'User not authenticated'], 401);
             }
+
+            $exam = Exam::findOrFail($examId);
+            $questions = $exam->questions;
+            $totalScore = 0;
+            $totalPossible = 0;
+
+            foreach ($questions as $question) {
+                $submittedAnswer = $request->answers[$question->id] ?? null;
+                $correctAnswer = $question->correct_answer;
+                $points = $question->points;
+
+                // Log received answer for debugging
+                \Log::info("QID: {$question->id}, Answer: {$submittedAnswer}");
+
+                // Store answer in database
+                StudentAnswer::create([
+                    'student_id' => $studentId,
+                    'exam_id' => $examId,
+                    'question_id' => $question->id,
+                    'answer' => $submittedAnswer,
+                    'is_correct' => $submittedAnswer === $correctAnswer,
+                ]);
+
+                // Calculate score
+                if ($submittedAnswer === $correctAnswer) {
+                    $totalScore += $points;
+                }
+                $totalPossible += $points;
+            }
+
+            // Store total score in exam_results table
+            ExamResult::updateOrCreate(
+                ['student_id' => $studentId, 'exam_id' => $examId],
+                ['total_score' => $totalScore, 'total_possible' => $totalPossible]
+            );
+
+            return response()->json([
+                'score' => $totalScore,
+                'total' => $totalPossible,
+                'message' => 'Exam submitted successfully'
+            ]);
+
+        } catch (\Exception $e) {
+            \Log::error('Submit Exam Error: ' . $e->getMessage());
+            return response()->json(['error' => 'Something went wrong! ' . $e->getMessage()], 500);
         }
-
-        // Save the result in the database
-        $result = new Result();
-        $result->user_id = Auth::id();
-        $result->exam_id = $examId;
-        $result->total_score = $totalScore;
-        $result->result_status = ($totalScore >= $exam->passing_marks) ? 'pass' : 'fail'; // Assuming you have a passing_marks column in the exams table
-        $result->save();
-
-        // Return the result to the view
-        return view('exam.result', [
-            'totalScore' => $totalScore,
-            'totalMarks' => $questions->sum('marks'), // Total possible marks
-            'resultStatus' => $result->result_status,
-        ]);
     }
+
 
 
 

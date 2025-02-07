@@ -8,6 +8,7 @@ use App\Http\Controllers\page\ResultController;
 use App\Http\Controllers\page\StudentController;
 use App\Http\Controllers\page\StudentDashboardController;
 use App\Http\Controllers\page\SubjectController;
+use Illuminate\Http\Request;
 
 // Admin Routes
 Route::get('/', [Admin_login_controller::class, 'ShowLoginPage'])->name('login');
@@ -54,9 +55,11 @@ Route::get('/users', [UserController::class, 'index']);
 Route::get('/student/subject', [SubjectController::class, 'index'])->name('Student.subject');
 Route::get('/student/exam', [ExamController::class, 'index'])->name('Student.exams');
 Route::get('/student/history-exam', [HistoryExamController::class, 'index'])->name('Student.history_exam');
-Route::get('/student/result', [ResultController::class, 'index'])->name('Student.result');
+Route::get('/student/result/{id}', [ExamController::class, 'submitExam'])->name('Student.result');
 Route::get('/student/student', [StudentController::class, 'index'])->name('Student.student');
+Route::post('/exam/{exam}/submit', [ExamController::class, 'submitExam']);
 // Route to show the exam page based on exam ID
+
 
 
 Route::get('/student/exam/{examId}', [ExamController::class, 'exampage'])->name('Student.exam_page');

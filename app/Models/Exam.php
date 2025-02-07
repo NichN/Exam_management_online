@@ -19,15 +19,16 @@ class Exam extends Model
         'exam_type'
     ];
 
-    public function subject()
-    {
-        return $this->belongsTo(Subject::class);
-    }
-
     public function teacher()
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id');
+    }
+
 
     public function questions()
     {
@@ -40,13 +41,4 @@ class Exam extends Model
     }
 
 
-    public function createdBy()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function subjectTeacher()
-    {
-        return $this->hasOne(SubjectTeacher::class, 'subject_id', 'subject_id');
-    }
 }
