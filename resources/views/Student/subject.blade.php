@@ -21,7 +21,7 @@
 
     @section('content')
 
-    <h1>All Subjects</h1>
+    <h1 style="padding-left: 70px; padding-bottom: 20px">All Subjects</h1>
 
     <div class="card-row">
         <div class="card highlight">

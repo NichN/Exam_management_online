@@ -56,19 +56,22 @@ h1 {
 }
 
 .start-exam-btn {
-    background-color: #ff5f57;
-    color: #ffffff;
+    background-color: #28a745;
+    color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background 0.3s;
+}
+.start-exam-btn:hover {
+    background-color: #218838;
+}
+.status.completed {
+    color: green;
+    font-weight: bold;
 }
 
-.start-exam-btn:hover {
-    background-color: #e04e4d;
-}
 
 .lecturer {
     background-color: #3b82f6;

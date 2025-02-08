@@ -115,7 +115,7 @@ header {
 
 .view-details {
     background-color: #4169e1;
-    color: white;
+    color: black;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -163,7 +163,7 @@ header {
 }
 
 .save-button {
-    background-color: #43c4f9;
+    background-color: #007bff;
     /* Green background */
     color: white;
     padding: 10px 20px;

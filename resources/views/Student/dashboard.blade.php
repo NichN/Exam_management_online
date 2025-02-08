@@ -29,86 +29,57 @@
             </div>
             <div class="card-right">
                 <div class="profile-icon">
-                    <img src="https://via.placeholder.com/40/000000/FFFFFF/?text=User" alt="Profile Icon">
+                    <img src="https://via.placeholder.com/80/000000/FFFFFF/?text=User" alt="Profile Icon">
                 </div>
             </div>
         </div>
 
-        <div class="card-row">
-            <div class="total-students">
-                <div class="icon-container" style="background-color: #e57373;">
-                    <i class="fas fa-home"></i>
-                </div>
-                <div class="details">
-                    <div>
-                        <span class="title">Class</span>
-                        <span class="subtitle">ES1</span>
-                    </div>
-                    <div class="semester">Semester1, Year4</div>
-                </div>
-            </div>
 
-            <!-- Card 3 -->
-            <div class="total-students">
-                <div class="icon-container" style="background-color: #e57373;">
-                    <i class="fas fa-home"></i>
-                </div>
-                <div class="details">
-                    <div>
-                        <span class="title">Class</span>
-                        <span class="subtitle">ES2</span>
-                    </div>
-                    <div class="semester">Semester1, Year4</div>
-                </div>
-            </div>
-        </div>
         <div class="upcomming-header">
-            <h2>Upcomming Exams</h2>
+            <h2>Exams</h2>
         </div>
         <div class="upcomming-exam-container">
-
             <div class="upcomming-list">
-                @foreach($user->exams as $exam) <!-- Loop through all exams of the user -->
-                <div class="upcomming-item">
-                    <img src="/Image/avatar.png" alt="Avatar" class="avatar">
-                    <span class="name">{{ $exam->teacher->name ?? "Unknown" }}</span> <!-- Fixed -->
-                    <span class="class">ES1</span>
-                    <span class="assignment">{{ $exam->subject->name ?? 'Unknown' }}</span>
-                    <span class="status submitted">{{ $exam->status ?? 'Completed' }}</span>
-                    <span class="date">{{ $exam->start_time ?? 'No Date Available' }}</span>
-                </div>
+                @foreach($user->exams as $exam)
+                    <div class="upcomming-item">
+                        <img src="/Image/studentProfile.jpg" alt="Avatar" class="avatar">
+                        <span class="name">{{ $exam->teacher->name ?? "Unknown" }}</span>
+                        <span class="class">ES1</span>
+                        <span class="assignment">{{ $exam->subject->name ?? 'Unknown' }}</span>
+                        <span class="status submitted">{{ $exam->status ?? 'Completed' }}</span>
+                        <span class="date">{{ $exam->start_time ?? 'No Date Available' }}</span>
+                    </div>
                 @endforeach
             </div>
-
-
-
         </div>
-        <div class="upcomming-header">
-            <h2>Dashboard Overview</h2>
+
+        <div class="dashboard-overview" style="padding-top: 20px">
+            <h2>All Exam Overview</h2>
         </div>
         <div class="card-grid">
             @foreach($examDetails as $details)
                 <div class="card">
-                    <div class="card-header" style="background-image:{{asset('/image/norton_logo.png') }}">
-                        <span>{{ $details['exam']->subject->name ?? 'No Subject' }}</span>
+                    <div class="card-header">
+                        <h3 class="subject-name">{{ $details['exam']->subject->name ?? 'No Subject' }}</h3>
                     </div>
                     <div class="card-body">
-                        <p><img src="https://via.placeholder.com/40" class="profile" alt="Profile">
-                            {{ $details['exam']->teacher->name ?? 'Unknown' }}
+                        <p class="teacher"><i class="fas fa-user"></i> {{ $details['exam']->teacher->name ?? 'Unknown' }}</p>
+                        <p class="duration"><i class="fas fa-clock"></i> Duration:
+                            {{ \Carbon\Carbon::parse($details['exam']->end_time)->diff(\Carbon\Carbon::parse($details['exam']->start_time))->format('%h h %i min') }}
                         </p>
-                        <p>⏰ <span>Duration:
-                    {{ \Carbon\Carbon::parse($details['exam']->end_time)->diff(\Carbon\Carbon::parse($details['exam']->start_time))->format('%h h %i min') }}
-                </span></p>
-                        <p>📅 <span>Date Time: {{ date('d/M/Y', strtotime($details['exam']->start_time)) }}</span></p>
-                        <p>❓ <span>Questions: {{ $details['questionCount'] }}</span></p>
-                        <p>✔️ <span>Correct Answers: {{ $details['correctAnswers'] }}</span></p>
+                        <p class="date"><i class="fas fa-calendar-alt"></i> Date:
+                            {{ date('d/M/Y', strtotime($details['exam']->start_time)) }}
+                        </p>
+                        <p class="questions"><i class="fas fa-question-circle"></i> Questions: {{ $details['questionCount'] }}</p>
+                        <p class="correct-answers"><i class="fas fa-check-circle"></i> Correct Answers: {{ $details['correctAnswers'] }}</p>
                     </div>
                     <div class="card-footer">
-                        <span class="points">{{ $details['totalScore'] }} pt</span>
+                        <span class="points"><i class="fas fa-star"></i> {{ $details['totalScore'] }} pt</span>
                     </div>
                 </div>
             @endforeach
         </div>
+
 
 
 

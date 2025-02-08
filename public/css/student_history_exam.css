@@ -106,8 +106,8 @@
 }
 
 .tab.active {
-    color: #3498db;
-    border-bottom: 2px solid #3498db;
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
 }
 
 .content {
@@ -131,7 +131,7 @@ td {
 }
 
 th {
-    background-color: #3498db;
+    background-color: #007bff;
     color: #fff;
 }
 
