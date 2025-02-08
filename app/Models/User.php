@@ -64,4 +64,14 @@ class User extends Authenticatable
         return $this->hasMany(Task::class, 'assigned_to');
     }
     
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'subject_teacher', 'teacher_id', 'subject_id');
+    }
+
+    public function subjectTeachers()
+    {
+        return $this->hasMany(SubjectTeacher::class, 'teacher_id');
+    }
+
 }

@@ -4,12 +4,13 @@ namespace App\Http\Controllers\page;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
-use App\Models\ExamModel;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+
 
 class StudentController extends Controller
 {
+
     public function index()
     {
         return view('Student.student');
@@ -44,4 +45,5 @@ class StudentController extends Controller
             return view('Admin.student_detail_screen', compact('student'));
         }
         
+
 }

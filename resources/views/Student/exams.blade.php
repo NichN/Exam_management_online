@@ -23,59 +23,44 @@
     <div>
         <h1>The Latest Exams</h1>
 
-        <div class="exam-card">
-            <div class="exam-header">Business Intelligence</div>
-            <div class="exam-body">
-                <div class="exam-info">
-                    <span><i>📌</i> Midterm</span>
-                    <span><i>⏱</i> 1h 30min</span>
-                    <span><i>💻</i> Computer, Software Development, Year 4</span>
-                    <span><i>⭐</i> Full Score: 100/100</span>
+        @foreach($exams as $exam)
+            <div class="exam-card">
+                <div class="exam-header">{{ $exam->subject->name ?? 'N/A' }}</div>
+                <div class="exam-body">
+                    <div class="exam-info">
+                        <span><i>📌</i> {{ $exam->title }}</span>
+                        <span><i>⏱</i>
+                            {{ \Carbon\Carbon::parse($exam->start_time)->diff(\Carbon\Carbon::parse($exam->end_time))->format('%h h %i min') }}
+                        </span>
+                        <span><i>⭐</i> Full Score:
+                            @if($exam->questions->count() > 0)
+                                @foreach($exam->questions as $question)
+                                    <div>Question {{ $loop->iteration }}: {{ $question->points }} points</div>
+                                @endforeach
+                            @else
+                                15
+                            @endif
+                        </span>
+                    </div>
+                </div>
+                <div class="exam-footer">
+                    <button class="start-exam-btn"
+                        onclick="navigateToExam({{ $exam->id }}, '{{ $exam->subject->name ?? 'N/A' }}')">
+                        Start Exam
+                    </button>
+                    <div class="lecturer">Lec. {{ $exam->teacher->name ?? 'Unknown' }}</div>
                 </div>
             </div>
-            <div class="exam-footer">
-                <button class="start-exam-btn" onclick="navigateToExam()">Start Exam</button>
-                <div class="lecturer">Lec. Ny SreyNich</div>
-            </div>
-        </div>
-
-        <div class="exam-card">
-            <div class="exam-header">Software Security</div>
-            <div class="exam-body">
-                <div class="exam-info">
-                    <span><i>📌</i> Test</span>
-                    <span><i>⏱</i> 1h 30min</span>
-                    <span><i>💻</i> Computer, Software Development, Year 4</span>
-                    <span><i>⭐</i> Full Score: 100/100</span>
-                </div>
-            </div>
-            <div class="exam-footer">
-                <button class="start-exam-btn">Start Exam</button>
-                <div class="lecturer">Lec. Ny SreyNich</div>
-            </div>
-        </div>
-
-        <div class="exam-card">
-            <div class="exam-header">Advance Web Development</div>
-            <div class="exam-body">
-                <div class="exam-info">
-                    <span><i>📌</i> Final</span>
-                    <span><i>⏱</i> 1h 30min</span>
-                    <span><i>💻</i> Computer, Software Development, Year 4</span>
-                    <span><i>⭐</i> Full Score: 100/100</span>
-                </div>
-            </div>
-            <div class="exam-footer">
-                <button class="start-exam-btn">Start Exam</button>
-                <div class="lecturer">Lec. Ny SreyNich</div>
-            </div>
-        </div>
+        @endforeach
 
     </div>
     <script>
-        function navigateToExam() {
-            window.location.href = "{{ route('Student.exam_page') }}";
+        function navigateToExam(examId, subjectName) {
+            const examUrl = `/student/exam/${examId}?subject=${encodeURIComponent(subjectName)}`;
+            console.log("Redirecting to: " + examUrl); // Log the URL to the console
+            window.location.href = examUrl;
         }
+
     </script>
     @endsection
 </body>

@@ -30,19 +30,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const submitButton = document.querySelector(".submit-task-btn");
     const attachmentGroup = document.querySelector(".attachment-group");
 
-    typeSelect.addEventListener("change", function () {
-        const selectedValue = typeSelect.value;
-
-        // Show "Next" button only for Quiz and Exam
-        nextButton.style.display = (selectedValue === "type2") ? "inline-block" : "none";
-
-        // Hide "Submit" button if Quiz or Exam is selected, show otherwise
-        submitButton.style.display = (selectedValue === "type2") ? "none" : "inline-block";
-
-        // Show "Attachment" field only for Assignment
-        attachmentGroup.style.display = (selectedValue === "type1") ? "block" : "none";
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuElement = document.querySelector("#menu");
+        if (menuElement) {
+            menuElement.style.display = "block"; // Modify the style safely
+        } else {
+            console.warn("Menu element not found!");
+        }
     });
-
     // Initially hide the Next button and Attachment field
     nextButton.style.display = "none";
     submitButton.style.display = "inline-block"; // Default is visible
