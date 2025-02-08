@@ -64,7 +64,6 @@
         </div>
         <div class="upcomming-header">
             <h2>Upcomming Exams</h2>
-            <a href="#" class="view-all">View All</a>
         </div>
         <div class="upcomming-exam-container">
 
@@ -77,7 +76,6 @@
                     <span class="assignment">{{ $exam->subject->name ?? 'Unknown' }}</span>
                     <span class="status submitted">{{ $exam->status ?? 'Completed' }}</span>
                     <span class="date">{{ $exam->start_time ?? 'No Date Available' }}</span>
-                    <button class="view-btn">View</button>
                 </div>
                 @endforeach
             </div>
@@ -89,29 +87,27 @@
             <h2>Dashboard Overview</h2>
         </div>
         <div class="card-grid">
-
-            <div class="card">
-                <div class="card-header" style="background-image: url('/image/ProfileSample.png');">
-                    <span>{{ $exam->subject->name ?? 'No Subject' }}</span>
+            @foreach($examDetails as $details)
+                <div class="card">
+                    <div class="card-header" style="background-image:{{asset('/image/norton_logo.png') }}">
+                        <span>{{ $details['exam']->subject->name ?? 'No Subject' }}</span>
+                    </div>
+                    <div class="card-body">
+                        <p><img src="https://via.placeholder.com/40" class="profile" alt="Profile">
+                            {{ $details['exam']->teacher->name ?? 'Unknown' }}
+                        </p>
+                        <p>⏰ <span>Duration:
+                    {{ \Carbon\Carbon::parse($details['exam']->end_time)->diff(\Carbon\Carbon::parse($details['exam']->start_time))->format('%h h %i min') }}
+                </span></p>
+                        <p>📅 <span>Date Time: {{ date('d/M/Y', strtotime($details['exam']->start_time)) }}</span></p>
+                        <p>❓ <span>Questions: {{ $details['questionCount'] }}</span></p>
+                        <p>✔️ <span>Correct Answers: {{ $details['correctAnswers'] }}</span></p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="points">{{ $details['totalScore'] }} pt</span>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p><img src="https://via.placeholder.com/40" class="profile" alt="Profile">
-                        {{ $exam->teacher->name ?? 'Unknown' }}
-                    </p>
-                    <p>⏰ <span>Duration:
-                            {{ \Carbon\Carbon::parse(time: $exam->end_time)->diff(\Carbon\Carbon::parse($exam->start_time))->format('%h h %i min') }}</span>
-                    </p>
-                    </p>
-                    <p>📅 <span>Date Time: {{ date('d/M/Y', strtotime($exam->start_time)) }}</span></p>
-                    <p>❓ <span>Questions: {{ $questionCount }}</span></p>
-                    <p>✔️ <span>Correct Answers: {{ $correctAnswers }}</span></p>
-                </div>
-                <div class="card-footer">
-                    <span class="points">{{ $totalScore }} pt</span>
-                </div>
-            </div>
-
-
+            @endforeach
         </div>
 
 

@@ -69,6 +69,8 @@ Route::get('/student/history-exam', [HistoryExamController::class, 'index'])->na
 Route::get('/student/result/{id}', [ExamController::class, 'submitExam'])->name('Student.result');
 Route::get('/student/student', [StudentController::class, 'index'])->name('Student.student');
 Route::post('/exam/{exam}/submit', [ExamController::class, 'submitExam']);
+//Route::get('/student/history_exam', [HistoryExamController::class, 'index'])->name('student.history_exam');
+
 // Route to show the exam page based on exam ID
 
 

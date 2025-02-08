@@ -1,11 +1,94 @@
-.main-content {
-    margin-left: 5vh;
-}
+
 
 .header {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+}
+/* Tab Styling */
+.tab-container {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    background: #f0f0f0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.tab-btn.active {
+    background: #007bff;
+    color: white;
+}
+
+/* Content Styling */
+.content {
+    display: none;
+}
+
+.content.active {
+    display: block;
+}
+
+/* Table Styling */
+.exam-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.exam-table th, .exam-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.exam-table th {
+    background: #3498db;
+}
+
+/* Status Styling */
+.status {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.status.completed {
+    background: #28a745;
+    color: white;
+}
+
+.status.upcoming {
+    background: #ffc107;
+    color: black;
+}
+
+/* No Data Styling */
+.no-data {
+    text-align: center;
+    padding: 20px;
+    font-size: 16px;
+    color: #666;
+}
+
+.no-data i {
+    font-size: 24px;
+    color: #999;
+    margin-bottom: 10px;
 }
 
 .tabs {
