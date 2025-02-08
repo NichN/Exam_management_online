@@ -30,24 +30,30 @@
                     <div class="exam-info">
                         <span><i>📌</i> {{ $exam->title }}</span>
                         <span><i>⏱</i>
-                            {{ \Carbon\Carbon::parse($exam->start_time)->diff(\Carbon\Carbon::parse($exam->end_time))->format('%h h %i min') }}
-                        </span>
+                    {{ \Carbon\Carbon::parse($exam->start_time)->diff(\Carbon\Carbon::parse($exam->end_time))->format('%h h %i min') }}
+                </span>
                         <span><i>⭐</i> Full Score:
-                            @if($exam->questions->count() > 0)
+                    @if($exam->questions->count() > 0)
                                 @foreach($exam->questions as $question)
                                     <div>Question {{ $loop->iteration }}: {{ $question->points }} points</div>
                                 @endforeach
                             @else
                                 15
                             @endif
-                        </span>
+                </span>
                     </div>
                 </div>
                 <div class="exam-footer">
+                    @if($exam->status === 'scheduled') <!-- Only show button for active exams -->
                     <button class="start-exam-btn"
-                        onclick="navigateToExam({{ $exam->id }}, '{{ $exam->subject->name ?? 'N/A' }}')">
+                            onclick="navigateToExam({{ $exam->id }}, '{{ $exam->subject->name ?? 'N/A' }}')">
                         Start Exam
                     </button>
+                    @else
+                        <button class="start-exam-btn" disabled>
+                            {{ ucfirst($exam->status) }} <!-- Show status instead -->
+                        </button>
+                    @endif
                     <div class="lecturer">Lec. {{ $exam->teacher->name ?? 'Unknown' }}</div>
                 </div>
             </div>
@@ -57,7 +63,7 @@
     <script>
         function navigateToExam(examId, subjectName) {
             const examUrl = `/student/exam/${examId}?subject=${encodeURIComponent(subjectName)}`;
-            console.log("Redirecting to: " + examUrl); // Log the URL to the console
+            console.log("Redirecting to: " + examUrl); // Debugging
             window.location.href = examUrl;
         }
 

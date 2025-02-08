@@ -14,101 +14,107 @@
 </head>
 
 <body>
-    @extends('layouts.app')
+@extends('layouts.app')
 
-    @section('title', 'Exam')
+@section('title', 'Exam History')
 
-    @section('content')
-        <div class="main-content">
-            <h1>Exam Overview</h1>
-
-            <div class="tabs">
-                <div class="tab active" data-tab="completed-exam">Completed Exams</div>
-                <div class="tab" data-tab="upcoming-exam">Upcoming Exams</div>
-            </div>
-
-            <div class="content active" id="completed-exam">
-                @if($completedExams->count() > 0)
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Title</th>
-                            <th>Subject</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($completedExams as $key => $exam)
-                            <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $exam->title }}</td>
-                                <td>{{ $exam->subject->name }}</td>
-                                <td>{{ \Carbon\Carbon::parse($exam->start_time)->format('d/M/Y H:i') }}</td>
-                                <td>{{ \Carbon\Carbon::parse($exam->end_time)->format('d/M/Y H:i') }}</td>
-                                <td class="status">{{ ucfirst($exam->status) }}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <p>No completed exams available.</p>
-                @endif
-            </div>
-
-            <div class="content" id="upcoming-exam">
-                @if($upcomingExams->count() > 0)
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Title</th>
-                            <th>Subject</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($upcomingExams as $key => $exam)
-                            <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $exam->title }}</td>
-                                <td>{{ $exam->subject->name }}</td>
-                                <td>{{ \Carbon\Carbon::parse($exam->start_time)->format('d/M/Y H:i') }}</td>
-                                <td>{{ \Carbon\Carbon::parse($exam->end_time)->format('d/M/Y H:i') }}</td>
-                                <td class="status">{{ ucfirst($exam->status) }}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <p>No upcoming exams available.</p>
-                @endif
-            </div>
+@section('content')
+    <div class="container">
+        <!-- Beautiful Tab Bar -->
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="showTab('completed-exam')">
+                <i class="fas fa-check-circle"></i> Completed Exams
+            </button>
+            <button class="tab-btn" onclick="showTab('upcoming-exam')">
+                <i class="fas fa-calendar-alt"></i> Upcoming Exams
+            </button>
         </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const tabs = document.querySelectorAll('.tab');
-                const contents = document.querySelectorAll('.content');
+        <!-- Completed Exams -->
+        <div class="content active" id="completed-exam">
+            @if($completedExams->count() > 0)
+                <table class="exam-table">
+                    <thead>
+                    <tr>
+                        <th>No. </th>
+                        <th>Title</th>
+                        <th>Subject</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($completedExams as $key => $exam)
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $exam->title }}</td>
+                            <td>{{ $exam->subject->name ?? 'N/A' }}</td>
+                            <td>{{ \Carbon\Carbon::parse($exam->start_time)->format('d/M/Y H:i') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($exam->end_time)->format('d/M/Y H:i') }}</td>
+                            <td><span class="status completed">{{ ucfirst($exam->status) }}</span></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @else
+                <div class="no-data">
+                    <i class="fas fa-exclamation-circle"></i> No completed exams available.
+                </div>
+            @endif
+        </div>
 
-                tabs.forEach(tab => {
-                    tab.addEventListener('click', function () {
-                        tabs.forEach(t => t.classList.remove('active'));
-                        this.classList.add('active');
+        <!-- Upcoming Exams -->
+        <div class="content" id="upcoming-exam">
+            @if($upcomingExams->count() > 0)
+                <table class="exam-table">
+                    <thead>
+                    <tr>
+                        <th>No. </th>
+                        <th>Title</th>
+                        <th>Subject</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($upcomingExams as $key => $exam)
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $exam->title }}</td>
+                            <td>{{ $exam->subject->name ?? 'N/A' }}</td>
+                            <td>{{ \Carbon\Carbon::parse($exam->start_time)->format('d/M/Y H:i') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($exam->end_time)->format('d/M/Y H:i') }}</td>
+                            <td><span class="status upcoming">{{ ucfirst($exam->status) }}</span></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @else
+                <div class="no-data">
+                    <i class="fas fa-calendar-times"></i> No upcoming exams available.
+                </div>
+            @endif
+        </div>
+    </div>
 
-                        contents.forEach(content => content.classList.remove('active'));
-                        const activeContent = document.getElementById(this.getAttribute('data-tab'));
-                        activeContent.classList.add('active');
-                    });
-                });
-            });
-        </script>
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
 
-    @endsection
+            document.querySelectorAll('.tab-btn').forEach(tab => tab.classList.remove('active'));
+            document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+    </script>
+
+    <style>
+
+    </style>
+@endsection
+
+
 
 </body>
 

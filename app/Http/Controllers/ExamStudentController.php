@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exam;
 use App\Models\ExamStudent;
 use Illuminate\Http\Request;
 use App\Models\StudentAnswer;
@@ -16,6 +17,7 @@ class ExamStudentController extends Controller
         $examStudents = ExamStudent::with('exam', 'student')->get();
         return response()->json($examStudents);
     }
+
 
     public function getScore($examId, $studentId)
     {
