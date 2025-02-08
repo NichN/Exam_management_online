@@ -37,8 +37,6 @@
 
     </div>
 </div>
-
-
     <div id="DueToday" class="task-container">
         <div class="tasks-container">
 

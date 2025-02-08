@@ -10,7 +10,6 @@ use App\Http\Controllers\page\StudentDashboardController;
 use App\Http\Controllers\page\SubjectController;
 use Illuminate\Http\Request;
 
-// Admin Routes
 Route::get('/', [Admin_login_controller::class, 'ShowLoginPage'])->name('login');
 Route::get('/password/email', function () {
     return view('Loginform.Password_Reset');
@@ -69,10 +68,6 @@ Route::get('/student/history-exam', [HistoryExamController::class, 'index'])->na
 Route::get('/student/result/{id}', [ExamController::class, 'submitExam'])->name('Student.result');
 Route::get('/student/student', [StudentController::class, 'index'])->name('Student.student');
 Route::post('/exam/{exam}/submit', [ExamController::class, 'submitExam']);
-// Route to show the exam page based on exam ID
-
-
-
 Route::get('/student/exam/{examId}', [ExamController::class, 'exampage'])->name('Student.exam_page');
 
 ?>
