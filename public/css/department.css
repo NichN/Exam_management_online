@@ -23,7 +23,7 @@
     color: #666;
 }
 .laptop {
-    font-size: 3rem;
+    font-size: 5rem;
     color: #007bff;
     margin-bottom: 15px;
 }
@@ -36,7 +36,7 @@ button{
     background-color: #007bff;
     margin-top: 30px;
     width: 120px;
-    height: 40px;
+    height: 30px;
     border: none;
     border-radius: 30px;
 }

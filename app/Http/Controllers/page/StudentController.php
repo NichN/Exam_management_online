@@ -16,18 +16,32 @@ class StudentController extends Controller
     }
         public function __construct()
         {
-            $this->middleware('auth:sanctum'); // Ensure the request is authenticated with Sanctum
+            $this->middleware('auth:sanctum'); 
         }
         public function getTotalStudents(Request $request)
         {
-            // Ensure the user is a teacher
             if ($request->user()->role !== 'teacher') {
                 return response()->json(['error' => 'Unauthorized'], 403);
             }
-    
-            // Count the number of students in the system
             $totalStudents = User::where('role', 'student')->count();
     
             return response()->json(['total_students' => $totalStudents], 200);
         }
-    }
+        public function showStudentDetails($id)
+        {
+            $student = User::with('department')->where('role', 'student')->find($id);
+            if (!$student) {
+                return response()->json(['error' => 'Student not found'], 404);
+            }
+            return response()->json($student);
+        }
+        public function showDetail($id)
+        {
+            $student = User::with('department')->find($id);
+            if (!$student) {
+                abort(404, 'Student not found');
+            }
+            return view('Admin.student_detail_screen', compact('student'));
+        }
+        
+}

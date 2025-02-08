@@ -14,7 +14,6 @@ class SubjectController extends Controller
     {
         return Subject::with('course')->get();
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -22,7 +21,6 @@ class SubjectController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -53,7 +51,6 @@ class SubjectController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -69,7 +66,6 @@ class SubjectController extends Controller
         $subject->update($validated);
         return response()->json($subject);
     }
-
     /**
      * Remove the specified resource from storage.
      */

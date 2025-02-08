@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('question', function (Blueprint $table) {
-            $table->foreign(['exam_id'], 'fk_question_id')->references(['exam_id'])->on('exam')->onUpdate('restrict')->onDelete('restrict');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->foreign(['assigned_to'], 'tasks_ibfk_1')->references(['id'])->on('users')->onUpdate('restrict')->onDelete('cascade');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('question', function (Blueprint $table) {
-            $table->dropForeign('fk_question_id');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropForeign('tasks_ibfk_1');
         });
     }
 };

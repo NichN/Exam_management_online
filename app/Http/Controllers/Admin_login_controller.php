@@ -25,18 +25,16 @@ class Admin_login_controller extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'role' => 'required|in:student,teacher'
+            'role' => 'required|in:student,teacher',
+            'department_id' => 'required|exists:departments,id'
         ]);
-        
-        // Create the user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role, // You should store the role too, as it's validated
+            'role' => $request->role, 
+            'department_id' => $request->department_id,
         ]);
-        
-        // Generate the token
         $token = $user->createToken('Token')->plainTextToken;
         
         return response()->json([
@@ -47,7 +45,6 @@ class Admin_login_controller extends Controller
         ]);
         
     }
-
     public function login(Request $request)
     {
         $request->validate([
@@ -223,4 +220,11 @@ class Admin_login_controller extends Controller
 
         return response()->json(['error' => 'We can\'t find a user with that email address.'], 404);
     }
+    public function getStudents()
+    {
+        $students = User::with('department')->where('role', 'student')->get();
+    
+        return response()->json($students);
+    }
+
 }

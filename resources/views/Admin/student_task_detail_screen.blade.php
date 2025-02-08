@@ -15,58 +15,6 @@
 <div class="container">
         @include('partials.admin_sidebar')
 </div>
-<!-- <div class="side-menu">
-    <div class="logo">
-    <img src="/Image/norton.png" alt="Logo">
-    </div>
-    <ul class="menu-list">
-    <li class="menu-item" onclick="setActive(this)">
-        <a href="/admin/dashboard">
-            <i class="fas fa-home"></i> Dashboard
-        </a>        
-    </li>
-    <li class="menu-item" onclick="setActive(this)">
-        <a href="/admin/department">
-            <i class="fas fa-building"></i> Department
-        </a> 
-    </li>
-    <li class="menu-item" onclick="setActive(this)">
-        <a href="/admin/student">
-            <i class="fas fa-user-graduate"></i> Student
-        </a>    
-    </li>
-    <li class="menu-item" onclick="setActive(this)">
-        <a href="/admin/alltask">
-            <i class="fas fa-tasks"></i> All Task
-        </a>    
-    </li>
-    <li class="menu-item" onclick="setActive(this)">
-        <a href="/admin/myschedule">
-            <i class="fas fa-clock"></i> My Schedule
-        </a>
-    </li>
-</ul>
-
-<div class="logout">
-        <i class="fas fa-sign-out-alt"></i> Log out
-    </div>
-</div> -->
-<!-- <div class="container">
-
-    <div class="header">
-    <div class="header-icons">
-        <div class="notification">
-            <i class="fa fa-bell"></i>
-            <span class="notification-badge"></span>
-        </div>
-        <div class="user-profile">
-            <i class="fa fa-user-circle"></i>
-            <span class="user-name">Sun Nasy</span>
-        </div>
-    </div>
-    </div>
- </div> -->
-
 <div class="student-taskdetail-container">
     <div class="detail-header">
         <div class="header-with-back">
@@ -79,11 +27,10 @@
     <hr class="divider">
     <div class="profile-details">
         <div class="profile-card">
-            <img src="/Image/student_profile.png" alt="Profile Picture" class="profile-pic">
+            <img id="profile-picture" src="/Image/pfstudent.png" alt="Profile Picture" class="profile-pic">
             <div class="profile-info">
-                <p><strong>Nich</strong></p>
-                <p>Student ID: B02223119</p>
-                <p>Gender: Female</p>
+                <p id="student-name"><strong>Loading...</strong></p>
+                <p id="student-id">Student ID: Loading...</p>
             </div>
         </div>
         <div class="additional-info">
@@ -111,5 +58,21 @@
             <p class="score">32/50</p>
         </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const studentId = window.location.pathname.split('/').pop();
+
+    fetch(`http://127.0.0.1:8000/api/students/${studentId}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('student-name').innerText = data.name;
+            document.getElementById('student-Email').innerText = data.email;
+            document.getElementById('student-id').innerText = `Student ID: ${data.id}`;
+            document.getElementById('student-department').innerText = data.department.name;
+            document.getElementById('profile-picture').src = data.profile_picture || '/Image/pfstudent.png';
+        })
+        .catch(error => console.error('Error fetching student data:', error));
+});
+</script>
 </body>
 </html>

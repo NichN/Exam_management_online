@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('departments', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->integer('id', true);
+            $table->string('name', 255);
+            $table->text('description')->nullable();
+            $table->timestamp('created_at')->nullable()->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable()->useCurrent();
         });
     }
 

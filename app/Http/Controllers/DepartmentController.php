@@ -7,55 +7,81 @@ use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return response()->json(Department::all(), 200);
+        $department= Department::with('courses.subjects')->get();
+        return response()->json($department,200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function getCourses($id)
     {
-        //
+        try {
+            $department = Department::with('courses')->findOrFail($id);
+            return response()->json([
+                'department' => $department,
+                'courses' => $department->courses,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Department or courses not found.',
+                'error' => $e->getMessage(),
+            ], 404);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ]);
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255|unique:departments,name',
+                'description' => 'nullable|string',
+            ]);
 
-        $department = Department::create($validated);
-        return response()->json($department, 201);
+            $department = \DB::transaction(function () use ($validated) {
+                return Department::create($validated);
+            });
+
+            return response()->json([
+                'message' => 'Department created successfully!',
+                'department' => $department,
+            ], 201);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to create department.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Department $department)
+    public function storeCourse(Request $request, $id)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+            ]);
+
+            $department = Department::findOrFail($id);
+
+            $course = $department->courses()->create([
+                'name' => $validated['name'],
+                'description' => $validated['description'],
+            ]);
+
+            return response()->json([
+                'message' => 'Course created successfully!',
+                'course' => $course,
+            ], 201);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to create course.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Department $department)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
         $department = Department::findOrFail($id);
@@ -69,9 +95,6 @@ class DepartmentController extends Controller
         return response()->json($department, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $department = Department::findOrFail($id);
@@ -79,4 +102,31 @@ class DepartmentController extends Controller
 
         return response()->json(null, 204);
     }
+    public function storeSubject(Request $request, $departmentId, $courseId)
+{
+    try {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+        $department = Department::findOrFail($departmentId);
+        $course = $department->courses()->findOrFail($courseId);
+        $subject = $course->subjects()->create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+        ]);
+
+        return response()->json([
+            'message' => 'Subject created successfully!',
+            'subject' => $subject,
+        ], 201);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Failed to create subject.',
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+}
+
 }

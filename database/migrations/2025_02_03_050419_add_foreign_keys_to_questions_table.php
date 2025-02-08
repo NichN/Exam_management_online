@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('questions', function (Blueprint $table) {
+            $table->foreign(['exam_id'], 'questions_ibfk_1')->references(['id'])->on('exams')->onUpdate('restrict')->onDelete('cascade');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sessions');
+        Schema::table('questions', function (Blueprint $table) {
+            $table->dropForeign('questions_ibfk_1');
+        });
     }
 };

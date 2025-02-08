@@ -46,10 +46,18 @@ Route::group(['middleware' => 'role:teacher'], function () {
     Route::get('/admin/myschedule', function () {
         return view('Admin.my_schedule_screen');
     });
-    Route::get('/major', function () {
+    Route::get('/subject', function () {
+        return view('Admin.subject');
+    })->name('subject');
+    Route::get('/major', function () { 
         return view('Admin.major');
     })->name('major');
 });
+
+Route::get('/departments/{id}', [CourseController::class, 'showDepartmentCourses']);
+// In routes/web.php
+Route::get('/admin/user/detail/{id}', [StudentController::class, 'showDetail'])->name('student.detail');
+
 // Student Routes
 Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('Student.dashboard')->middleware('auth', 'role:student');
 Route::get('/student/subject', [SubjectController::class, 'index'])->name('Student.subject');

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Department</title>
+    <title>Major</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" 
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" 
             crossorigin="anonymous"></script>
@@ -18,33 +18,40 @@
     @include('partials.admin_sidebar')
 </div>
 <div class="container text-center">
-    <h2 style="text-align: center" class="mt-3">Department</h2>
+    <h2 class="mt-3 text-center">Subject</h2>
     <hr class="divider mb-4">
     <div class="row batch-container">
     </div>
 </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        fetch('http://127.0.0.1:8000/api/departments')
+        fetch('http://127.0.0.1:8000/api/subjects')
             .then(response => response.json())
             .then(data => {
                 const batchContainer = document.querySelector('.batch-container');
                 batchContainer.innerHTML = '';
-
                 data.forEach(department => {
-                    const batchHTML = `
-                        <div class="col">
-                            <a href="/departments/${department.id}"> <!-- Updated to pass ID -->
-                                <div class="card shadow-sm border-0">
-                                    <div class="card-body">
-                                        <i class="fas fa-laptop laptop"></i>
-                                        <h5 class="card-title">${department.name.toUpperCase()}</h5>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    `;
-                    batchContainer.innerHTML += batchHTML;
+                    if (department.courses) {
+                        department.courses.forEach(course => {
+                            if (course.subjects) {
+                                course.subjects.forEach(subject => {
+                                    const batchHTML = `
+                                        <div class="col">
+                                            <div class="card shadow-sm border-0">
+                                                <div class="card-body">
+                                                    <i class="fas fa-laptop laptop"></i>
+                                                    <h5 class="card-title">${subject.name.toUpperCase()}</h5>
+                                                    <button><a href="/admin/department/detail/${subject.id}">View Details <i class="fas fa-arrow-right"></i></button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    `;
+                                    batchContainer.innerHTML += batchHTML;
+                                });
+                            }
+                        });
+                    }
                 });
             })
             .catch(error => console.error('Error fetching departments:', error));

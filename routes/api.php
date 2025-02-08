@@ -35,9 +35,11 @@ Route::middleware(['auth:sanctum', 'role:teacher'])->get('/teacher/dashboard', [
 Route::middleware(['auth:sanctum', 'role:student'])->get('/student/dashboard', [Admin_login_controller::class, 'student']);
 Route::middleware(['auth:sanctum'])->patch('profile-update', [Admin_login_controller::class, 'profile_update']);
 Route::post('password/email', [Admin_login_controller::class, 'sendResetLinkEmail']);
+Route::get('/students', [Admin_login_controller::class, 'getStudents']);
 
 //student total
 Route::middleware('auth:sanctum')->get('/students/total', [StudentController::class, 'getTotalStudents']);
+Route::get('/students/{id}', [StudentController::class, 'showStudentDetails']);
 Route::get('/exams', [ExamController::class, 'index']);
 Route::post('/exams', [ExamController::class, 'store']);
 //exam details
@@ -50,6 +52,11 @@ Route::get('/show/departments/{id}', [DepartmentController::class, 'show']);
 Route::post('/departments', [DepartmentController::class, 'store']);
 Route::put('/departments/{id}', [DepartmentController::class, 'update']);
 Route::delete('/departments/{id}', [DepartmentController::class, 'destroy']);
+
+Route::get('/departments/{id}/courses', [DepartmentController::class, 'getCourses']);
+Route::post('/departments/{id}/courses', [DepartmentController::class, 'storeCourse']);
+Route::post('/departments/{departmentId}/courses/{courseId}/subjects', [DepartmentController::class, 'storeSubject']);
+Route::get('/departments/{id}', [DepartmentController::class, 'show']);
 
 Route::get('/courses', [DepartmentController::class, 'index']);
 Route::post('/courses', [DepartmentController::class, 'store']);
