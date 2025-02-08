@@ -15,7 +15,8 @@ Route::get('/password/email', function () {
     return view('Loginform.Password_Reset');
 })->name('emailreset');
 
-Route::get('/admin/dashboard', function () {
+Route::get('/admin/dashboard', 
+function () {
     return view('Admin.dasboard_screen');
 })->middleware('auth', 'role:teacher');
 
@@ -68,15 +69,5 @@ Route::get('/student/history-exam', [HistoryExamController::class, 'index'])->na
 Route::get('/student/result/{id}', [ExamController::class, 'submitExam'])->name('Student.result');
 Route::get('/student/student', [StudentController::class, 'index'])->name('Student.student');
 Route::post('/exam/{exam}/submit', [ExamController::class, 'submitExam']);
-<<<<<<< HEAD
-=======
-//Route::get('/student/history_exam', [HistoryExamController::class, 'index'])->name('student.history_exam');
-
-// Route to show the exam page based on exam ID
-
-
-
->>>>>>> b9ac0e832a6fbda8d5e51f034b66e2c760cde4eb
 Route::get('/student/exam/{examId}', [ExamController::class, 'exampage'])->name('Student.exam_page');
-
 ?>

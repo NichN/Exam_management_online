@@ -50,7 +50,7 @@ class ExamController extends Controller
             $questions = $exam->questions;
             $totalScore = 0;
             $totalPossible = 0;
-
+            
             foreach ($questions as $question) {
                 $submittedAnswer = $request->answers[$question->id] ?? null;
                 $correctAnswer = $question->correct_answer;
@@ -92,11 +92,5 @@ class ExamController extends Controller
             return response()->json(['error' => 'Something went wrong! ' . $e->getMessage()], 500);
         }
     }
-
-
-
-
-
-
 
 }

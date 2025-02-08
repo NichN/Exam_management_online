@@ -1,14 +1,14 @@
 <?php
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin_login_controller;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\page\StudentController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\StudentAnswerController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -72,11 +72,11 @@ Route::post('/questions', [DepartmentController::class, 'store']);
 Route::put('/questions/{id}', [DepartmentController::class, 'update']);
 Route::delete('/questions/{id}', [DepartmentController::class, 'destroy']);
 
-Route::get('/student-answers', [DepartmentController::class, 'index']);
-Route::post('/student-answers', [DepartmentController::class, 'store']);
+Route::get('/student-answers', [StudentAnswerController::class, 'index']);
 Route::put('/student-answers/{id}', [DepartmentController::class, 'update']);
+Route::get('/student-answers/{studentId}', [StudentAnswerController::class, 'getStudentAnswers']);
 Route::delete('/student-answers/{id}', [DepartmentController::class, 'destroy']);
-
+Route::post('student-answers', [StudentAnswerController::class, 'store']);
 Route::get('/exam-students', [DepartmentController::class, 'index']);
 Route::post('/exam-students', [DepartmentController::class, 'store']);
 Route::put('/exam-students/{id}', [DepartmentController::class, 'update']);

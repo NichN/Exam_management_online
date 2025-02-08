@@ -17,12 +17,13 @@ class StudentDashboardController extends Controller
     {
         // Fetch all users and their related data
         $users = User::with(['department', 'exams.subject'])->get();
+        $exams = Exam::with(['subject', 'teacher'])->get(); // Get all exams
+
         foreach ($users as $user) {
             $user->exams = $user->exams ?: collect(); // Ensure that we don't pass null exams
         }
 
         // Fetch all exams with their subjects and teachers
-        $exams = Exam::with(['subject', 'teacher'])->get(); // Get all exams
 
         // If no exams are available
         if ($exams->isEmpty()) {
@@ -61,9 +62,7 @@ class StudentDashboardController extends Controller
         // Return view with all exams and their details
         return view('student.dashboard', compact('exams', 'examDetails', 'users', 'user'));
     }
-
-
-
+    
 
 
 }

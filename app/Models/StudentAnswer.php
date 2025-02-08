@@ -15,7 +15,8 @@ class StudentAnswer extends Model
         'question_id',
         'student_id',
         'answer',
-        'is_correct'
+        'is_correct',
+        'score'
     ];
 
     // Relationships

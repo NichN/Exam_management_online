@@ -16,7 +16,6 @@ class Exam extends Model
         'start_time',
         'end_time',
         'status',
-        'exam_type'
     ];
 
     public function teacher()
@@ -39,6 +38,5 @@ class Exam extends Model
     {
         return $this->belongsToMany(User::class, 'exam_student');
     }
-
-
+    
 }

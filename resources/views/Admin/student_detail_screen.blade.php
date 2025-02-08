@@ -42,7 +42,7 @@
             <div class="spacer"></div>
             <div class="contact-card">
                 <h3>Center Contact</h3>
-                <p><strong>Email:</strong><span id="student-Email">Loading...</span></p>
+                <p><strong>Email:</strong><span id="student-email">Loading...</span></p>
             </div>
         </div>
 
@@ -58,19 +58,7 @@
         <!-- Task UI Containers - Static content -->
         <div id="Quiz" class="task-container active">
             <div class="tasks-container">
-                <div class="card">
-                    <h3>Quiz Chapter1 in Semester 1</h3>
-                    <p><strong>Major:</strong> Web Development </p>
-                    <div class="details">
-                        <p>
-                            <i class="fas fa-calendar-alt batch-icon"></i> 2025-01-01
-                            <i class="fas fa-clock batch-icon"></i> 2:00 PM - 3:30 PM
-                        </p>
-                    </div>
-                    <button class="view-details">
-                        <a href="/admin/student/task/detail">View Details</a>
-                    </button>
-                </div>
+                <!-- Submitted quiz results will be appended here -->
             </div>
         </div>
 
@@ -114,19 +102,45 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    const studentId = window.location.pathname.split('/').pop();
+        const studentId = window.location.pathname.split('/').pop(); // Get student ID from URL
 
-    fetch(`http://127.0.0.1:8000/api/students/${studentId}`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('student-name').innerText = data.name;
-            document.getElementById('student-Email').innerText = data.email;
-            document.getElementById('student-id').innerText = `Student ID: ${data.id}`;
-            document.getElementById('student-department').innerText = data.department.name;
-            document.getElementById('profile-picture').src = data.profile_picture || '/Image/pfstudent.png';
-        })
-        .catch(error => console.error('Error fetching student data:', error));
-});
+        // Fetch student data from API
+        fetch(`http://127.0.0.1:8000/api/students/${studentId}`)
+            .then(response => response.json())
+            .then(studentData => {
+                document.getElementById('student-name').innerText = studentData.name;
+                document.getElementById('student-email').innerText = studentData.email;
+                document.getElementById('student-id').innerText = `Student ID: ${studentData.id}`;
+                document.getElementById('student-department').innerText = studentData.department.name;
+                document.getElementById('profile-picture').src = studentData.profile_picture || '/Image/pfstudent.png';
+            })
+            .catch(error => console.error('Error fetching student data:', error));
+
+        // Fetch student quiz submissions from API
+        fetch(`http://127.0.0.1:8000/api/student-submissions/${studentId}`)
+            .then(response => response.json())
+            .then(submissions => {
+                const quizContainer = document.getElementById('Quiz').querySelector('.tasks-container');
+                submissions.forEach(submission => {
+                    const submissionCard = document.createElement('div');
+                    submissionCard.classList.add('card');
+                    
+                    const question = submission.question;
+                    const isCorrect = submission.is_correct ? 'Correct' : 'Incorrect';
+                    const points = submission.is_correct ? question.points : '0.00';
+                    
+                    submissionCard.innerHTML = `
+                        <h3>${question.question_text}</h3>
+                        <p><strong>Your Answer:</strong> ${submission.answer}</p>
+                        <p><strong>Status:</strong> ${isCorrect}</p>
+                        <p><strong>Points Awarded:</strong> ${points}</p>
+                    `;
+
+                    quizContainer.appendChild(submissionCard);
+                });
+            })
+            .catch(error => console.error('Error fetching submissions:', error));
+    });
 </script>
 
 </body>
