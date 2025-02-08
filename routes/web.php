@@ -15,8 +15,7 @@ Route::get('/password/email', function () {
     return view('Loginform.Password_Reset');
 })->name('emailreset');
 
-Route::get('/admin/dashboard', 
-function () {
+Route::get('/admin/dashboard', function () {
     return view('Admin.dasboard_screen');
 })->middleware('auth', 'role:teacher');
 
@@ -48,7 +47,7 @@ Route::group(['middleware' => 'role:teacher'], function () {
     Route::get('/subject', function () {
         return view('Admin.subject');
     })->name('subject');
-    Route::get('/major', function () { 
+    Route::get('/major', function () {
         return view('Admin.major');
     })->name('major');
 });
@@ -61,13 +60,17 @@ Route::get('/admin/user/detail/{id}', [StudentController::class, 'showDetail'])-
 
 Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('Student.dashboard')->middleware('auth', 'role:student');
 Route::get('/users', [UserController::class, 'index']);
-
-
 Route::get('/student/subject', [SubjectController::class, 'index'])->name('Student.subject');
 Route::get('/student/exam', [ExamController::class, 'index'])->name('Student.exams');
 Route::get('/student/history-exam', [HistoryExamController::class, 'index'])->name('Student.history_exam');
 Route::get('/student/result/{id}', [ExamController::class, 'submitExam'])->name('Student.result');
 Route::get('/student/student', [StudentController::class, 'index'])->name('Student.student');
 Route::post('/exam/{exam}/submit', [ExamController::class, 'submitExam']);
+
+
+//Route::get('/student/history_exam', [HistoryExamController::class, 'index'])->name('student.history_exam');
+
+// Route to show the exam page based on exam ID
 Route::get('/student/exam/{examId}', [ExamController::class, 'exampage'])->name('Student.exam_page');
+Route::post('/exams/store', [AllTaskController::class, 'storeExam'])->name('exams.store');
 ?>
