@@ -28,6 +28,16 @@ class HistoryExamController extends Controller
         return view('Student.history_exam', compact('completedExams', 'upcomingExams'));
     }
 
+    public function submitExam($id)
+    {
+        $exam = Exam::findOrFail($id);
+        $exam->status = 'submitted';
+        $exam->save();
+
+        return redirect()->back()->with('success', 'Exam submitted successfully!');
+    }
+
+
 
 
     public function start($examId)
