@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\page;
 
 use App\Http\Controllers\Controller;
-use App\Models\Exam;
-use App\Models\ExamStudent;
-use App\Models\Question;
+
 use App\Models\StudentAnswer;
 use App\Models\ExamResult;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
@@ -50,7 +47,7 @@ class ExamController extends Controller
             $questions = $exam->questions;
             $totalScore = 0;
             $totalPossible = 0;
-            
+
             foreach ($questions as $question) {
                 $submittedAnswer = $request->answers[$question->id] ?? null;
                 $correctAnswer = $question->correct_answer;
@@ -93,17 +90,10 @@ class ExamController extends Controller
         }
     }
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
-
->>>>>>> a26b7e2fe1f3889b353a92feba22ac3160ffbf90
 }
+
+
+
+
+
 
