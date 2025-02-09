@@ -9,7 +9,6 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/student_history_exam.css') }}">
 </head>
 
@@ -19,8 +18,7 @@
 @section('title', 'Exam History')
 
 @section('content')
-    <div class="container">
-        <!-- Beautiful Tab Bar -->
+    <div class="main-container">
         <div class="tab-container">
             <button class="tab-btn active" onclick="showTab('completed-exam')">
                 <i class="fas fa-check-circle"></i> Completed Exams

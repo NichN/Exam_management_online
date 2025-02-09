@@ -1,4 +1,7 @@
+.main-container{
+    padding-left: 50px;
 
+}
 
 .header {
     font-size: 24px;
@@ -33,10 +36,6 @@
     color: white;
 }
 
-/* Content Styling */
-.content {
-    display: none;
-}
 
 .content.active {
     display: block;
@@ -44,7 +43,7 @@
 
 /* Table Styling */
 .exam-table {
-    width: 100%;
+    width: 95%;
     border-collapse: collapse;
     margin-top: 10px;
 }
